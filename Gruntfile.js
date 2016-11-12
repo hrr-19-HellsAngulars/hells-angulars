@@ -25,6 +25,12 @@ module.exports = function(grunt) {
         src: ['app/**/*.css'],
         dest: 'dist',
       },
+      html: {
+        expand: true,
+        flatten: true,
+        src: ['app/**/*.html'],
+        dest: 'dist',
+      }
     },
 
     watch: {
@@ -33,8 +39,8 @@ module.exports = function(grunt) {
         tasks: ['ts']
       },
       copy: {
-        files: ['app/**/*.css'],
-        tasks: ['copy:css']
+        files: ['app/**/*.css', 'app/**/*.html'],
+        tasks: ['copy:css', 'copy:html']
       }
     },
 
@@ -45,6 +51,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-copy');
 
-  grunt.registerTask('build', ['ts', 'copy:css'])
+  grunt.registerTask('build', ['ts', 'copy:css', 'copy:html'])
   grunt.registerTask('default', ['build', 'watch']);
 };
