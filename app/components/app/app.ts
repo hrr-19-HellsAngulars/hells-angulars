@@ -7,6 +7,7 @@ import {Auth} from "../../auth/auth.service";
   providers: [Auth],
   templateUrl: 'app.html',
   styleUrls: [ 'app.css' ]
+
 })
 
 export class App {
