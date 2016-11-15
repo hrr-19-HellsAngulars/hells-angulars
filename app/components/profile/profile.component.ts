@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+
+import { ProfileService } from './profile.service';
 
 @Component({
   moduleId: module.id,
@@ -7,6 +9,21 @@ import { Component } from '@angular/core';
   styleUrls: ['profile.component.css']
 })
 
-export class ProfileComponent {
+export class ProfileComponent implements OnInit {
 
+  constructor(
+    private profileService: ProfileService
+  ) { }
+
+  getUserInfo() {
+    this.profileService
+      .getUserInfo()
+      .then(info => {
+        // do something with the info returned from request
+      })
+  }
+
+  ngOnInit(): void {
+    this.getUserInfo();
+  }
 }
