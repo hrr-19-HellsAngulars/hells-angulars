@@ -11,7 +11,7 @@ export class ProfileService {
   ){}
 
   //need to finish this method
-  public getProfileInfo(): Promise<any>{
+  public getUserInfo(): Promise<any>{
     return Promise.resolve()
   }
 
