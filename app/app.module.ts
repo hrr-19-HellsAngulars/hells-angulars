@@ -19,6 +19,7 @@ import {MyUIRouterConfig} from "./config/router.config.js";
 import {homeState, gearState, profileState} from "./states.js";
 
 import { ProductsService } from "./components/products/products.service";
+import { ProfileService } from "./components/profile/profile.service";
 
 import { AUTH_PROVIDERS }      from 'angular2-jwt';
 
@@ -40,7 +41,7 @@ let INITIAL_COMPONENTS =  [ App, Home, ProductsComponent, ProfileComponent ];
     })
   ],
   declarations: INITIAL_COMPONENTS,
-  providers: [ProductsService, AUTH_PROVIDERS],
+  providers: [ProductsService, ProfileService, AUTH_PROVIDERS],
   bootstrap: [ App ]
 })
 export class AppModule { }
