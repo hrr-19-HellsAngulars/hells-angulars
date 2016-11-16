@@ -20,6 +20,7 @@ export class ProfileComponent implements OnInit {
       .getUserInfo()
       .then(info => {
         // do something with the info returned from request
+        console.log(info)
       })
   }
 
