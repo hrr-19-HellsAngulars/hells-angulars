@@ -10,6 +10,7 @@ import { ProfileService } from './profile.service';
 })
 
 export class ProfileComponent implements OnInit {
+  user: Array<any>;
 
   constructor(
     private profileService: ProfileService
@@ -20,7 +21,8 @@ export class ProfileComponent implements OnInit {
       .getUserInfo()
       .then(info => {
         // do something with the info returned from request
-        console.log(info)
+        this.user = info;
+        console.log(this.user)
       })
   }
 
