@@ -1,11 +1,10 @@
 var express = require('express');
 var jwt = require('express-jwt');
-var authConfig = require('../config/authConfig');
+var authConfig = require('../auth/authConfig');
 
 //require controllers
 var userController = require('../users/userController.js');
 var productController = require('../products/productController.js');
-var stripeController = require('../stripe/stripeController');
 
 var authCheck = jwt({
   secret: new Buffer(authConfig.secret, 'base64'),
@@ -38,11 +37,6 @@ module.exports = function(app, express) {
   // app.get('/api/transactions/:id', productController.getTransactionsById);
   // app.post('/api/transactions', productController.createTransaction);
 
-
-  // Stripe routes
-  // Use
-  app.get('/connect', stripeController.getCode);
-  app.post('/api/charge', stripeController.createCharge);
 }
 
 

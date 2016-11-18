@@ -17,7 +17,7 @@ server/db/dbConfig.js
 
 ## Auth0 CREDENTIALS ##
 app/auth/auth.config.ts
-server/config
+server/auth/authConfig.js
 
 ## Typescript command files ##
 *.tmp.txt
