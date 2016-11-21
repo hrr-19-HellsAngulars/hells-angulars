@@ -49,8 +49,12 @@ var products = `CREATE TABLE IF NOT EXISTS products (
   description     TEXT          NOT NULL,
   productname     VARCHAR(50)   NOT NULL,
   priceperday     INT           NOT NULL,
-  location        VARCHAR(255)  NOT NULL
-);`;
+  location        VARCHAR(255)  ,
+  place_id        VARCHAR(255)  NOT NULL,
+  city            VARCHAR(255)  ,
+  state           VARCHAR(50)   ,
+  zip             INT
+);`
 
 var transactions = `CREATE TABLE IF NOT EXISTS transactions (
   id              SERIAL        PRIMARY KEY,
