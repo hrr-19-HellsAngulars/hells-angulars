@@ -50,3 +50,9 @@ export const profileState = {
   name: "profile",
   url: "/profile",
 };
+
+export const searchState = {
+  component: Products,
+  name: "products-search",
+  url: "/products/search/:query",
+};
