@@ -11,12 +11,12 @@ import { NgbModule }               from "@ng-bootstrap/ng-bootstrap";
 import { NgModule }                from "@angular/core";
 import { UIRouterModule }          from "ui-router-ng2";
 
-
 import { AddReviewForm }           from "./components/add-review/add-review";
 import { AgmCoreModule }           from "angular2-google-maps/core";
 
 import { AddModalService }         from "./components/add_modal/addModal.service";
 import { About }                   from "./components/about/about.js";
+
 import { App }                     from "./components/app/app.js";
 import { Google }                  from "./components/google/google.component";
 import { Home }                    from "./components/home/home.js";
