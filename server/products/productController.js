@@ -110,15 +110,15 @@ module.exports = {
     var body = req.body;
     // query string for storing product in product table
     var queryStr = `WITH ins1 AS (
-                      INSERT INTO products(category_id, owner_id, description, productname, priceperday, location)
-                      VALUES ((SELECT id from categories where category = $1), (SELECT id from users where authid = $2), $3, $4, $5, $6)
+                      INSERT INTO products(category_id, owner_id, description, productname, priceperday, lat, lng, city, state, zip)
+                      VALUES ((SELECT id from categories where category = $1), (SELECT id from users where authid = $2), $3, $4, $5, $6, $7, $8, $9, $10)
                       RETURNING id
                       )
                       INSERT INTO images(product_id, url)
-                      SELECT id, $7
+                      SELECT id, $11
                       FROM ins1`;
 
-    pool.query(queryStr, [body.categoryId, body.userId, body.productDescription, body.productName, body.pricePerDay, body.location, body.imageLink], function(err, result) {
+    pool.query(queryStr, [body.categoryId, body.userId, body.productDescription, body.productName, body.pricePerDay, body.lat, body.lng, body.city, body.state, body.zip, body.imageLink], function(err, result) {
       if (err) {
         res.status(404).send();
         return;
