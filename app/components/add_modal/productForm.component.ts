@@ -37,6 +37,8 @@ export class NewProductForm {
 
   public onSubmit(model: NewProduct) {
     model.placeId = this.place.place_id;
+    model.lat = this.place.geometry.location.lat();
+    model.lng = this.place.geometry.location.lng();
     model.city = this.place.address_components[1].long_name;
     model.state = this.place.address_components[3].short_name;
     model.zip = this.place.address_components[5].long_name;
@@ -66,8 +68,6 @@ export class NewProductForm {
       autocomplete.addListener("place_changed", () => {
         // get the place result
         let place: google.maps.places.PlaceResult = autocomplete.getPlace();
-        console.log("place -->", place);
-        console.log(typeof place);
         this.place = place;
 
         // set latitude and longitude
