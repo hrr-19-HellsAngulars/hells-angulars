@@ -8,7 +8,8 @@
     <sebm-google-map-marker
     *ngFor="let m of markers; let i = index"
     (markerClick)="clickedMarker(m.label, i)"
-    [place]="m.place"
+    [latitude]="m.lat"
+    [longitude]="m.lng"
     [label]="m.label"
     [markerDraggable]="false"></sebm-google-map-marker>
   </sebm-google-map>
