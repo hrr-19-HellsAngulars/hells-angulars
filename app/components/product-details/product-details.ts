@@ -28,6 +28,10 @@ export class ProductDetails implements OnInit, DoCheck {
     "day": +new Date().getDate(),
   };
 
+  private reviews: Array<any>;
+  private numberOfReviews: Number;
+  private averageRating: Number;
+
   private oldFromDate: any = undefined;
   private oldToDate: any = undefined;
   private totalAmount: Number;
@@ -46,11 +50,29 @@ export class ProductDetails implements OnInit, DoCheck {
   public ngOnInit() {
     this.product = this.product[0];
     this.selectedPic = this.product.url[0];
-    console.log(this.product);
+    this.getReviews(this.product.id);
   }
 
   public onSelect(n: number) {
     this.selectedPic = this.product.url[n];
+  }
+
+  public getReviews(productId: number) {
+    this.productDetailsService
+      .getReviews(productId)
+      .then(response => {
+        const reviews = response;
+        this.reviews = reviews;
+        this.numberOfReviews = this.reviews.length;
+        let total = this.reviews.reduce((prev, acc) => {
+          return prev + acc.rating;
+        }, 0);
+        this.averageRating =  +total / reviews.length;
+
+        console.log(this.reviews);
+      })
+      .catch(err => console.log(err));
+
   }
 
   public openCheckOut() {

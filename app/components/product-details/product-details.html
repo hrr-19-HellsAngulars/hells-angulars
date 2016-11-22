@@ -20,8 +20,8 @@
           <h3 class="product-title">{{product.productname}}</h3>
           <p><i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;{{product.location}}</p>
           <div class="rating">
-            <ngb-rating [(rate)]="product.rating"></ngb-rating>
-            <span>  reviews</span>
+            <ngb-rating [(rate)]="averageRating"></ngb-rating>
+            <span>&nbsp; &nbsp;{{numberOfReviews}} reviews</span>
           </div>
           </div>
           <div class="col-xs-3">
@@ -68,24 +68,26 @@
 <hr>
 
 <!-- Reviews -->
-<!-- <div *ngFor="let transaction of transactions" class="card product">
-    <div class="row">
-        <div class="col-xs-3">
-          <p class="primary card-text date"> {{convertDate(transaction.bookedfrom)}}<br>TO <br>{{convertDate(transaction.bookedto)}}</p>
-        </div>
-        <div class="col-xs-6">
-          <h4 class="card-title">{{transaction.productname}}</h4>
-          <p class="primary card-text">Renting To {{transaction.firstname}}</p>
-        </div>
-        <div class="col-xs-3 review">
-          <h4><strong>${{transaction.totalvalue}}</strong></h4>
-          <p *ngIf="transaction.status_id===1">
-            <button class="btn btn-primary" (click)="open(review)" (click)="onSelect(transaction)">Add Review</button>
-          </p>
-        </div>
+<div class="container">
+  <h3 class="review-title">Customer Reviews</h3>
+  <div *ngIf="numberOfReviews === 0" class="no-review">
+    <h4> There is no review for this gear yet</h4>
+  </div>
+  <div *ngFor="let review of reviews" class="card reviews">
+    <div class="row ">
+      <div class="col-xs-3 div-center">
+          <img class="img-circle2 img-responsive img-center" [src]="review.profilepic" alt="">
+          <div class="div-center"><p><strong>{{review.firstname}}</strong></p></div>
       </div>
+      <div class="col-xs-9 review-detail">
+        <ngb-rating [(rate)]="review.rating"></ngb-rating>
+        <br>
+        <br>
+        <p class="primary card-text">{{review.text}}</p>
+      </div>
+    </div>
     <hr>
+  </div>
 </div>
-</div>
- -->
+
 
