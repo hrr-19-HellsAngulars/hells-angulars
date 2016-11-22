@@ -1,39 +1,38 @@
 <div class="page-wrap">
-  <nav class="navbar nav-inline row">
-    <div class="col-md-6 float-xs-left">
-      <h1 class="left-nav navbar-brand gearbox" href="#">GEAR BOX</h1>
-      <form class="form-inline float-xs-left" #form="ngForm">
-        <input type="text" class="left-nav form-control" placeholder="Dig in the Gear Box..." ngModel name="keyword">
-        <a class="left-nav btn" uiSref="products-search" ui-sref-opts="{reload: true}" (click)="onSearch(form); form.reset()" >Dig In!</a>
-
-      </form>
-    </div>
-    <div class="col-md-6 float-xs-right">
-      <div class="float-xs-right">
-        <ul class = "nav navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link" uiSref="home" uiSrefActive="active"> Home </a>
-          </li>
-          <li class="nav-item">
-            <a uiSref="products" uiSrefActive="active" (click)='onSearch({"value": {"keyword": ""}})'>Gear</a>
-          </li>
-          <li class="nav-item">
-            <a uiSref="profile" uiSrefActive="active" *ngIf="auth.authenticated()">Profile</a>
-          </li>
-          <li class="nav-item">
-            <a (click)="open(content)">List Gear</a>
-          </li>
-          <li class="nav-item">
-            <a class="navbar-right float-xs-right" (click)="auth.login()" *ngIf="!auth.authenticated()">Log In</a>
-            <a class="navbar-right float-xs-right" (click)="auth.logout()" *ngIf="auth.authenticated()">Log Out</a>
-          </li>
-        </ul>
-      </div>
+  <nav class="navbar navbar-light bg-faded">
+    <a class="navbar-brand gearbox" href="#">Gear Box</a>
+    <form class="form-inline float-xs-left" #form="ngForm">
+      <input type="text" class="left-nav form-control" placeholder="Dig in the Gear Box..." ngModel name="keyword">
+      <a class="left-nav" uiSref="products-search" ui-sref-opts="{reload: true}" (click)="onSearch(form); form.reset()"><i class="fa fa-search fa-lg"></i></a>
+    </form>
+    <div class="float-xs-right">
+      <ul class = "nav navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" uiSref="home"> Home </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" uiSref="products" (click)='onSearch({"value": {"keyword": ""}})'>Gear</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" uiSref="profile" *ngIf="auth.authenticated()">Profile</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" (click)="open(content)">List Gear</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" (click)="auth.login()" *ngIf="!auth.authenticated()">Log In</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link"  (click)="auth.logout()" *ngIf="auth.authenticated()">Log Out</a>
+        </li>
+      </ul>
     </div>
   </nav>
 
   <ui-view></ui-view>
+
 </div>
+
 <footer class="site-footer">
   <p class="footer-content">© 2016 Gear Box</p>
   <a class="nav-link footer-content" uiSref="about" uiSrefActive="active">About</a>

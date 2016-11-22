@@ -28,12 +28,20 @@ nav a.active {
 }*/
 
 nav {
-  border-bottom: 2px solid #2A4E75;
-  background: linear-gradient(45deg, #e4f5fc 0%,#bfe8f9 50%,#9fd8ef 51%,#2ab0ed 100%);
+  background: #f5f5f5;
+}
+.nav-link {
+  color: #404040 !important;
 }
 
+.nav-item {
+  border-bottom: 3px solid transparent;
+}
+.nav-item:hover {
+  border-bottom: 3px solid #579ed1;
+}
 .left-nav {
-  margin-top: 10px;
+  margin-top: 5px;
 }
 
 .page-wrap {
@@ -50,7 +58,6 @@ nav {
 }
 
 .gearbox {
-  height: 50px;
   color: #579ed1;
 }
 

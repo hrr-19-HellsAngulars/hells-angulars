@@ -17,11 +17,6 @@ h3 {
   color: #579ed1;
 }
 
-.homeCarousel {
-  /*max-height: 400px !important;*/
-  padding-top: 10px;
-}
-
 .carouselSlide {
   height: 50px;
 }
