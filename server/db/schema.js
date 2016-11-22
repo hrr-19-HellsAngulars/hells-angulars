@@ -45,8 +45,8 @@ var products = `CREATE TABLE IF NOT EXISTS products (
   avgrating       INT           ,
   priceperday     INT           NOT NULL,
   location        VARCHAR(100)  ,
-  lat             DECIMAL       NOT NULL,
-  lng             DECIMAL       NOT NULL,
+  lat             DECIMAL(12,9) NOT NULL,
+  lng             DECIMAL(12,9) NOT NULL,
   city            VARCHAR(255)  ,
   state           VARCHAR(50)   ,
   zip             INT
@@ -80,4 +80,4 @@ var images = `CREATE TABLE IF NOT EXISTS images (
   url             VARCHAR(2000) NOT NULL
 );`;
 
-module.exports =   /*deleteTables +*/  statuses + categories + users + products + transactions + reviews + images;
+module.exports = /*deleteTables +*/ statuses + categories + users + products + transactions + reviews + images;
