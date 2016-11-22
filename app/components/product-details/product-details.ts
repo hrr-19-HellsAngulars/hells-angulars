@@ -64,7 +64,7 @@ export class ProductDetails implements OnInit, DoCheck {
         const reviews = response;
         this.reviews = reviews;
         this.numberOfReviews = this.reviews.length;
-        let total = this.reviews.reduce((prev,acc) =>{
+        let total = this.reviews.reduce((prev, acc) => {
           return prev + acc.rating;
         }, 0);
         this.averageRating =  +total / reviews.length;
