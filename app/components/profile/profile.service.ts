@@ -14,10 +14,6 @@ export class ProfileService {
   ) {}
 
   public getUserInfo(authId): Promise<any> {
-    // dummy data version
-    // return Promise.resolve(UserData);
-
-    // live database version
     return this.authHttp.get(`/api/users/${authId}`)
       .toPromise()
       .then(response => {
@@ -27,10 +23,6 @@ export class ProfileService {
   }
 
   public getUserProducts(userId): Promise<any> {
-    // dummy data version
-    // return Promise.resolve(Data);
-
-    // live database version
     userId = JSON.stringify(userId);
     return this.http.get(`/api/products/byuser/${userId}`)
       .toPromise()

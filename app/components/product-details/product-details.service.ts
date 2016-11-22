@@ -18,8 +18,15 @@ export class ProductDetailsService {
   ) {}
 
   public getProductDetails(id: any) {
-
     let url = "/api/products/" + id;
+    return this.http.get(url)
+        .toPromise()
+        .then(response => response.json())
+        .catch(this.handleError);
+  }
+
+  public getReviews(id: number) {
+    let url = "/api/reviews/" + id;
     return this.http.get(url)
         .toPromise()
         .then(response => response.json())
