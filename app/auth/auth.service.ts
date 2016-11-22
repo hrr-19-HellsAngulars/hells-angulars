@@ -25,6 +25,9 @@ export class Auth {
         placeholder: "enter your last name",
       },
     ],
+    theme: {
+      primaryColor: '#579ed1'
+    },
   });
 
   public userProfile: Object;

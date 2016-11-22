@@ -14,10 +14,10 @@
           <a class="nav-link" uiSref="products" (click)='onSearch({"value": {"keyword": ""}})'>Gear</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" uiSref="profile" *ngIf="auth.authenticated()">Profile</a>
+          <a class="nav-link" (click)="open(content)">List Gear</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" (click)="open(content)">List Gear</a>
+          <a class="nav-link" uiSref="profile" *ngIf="auth.authenticated()">Profile</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" (click)="auth.login()" *ngIf="!auth.authenticated()">Log In</a>
