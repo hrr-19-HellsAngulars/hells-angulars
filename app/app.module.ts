@@ -10,6 +10,7 @@ import { HttpModule, JsonpModule } from "@angular/http";
 import { NgbModule }               from "@ng-bootstrap/ng-bootstrap";
 import { NgModule }                from "@angular/core";
 import { UIRouterModule }          from "ui-router-ng2";
+import { Daterangepicker }         from "./components/product-details/daterangepicker/index"
 
 import { AddReviewForm }           from "./components/add-review/add-review";
 import { AgmCoreModule }           from "angular2-google-maps/core";
@@ -24,6 +25,7 @@ import { NewProductForm }          from "./components/add_modal/productForm.comp
 import { Products }                from "./components/products/products";
 import { ProductDetails }          from "./components/product-details/product-details";
 import { ProfileComponent }        from "./components/profile/profile.component";
+import { DateRangeComponent }      from "./components/product-details/daterange.component";
 
 import { GOOGLE_API_KEY }          from "./auth/googleMaps.config";
 
@@ -38,7 +40,7 @@ import { MyUIRouterConfig }        from "./config/router.config.js";
 import { aboutState, googleState, homeState, productsState, productDetailsState, profileState, searchState } from "./states.js";
 
 let INITIAL_COMPONENTS =  [
-  App, About, AddReviewForm,  Google, Home, Products, ProductDetails, ProfileComponent, NewProductForm,
+  App, About, AddReviewForm,  Google, Home, Products, ProductDetails, ProfileComponent, NewProductForm, DateRangeComponent
 ];
 
 let INITIAL_PROVIDERS  =  [
@@ -56,6 +58,7 @@ let INITIAL_STATES     =  [
       libraries: ["places"],
     }),
     BrowserModule,
+    Daterangepicker,
     FormsModule,
     HttpModule,
     JsonpModule,
