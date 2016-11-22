@@ -5,7 +5,7 @@ import { NgbRatingConfig }     from "@ng-bootstrap/ng-bootstrap";
 import { ProductsService }     from "./products.service";
 import { UIROUTER_DIRECTIVES } from "ui-router-ng2";
 
-interface marker {
+interface Marker {
     place: string;
     label?: string;
     draggable: boolean;
@@ -27,15 +27,15 @@ export class Products implements OnInit {
   public searchControl: FormControl;
   public zoom: number = 4;
 
-  public markers: marker[] = [
+  public markers: Marker[] = [
     {
       place: "ChIJJ1XCysTQmoARU9qxtqimyiE",
-      draggable: false
+      draggable: false,
     },
     {
       place: "ChIJtaxkMdvQmoARA8Diy_MifCo",
-      draggable: false
-    }
+      draggable: false,
+    },
   ];
 
   // Note: This is looking for #search in the HTML template
@@ -52,7 +52,7 @@ export class Products implements OnInit {
   }
 
   clickedMarker(label: string, index: number) {
-    console.log(`clicked the marker: ${label || index}`)
+    console.log(`clicked the marker: ${label || index}`);
   }
 
   public getProducts() {
