@@ -1,7 +1,17 @@
-  <sebm-google-map [latitude]="latitude" [longitude]="longitude" [scrollwheel]="false" [zoom]="zoom">
-    <sebm-google-map-marker [latitude]="latitude" [longitude]="longitude"></sebm-google-map-marker>
+  <sebm-google-map class="sebm-google-map-container"
+  [latitude]="lat"
+  [longitude]="lng"
+  [zoom]="zoom"
+  [disableDefaultUI]="true"
+  [zoomControl]="true"
+  >
+    <sebm-google-map-marker
+    *ngFor="let m of markers; let i = index"
+    (markerClick)="clickedMarker(m.label, i)"
+    [place]="m.place"
+    [label]="m.label"
+    [markerDraggable]="false"></sebm-google-map-marker>
   </sebm-google-map>
-
 
 <div class="container">
   <div class="row">
