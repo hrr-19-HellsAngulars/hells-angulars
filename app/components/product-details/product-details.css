@@ -88,6 +88,9 @@ ngb-rating, .fa-map-marker{
   padding-right: 50px;
 }
 
+.review-detail {
+  padding-right: 40px;
+}
 .reviews {
   margin-top:30px;
   padding-bottom: 0px;
