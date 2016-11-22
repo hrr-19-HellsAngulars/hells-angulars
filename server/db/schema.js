@@ -11,12 +11,6 @@
 //  types
 //  ;`
 
-//this table is for review types: buyer review (a buyer reviewing a seller), and seller review (vice versa)
-var types = `CREATE TABLE IF NOT EXISTS types (
-  id              SERIAL        PRIMARY KEY,
-  type            VARCHAR(30)   NOT NULL
-);`;
-
 // statuses might include: pending, in progress, completed, cancelled
 var statuses = `CREATE TABLE IF NOT EXISTS statuses (
   id              SERIAL        PRIMARY KEY,
@@ -46,11 +40,13 @@ var products = `CREATE TABLE IF NOT EXISTS products (
   id              SERIAL        PRIMARY KEY,
   category_id     INT           references categories(id),
   owner_id        INT           references users(id),
-  description     TEXT          NOT NULL,
   productname     VARCHAR(50)   NOT NULL,
+  description     TEXT          NOT NULL,
+  avgrating       INT           ,
   priceperday     INT           NOT NULL,
-  location        VARCHAR(255)  ,
-  place_id        VARCHAR(255)  NOT NULL,
+  location        VARCHAR(100)  ,
+  lat             DECIMAL       NOT NULL,
+  lng             DECIMAL       NOT NULL,
   city            VARCHAR(255)  ,
   state           VARCHAR(50)   ,
   zip             INT
@@ -77,7 +73,6 @@ var reviews = `CREATE TABLE IF NOT EXISTS reviews (
   text            TEXT          NOT NULL,
   rating          INT
 );`;
-
 
 var images = `CREATE TABLE IF NOT EXISTS images (
   id              SERIAL        PRIMARY KEY,
