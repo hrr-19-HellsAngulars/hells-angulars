@@ -80,4 +80,4 @@ var images = `CREATE TABLE IF NOT EXISTS images (
   url             VARCHAR(2000) NOT NULL
 );`;
 
-module.exports =   /*deleteTables +*/ types + statuses + categories + users + products + transactions + reviews + images;
+module.exports =   /*deleteTables +*/  statuses + categories + users + products + transactions + reviews + images;
