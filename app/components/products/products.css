@@ -32,3 +32,7 @@ ngb-rating{
   cursor: pointer;
 }
 
+.sebm-google-map-container {
+  height: 150px;
+  width: 150px;
+}
