@@ -24,7 +24,7 @@ export class Products implements OnInit {
 
   public getProducts() {
     this.productsService
-        .getProducts()
+        .getProductsByQuery()
         .then(products => {
           // Rearrange products to have 3 products in one row
           let productsWithRows: Array<any> = [];
