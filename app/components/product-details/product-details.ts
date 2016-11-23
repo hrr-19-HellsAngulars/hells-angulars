@@ -116,54 +116,7 @@ export class ProductDetails implements OnInit, DoCheck {
 
   }
 
-  // public ngDoCheck() {
-  //   if (this.oldFromDate !== this.fromDate && this.oldToDate !== this.toDate) {
-  //     // set OldFromDate and oldToDate to current date
-  //     this.oldFromDate = this.fromDate;
-  //     this.oldToDate = this.toDate;
-  //     // this.convert date objects to date fromat
-  //     let fromDate = this.convertObjToDate(this.fromDate);
-  //     let toDate = this.convertObjToDate(this.toDate);
-  //     // Calculate days between
-  //     let daysBetween = this.getDaysBetween(fromDate, toDate);
-  //     // if days between is more than 1
-  //     if (daysBetween > 0) {
-  //       this.daysBetween = daysBetween;
-  //       this.totalAmount = this.product.priceperday * daysBetween;
-  //     } else if (daysBetween === 0) {
-  //       this.daysBetween = 1;
-  //       this.totalAmount = this.product.priceperday;
-  //     }
-  //   }
-  //}
-
   public convertObjToDate(obj: any) {
     let date = obj.year + "-" + obj.month + "-" + obj.day;
     return new Date(date);
   }
-
-//   public convertMomentDate(obj: any) {
-//     let dateString = obj._d;
-//     // let year = dateString.slice(12, 15);
-//     console.log(dateString);
-//     return new Date(dateString);
-//     // let month = obj._d.slice(5, 7);
-//     // let day = obj._d.slice(9, 10);
-//     // let date = year + "-" + month + "-" + day;
-//     // console.log(date);
-//   }
-
-//   public getDaysBetween(date1: Date, date2: Date) {
-//     let oneDay = 1000 * 60 * 60 * 24;
-
-//     // this.Convert both dates to milliseconds
-//     let date1Ms = date1.getTime();
-//     let date2Ms = date2.getTime();
-
-//     // Calculate the difference in milliseconds
-//     let differenceMs = date2Ms - date1Ms;
-
-//     // this.Convert back to days and return
-//     return Math.round(differenceMs / oneDay);
-//   }
-// }
