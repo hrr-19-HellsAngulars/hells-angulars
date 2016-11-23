@@ -38,12 +38,22 @@ export class NewProductForm {
   public onSubmit(model: NewProduct) {
     model.placeId = this.place.place_id;
     model.lat = this.place.geometry.location.lat().toFixed(7);
-    console.log(model.lat);
     model.lng = this.place.geometry.location.lng().toFixed(7);
-    model.city = this.place.address_components[1].long_name;
-    model.state = this.place.address_components[3].short_name;
-    if (this.place.address_components[5] !== undefined) {
-      model.zip = this.place.address_components[5].long_name;
+
+    // this block parses out the address_components and gets out what we need.
+    // It's needed because the address_components array sort is not stable.
+    for (var i = 0; i < this.place.address_components.length; i++) {
+      for (var j = 0; j < this.place.address_components[i].types.length; j++) {
+        if (this.place.address_components[i].types[j] === "locality") {
+          model.city = this.place.address_components[i].long_name;
+        }
+        if (this.place.address_components[i].types[j] === "administrative_area_level_1") {
+          model.state = this.place.address_components[i].short_name;
+        }
+        if (this.place.address_components[i].types[j] === "postal_code") {
+          model.zip = this.place.address_components[i].long_name;
+        }
+      }
     }
 
     model.userId = JSON.parse(localStorage.getItem("profile")).user_id;
