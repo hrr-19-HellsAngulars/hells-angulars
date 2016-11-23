@@ -40,13 +40,9 @@ export class NewProductForm {
     model.lat = this.place.geometry.location.lat();
     console.log(model.lat);
     model.lng = this.place.geometry.location.lng();
-    if (this.place.address_components === undefined) {
-      model.city = "not provided";
-      model.state = "not provided";
-      model.zip = "not provided";
-    } else {
-      model.city = this.place.address_components[1].long_name;
-      model.state = this.place.address_components[3].short_name;
+    model.city = this.place.address_components[1].long_name;
+    model.state = this.place.address_components[3].short_name;
+    if (this.place.address_components[5] !== undefined) {
       model.zip = this.place.address_components[5].long_name;
     }
 
@@ -76,6 +72,7 @@ export class NewProductForm {
         // get the place result
         let place: google.maps.places.PlaceResult = autocomplete.getPlace();
         this.place = place;
+        console.log(place);
 
         // set latitude and longitude
         this.latitude = place.geometry.location.lat();
