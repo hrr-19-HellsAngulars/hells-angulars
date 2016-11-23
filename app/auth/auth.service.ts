@@ -26,7 +26,7 @@ export class Auth {
       },
     ],
     theme: {
-      logo: "../../assets/cube.png",
+      logo: "../../assets/gearbox_v1.png",
       primaryColor: "#579ed1",
     },
     languageDictionary: {
