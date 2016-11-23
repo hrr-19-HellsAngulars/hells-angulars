@@ -45,8 +45,8 @@ var products = `CREATE TABLE IF NOT EXISTS products (
   avgrating       INT           ,
   priceperday     INT           NOT NULL,
   location        VARCHAR(100)  ,
-  lat             DECIMAL(12,9) NOT NULL,
-  lng             DECIMAL(12,9) NOT NULL,
+  lat             FLOAT         NOT NULL,
+  lng             FLOAT         NOT NULL,
   city            VARCHAR(255)  ,
   state           VARCHAR(50)   ,
   zip             INT
