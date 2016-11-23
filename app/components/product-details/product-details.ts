@@ -4,6 +4,8 @@ import { NgbRatingConfig }          from "@ng-bootstrap/ng-bootstrap";
 import { stripeConfig }        from "../../stripe/stripe.config";
 import { ProductDetailsService }    from "./product-details.service";
 import { UIROUTER_DIRECTIVES }      from "ui-router-ng2";
+import { DaterangepickerConfig } from './daterangepicker/index';
+
 
 @Component({
   moduleId: module.id,
@@ -15,18 +17,16 @@ import { UIROUTER_DIRECTIVES }      from "ui-router-ng2";
 
 export class ProductDetails implements OnInit, DoCheck {
 
+  public daterange: any = {};
+
+  private selectedDate(value: any) {
+      daterange.start = value.start;
+      daterange.end = value.end;
+  }
+
   @Input() public product: any;
 
   @Input() public selectedPic: String;
-
-  @Input() fromDate: any;
-  @Input() toDate: any;
-
-  private minDate: any = {
-    "year": new Date().getFullYear(),
-    "month": +new Date().getMonth() + 1,
-    "day": +new Date().getDate(),
-  };
 
   private reviews: Array<any>;
   private numberOfReviews: Number;
