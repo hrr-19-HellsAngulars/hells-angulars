@@ -36,25 +36,38 @@ export class NewProductForm {
   ) { }
 
   public onSubmit(model: NewProduct) {
-    model.placeId = this.place.place_id;
     model.lat = this.place.geometry.location.lat().toFixed(7);
     model.lng = this.place.geometry.location.lng().toFixed(7);
 
     // this block parses out the address_components and gets out what we need.
     // It's needed because the address_components array sort is not stable.
-    for (var i = 0; i < this.place.address_components.length; i++) {
-      for (var j = 0; j < this.place.address_components[i].types.length; j++) {
-        if (this.place.address_components[i].types[j] === "locality") {
-          model.city = this.place.address_components[i].long_name;
+    this.place.address_components.forEach(component => {
+      component.types.forEach(type => {
+        if (type === "locality") {
+          model.city = component.long_name;
         }
-        if (this.place.address_components[i].types[j] === "administrative_area_level_1") {
-          model.state = this.place.address_components[i].short_name;
+        if (type === "administrative_area_level_1") {
+          model.state = component.short_name;
         }
-        if (this.place.address_components[i].types[j] === "postal_code") {
-          model.zip = this.place.address_components[i].long_name;
+        if (type === "postal_code") {
+          model.zip = component.long_name;
         }
-      }
-    }
+      });
+    });
+
+    // for (const i = 0; i < this.place.address_components.length; i++) {
+    //   for (const j = 0; j < this.place.address_components[i].types.length; j++) {
+    //     if (this.place.address_components[i].types[j] === "locality") {
+    //       model.city = this.place.address_components[i].long_name;
+    //     }
+    //     if (this.place.address_components[i].types[j] === "administrative_area_level_1") {
+    //       model.state = this.place.address_components[i].short_name;
+    //     }
+    //     if (this.place.address_components[i].types[j] === "postal_code") {
+    //       model.zip = this.place.address_components[i].long_name;
+    //     }
+    //   }
+    // }
 
     model.userId = JSON.parse(localStorage.getItem("profile")).user_id;
     this.newProductService.postProduct(model)
