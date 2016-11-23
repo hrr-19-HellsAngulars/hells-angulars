@@ -1,4 +1,4 @@
-import { About }                  from "./components/about/about";
+import { About }                 from "./components/about/about";
 import { Google }                from "./components/google/google.component";
 import { Home }                  from "./components/home/home";
 import { Products }              from "./components/products/products";
@@ -54,5 +54,5 @@ export const profileState = {
 export const searchState = {
   component: Products,
   name: "products-search",
-  url: "/products/search/:query",
+  url: "/products/search",
 };
