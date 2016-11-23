@@ -106,7 +106,7 @@ module.exports = {
   // },
 
   createProduct: function (req, res, next) {
-    console.log(req.body);
+    console.log('>>>>>', req.body.lat);
     var body = req.body;
     // query string for storing product in product table
     var queryStr = `WITH ins1 AS (
