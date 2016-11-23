@@ -6,7 +6,8 @@ export class NewProduct {
     public categoryId: number;
     public imageLink?: string;
     public userId: string;
-    public placeId?: string;
+    public lat: number;
+    public lng: number;
     public city?: string;
     public state?: string;
     public zip?: number;
