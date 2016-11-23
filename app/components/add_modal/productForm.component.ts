@@ -37,9 +37,9 @@ export class NewProductForm {
 
   public onSubmit(model: NewProduct) {
     model.placeId = this.place.place_id;
-    model.lat = this.place.geometry.location.lat();
+    model.lat = this.place.geometry.location.lat().toFixed(7);
     console.log(model.lat);
-    model.lng = this.place.geometry.location.lng();
+    model.lng = this.place.geometry.location.lng().toFixed(7);
     model.city = this.place.address_components[1].long_name;
     model.state = this.place.address_components[3].short_name;
     if (this.place.address_components[5] !== undefined) {
