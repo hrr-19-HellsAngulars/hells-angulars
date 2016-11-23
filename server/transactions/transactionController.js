@@ -13,6 +13,7 @@ module.exports = {
       , transactions.product_id
       , products.productname
       , users.firstname
+      , users.profilepic
       , transactions.buyer_id
       , transactions.seller_id
       FROM transactions
@@ -40,6 +41,7 @@ module.exports = {
       , transactions.product_id
       , products.productname
       , users.firstname
+      , users.profilepic
       , transactions.buyer_id
       , transactions.seller_id
       FROM transactions

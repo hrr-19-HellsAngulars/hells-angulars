@@ -55,3 +55,11 @@ img {
 a: visited {
   color: #607D8B
 }
+
+.img-circle {
+  height: 100px;
+  width: 100px;
+  border: 1px solid #FFFFFF;
+  border-radius: 50%;
+  margin: 0 auto;
+}
