@@ -38,9 +38,13 @@ ngb-rating, .fa-map-marker{
   color: #579ed1;
 }
 
-.product-title, .price, .review-title {
+.product-title, .review-title {
   text-transform: UPPERCASE;
   font-weight: bold;
+}
+
+.price {
+  font-family: 'Raleway', serif;
 }
 
 .product-title, .rating, .product-description, .price {
