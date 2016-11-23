@@ -12,14 +12,8 @@ h3 {
 
 .homeInfo {
   text-align: center;
-  padding: 50px;
-  font-family: 'Open Sans', sans-serif;
+  padding: 20px;
   color: #579ed1;
-}
-
-.homeCarousel {
-  /*max-height: 400px !important;*/
-  padding-top: 10px;
 }
 
 .carouselSlide {
@@ -33,10 +27,20 @@ img {
 
 .home-content {
   padding-bottom: 1em;
+  margin-top: 20px;
 }
 
 .home-detail {
-  padding: 0 2%;
-  width: 75%;
+  padding: 0 1%;
+  width: 80%;
   margin: 0 auto;
+}
+
+.icons {
+  width: 25% !important;
+  height: 25% !important;
+}
+
+.center {
+  text-align: center;
 }

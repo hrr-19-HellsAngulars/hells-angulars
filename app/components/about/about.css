@@ -5,3 +5,15 @@
   border-radius: 50%;
   margin: 0 auto;
 }
+.container {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.row {
+  margin-top: 30px;
+}
+
+h3 {
+  margin-top: 10px;
+}

@@ -1,6 +1,6 @@
 var pool = require('../db/db.js');
 
-var queryStrWithImages = `SELECT products.id, products.category_id, products.owner_id, products.description, products.productname, products.priceperday, products.location, images.url
+var queryStrWithImages = `SELECT products.id, products.category_id, products.owner_id, products.description, products.productname, products.priceperday, products.location, products.lat, products.lng, products.city, products.state, images.url
       FROM products
       LEFT JOIN images
       ON products.id=images.product_id`;
@@ -74,10 +74,14 @@ module.exports = {
       , products.productname
       , products.priceperday
       , products.location
+      , products.city
+      , products.state
+      , products.lng
+      , products.lat
       , images.url
       FROM products
       LEFT JOIN images
-        ON products.id=images.product_id
+        ON products.id = images.product_id
       INNER JOIN users
           on users.id = products.owner_id
       WHERE products.id = ($1)`;

@@ -25,6 +25,13 @@ export class Auth {
         placeholder: "enter your last name",
       },
     ],
+    theme: {
+      logo: "../../assets/cube.png",
+      primaryColor: "#579ed1",
+    },
+    languageDictionary: {
+      title: "GEAR BOX",
+    },
   });
 
   public userProfile: Object;
