@@ -52,10 +52,10 @@ img {
   margin-top: 5px;
   padding: 0.4em;
 }
-a: visited {
-  color: #607D8B
+.link {
+  color: inherit;
+  text-decoration: inherit;
 }
-
 .img-circle {
   height: 60px;
   width: 60px;

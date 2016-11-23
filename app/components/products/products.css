@@ -33,6 +33,7 @@ ngb-rating{
 }
 
 .sebm-google-map-container {
-  height: 200px;
-  width: 300px;
+  height: 300px;
+  max-width: 280px;
 }
+

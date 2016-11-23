@@ -74,6 +74,7 @@ export class ProfileComponent implements OnInit {
       .then(response => {
         const rentals = JSON.parse(response._body);
         this.rentals = rentals;
+        console.log(this.rentals);
       })
       .catch(err => console.log(err));
   }
@@ -100,6 +101,7 @@ export class ProfileComponent implements OnInit {
 
   public close() {
     this.addModalService.close();
+    this.getUserInfo();
   }
 
   public convertDate(date: string) {

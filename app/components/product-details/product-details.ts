@@ -120,3 +120,4 @@ export class ProductDetails implements OnInit, DoCheck {
     let date = obj.year + "-" + obj.month + "-" + obj.day;
     return new Date(date);
   }
+}
