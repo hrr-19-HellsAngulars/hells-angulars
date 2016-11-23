@@ -30,7 +30,9 @@ module.exports = {
   // If no string was provided, will return all products
   getProducts: function(req, res, next) {
     console.log('query ' + JSON.stringify(req.query));
-    req.query.query = req.query.query || '';
+    if (req.query.query === 'undefined' || req.query.query === null || req.query.query === 'null') {
+      req.query.query = '';
+    }
     var queryStr = " WHERE (productname LIKE '%" + req.query.query + "%')";
     pool.query(queryStrWithImages + queryStr, function(err, result) {
       if (err) {
