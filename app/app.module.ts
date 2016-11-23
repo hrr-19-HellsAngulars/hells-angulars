@@ -11,7 +11,7 @@ import { NgbModule }               from "@ng-bootstrap/ng-bootstrap";
 import { NgModule }                from "@angular/core";
 import { UIRouterModule }          from "ui-router-ng2";
 
-import { About }                     from "./components/about/about.js";
+import { About }                   from "./components/about/about.js";
 import { AddReviewForm }           from "./components/add-review/add-review";
 import { AgmCoreModule }           from "angular2-google-maps/core";
 
@@ -26,14 +26,14 @@ import { ProfileComponent }        from "./components/profile/profile.component"
 import { GOOGLE_API_KEY }          from "./auth/googleMaps.config";
 
 import { AddModalService }         from "./components/add_modal/addModal.service";
-import { AddReviewService }         from "./components/add-review/add-review.service";
+import { AddReviewService }        from "./components/add-review/add-review.service";
 import { NewProductService }       from "./components/add_modal/newProduct.service";
 import { ProductsService }         from "./components/products/products.service";
 import { ProductDetailsService }   from "./components/product-details/product-details.service";
 import { ProfileService }          from "./components/profile/profile.service";
 
 import { MyUIRouterConfig }        from "./config/router.config.js";
-import { aboutState, googleState, homeState, productsState, productDetailsState, profileState } from "./states.js";
+import { aboutState, googleState, homeState, productsState, productDetailsState, profileState, searchState } from "./states.js";
 
 let INITIAL_COMPONENTS =  [
   App, About, AddReviewForm,  Google, Home, Products, ProductDetails, ProfileComponent, NewProductForm,
@@ -44,7 +44,7 @@ let INITIAL_PROVIDERS  =  [
 ];
 
 let INITIAL_STATES     =  [
-  aboutState, googleState, homeState, productsState, productDetailsState, profileState,
+  aboutState, googleState, homeState, productsState, productDetailsState, profileState, searchState,
 ];
 
 @NgModule({

@@ -1,5 +1,6 @@
 import { Auth }                from "../../auth/auth.service";
 import { Component, OnInit }   from "@angular/core";
+import { FormGroup }           from "@angular/forms";
 
 import { AddModalService }     from "../add_modal/addModal.service";
 import { ProductsService }     from "../products/products.service";
@@ -21,6 +22,7 @@ export class App {
   public closeResult: string;
   public modal: NgbModalRef;
   public content: any;
+  public form: FormGroup;
 
   constructor(
     private auth: Auth,

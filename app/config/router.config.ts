@@ -1,5 +1,5 @@
-import { googleState, homeState, productsState, productDetailsState, profileState } from "../states";
-import {Inject, Injectable} from "@angular/core";
+import { googleState, homeState, productsState, productDetailsState, profileState, searchState } from "../states";
+import { Inject, Injectable } from "@angular/core";
 import { UIRouter }         from "ui-router-ng2";
 
 /** UIRouter Config  */

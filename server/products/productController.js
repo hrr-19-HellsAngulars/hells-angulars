@@ -29,11 +29,12 @@ module.exports = {
   // Return products that match the query string.
   // If no string was provided, will return all products
   getProducts: function(req, res, next) {
-    // console.log(req.query.productname);
-    // console.log(req.query.productname)
-    // req.query.productname = req.query.productname || '';
-    // var queryStr = "SELECT * FROM products WHERE (productname LIKE '%" + req.query.productname+ "%')";
-    pool.query(queryStrWithImages, function(err, result) {
+    console.log('query ' + JSON.stringify(req.query));
+    if (req.query.query === 'undefined' || req.query.query === null || req.query.query === 'null') {
+      req.query.query = '';
+    }
+    var queryStr = " WHERE (productname LIKE '%" + req.query.query + "%')";
+    pool.query(queryStrWithImages + queryStr, function(err, result) {
       if (err) {
         console.log(err);
         res.send(err);
@@ -86,6 +87,19 @@ module.exports = {
       res.json(addImagesArray(result.rows));
     });
   },
+
+  // getProductsByQuery: function(req, res, next) {
+  //   var query = req.params.query;
+  //   console.log(query);
+  //   var queryStr = ` SELECT * FROM products WHERE productname LIKE '%" + ${query} + "%'
+  //   `;
+  //   pool.query(queryStr, function(err, result) {
+  //     if (err) {
+  //       return console.log(err);
+  //     }
+  //     res.json(result.rows);
+  //   });
+  // },
 
   createProduct: function (req, res, next) {
     console.log(req.body);

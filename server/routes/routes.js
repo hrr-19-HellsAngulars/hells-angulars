@@ -26,6 +26,7 @@ module.exports = function(app, express) {
   //Product routes
   app.get('/api/products', productController.getProducts);
   app.get('/api/products/byuser/:id', productController.getProductsByUser);
+  app.get('/api/products/search', productController.getProducts);
   app.get('/api/products/:id', productController.getProductById);
   // app.get('/api/products/images/:id', productController.getImages);
   app.post('/api/products', productController.createProduct);
