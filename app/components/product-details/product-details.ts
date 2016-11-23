@@ -4,8 +4,7 @@ import { NgbRatingConfig }          from "@ng-bootstrap/ng-bootstrap";
 import { stripeConfig }        from "../../stripe/stripe.config";
 import { ProductDetailsService }    from "./product-details.service";
 import { UIROUTER_DIRECTIVES }      from "ui-router-ng2";
-import { DaterangepickerConfig } from './daterangepicker/index';
-
+import { DaterangepickerConfig }      from "./daterangepicker/index";
 
 @Component({
   moduleId: module.id,
@@ -17,16 +16,18 @@ import { DaterangepickerConfig } from './daterangepicker/index';
 
 export class ProductDetails implements OnInit, DoCheck {
 
-  public daterange: any = {};
-
-  private selectedDate(value: any) {
-      daterange.start = value.start;
-      daterange.end = value.end;
-  }
-
   @Input() public product: any;
 
   @Input() public selectedPic: String;
+
+  public fromDate: any;
+  public toDate: any;
+
+  private minDate: any = {
+    "year": new Date().getFullYear(),
+    "month": +new Date().getMonth() + 1,
+    "day": +new Date().getDate(),
+  };
 
   private reviews: Array<any>;
   private numberOfReviews: Number;
@@ -45,6 +46,21 @@ export class ProductDetails implements OnInit, DoCheck {
   ) {
     config.max = 5;
     config.readonly = true;
+  }
+
+  public selectedDate(value: any) {
+    this.fromDate = value.start;
+    this.toDate = value.end;
+
+    let oneDay = 1000 * 60 * 60 * 24;
+
+    // Calculate the difference in milliseconds
+    let differenceMs = this.toDate - this.fromDate;
+
+    // this.Convert back to days and return
+    let days = Math.round(differenceMs / oneDay);
+    this.daysBetween = days;
+    this.totalAmount = days * this.product.priceperday;
   }
 
   public ngOnInit() {
@@ -87,8 +103,8 @@ export class ProductDetails implements OnInit, DoCheck {
           seller_id: this.product.owner_id,
           status_id: 1,
           product_id: this.product.id,
-          bookedfrom: this.convertObjToDate(this.fromDate),
-          bookedto: this.convertObjToDate(this.toDate),
+          bookedfrom: this.fromDate._d,
+          bookedto: this.toDate._d,
         });
       },
     });
@@ -100,43 +116,54 @@ export class ProductDetails implements OnInit, DoCheck {
 
   }
 
-  public ngDoCheck() {
-    if (this.oldFromDate !== this.fromDate && this.oldToDate !== this.toDate) {
-      // set OldFromDate and oldToDate to current date
-      this.oldFromDate = this.fromDate;
-      this.oldToDate = this.toDate;
-      // this.convert date objects to date fromat
-      let fromDate = this.convertObjToDate(this.fromDate);
-      let toDate = this.convertObjToDate(this.toDate);
-      // Calculate days between
-      let daysBetween = this.getDaysBetween(fromDate, toDate);
-      // if days between is more than 1
-      if (daysBetween > 0) {
-        this.daysBetween = daysBetween;
-        this.totalAmount = this.product.priceperday * daysBetween;
-      } else if (daysBetween === 0) {
-        this.daysBetween = 1;
-        this.totalAmount = this.product.priceperday;
-      }
-    }
-  }
+  // public ngDoCheck() {
+  //   if (this.oldFromDate !== this.fromDate && this.oldToDate !== this.toDate) {
+  //     // set OldFromDate and oldToDate to current date
+  //     this.oldFromDate = this.fromDate;
+  //     this.oldToDate = this.toDate;
+  //     // this.convert date objects to date fromat
+  //     let fromDate = this.convertObjToDate(this.fromDate);
+  //     let toDate = this.convertObjToDate(this.toDate);
+  //     // Calculate days between
+  //     let daysBetween = this.getDaysBetween(fromDate, toDate);
+  //     // if days between is more than 1
+  //     if (daysBetween > 0) {
+  //       this.daysBetween = daysBetween;
+  //       this.totalAmount = this.product.priceperday * daysBetween;
+  //     } else if (daysBetween === 0) {
+  //       this.daysBetween = 1;
+  //       this.totalAmount = this.product.priceperday;
+  //     }
+  //   }
+  //}
 
   public convertObjToDate(obj: any) {
     let date = obj.year + "-" + obj.month + "-" + obj.day;
     return new Date(date);
   }
 
-  public getDaysBetween(date1: Date, date2: Date) {
-    let oneDay = 1000 * 60 * 60 * 24;
+//   public convertMomentDate(obj: any) {
+//     let dateString = obj._d;
+//     // let year = dateString.slice(12, 15);
+//     console.log(dateString);
+//     return new Date(dateString);
+//     // let month = obj._d.slice(5, 7);
+//     // let day = obj._d.slice(9, 10);
+//     // let date = year + "-" + month + "-" + day;
+//     // console.log(date);
+//   }
 
-    // this.Convert both dates to milliseconds
-    let date1Ms = date1.getTime();
-    let date2Ms = date2.getTime();
+//   public getDaysBetween(date1: Date, date2: Date) {
+//     let oneDay = 1000 * 60 * 60 * 24;
 
-    // Calculate the difference in milliseconds
-    let differenceMs = date2Ms - date1Ms;
+//     // this.Convert both dates to milliseconds
+//     let date1Ms = date1.getTime();
+//     let date2Ms = date2.getTime();
 
-    // this.Convert back to days and return
-    return Math.round(differenceMs / oneDay);
-  }
-}
+//     // Calculate the difference in milliseconds
+//     let differenceMs = date2Ms - date1Ms;
+
+//     // this.Convert back to days and return
+//     return Math.round(differenceMs / oneDay);
+//   }
+// }
