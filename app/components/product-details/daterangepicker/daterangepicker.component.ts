@@ -8,9 +8,9 @@ import 'bootstrap-daterangepicker';
 import * as moment from 'moment';
 
 @Directive({
-    moduleId: module.id,
+    //moduleId: module.id,
     selector: '[daterangepicker]',
-    styleUrls: ['./daterangepicker.css'],
+    //styleUrls: ['./daterangepicker.css'],
  })
 
 export class DaterangePickerComponent implements AfterViewInit {
@@ -21,7 +21,8 @@ export class DaterangePickerComponent implements AfterViewInit {
     constructor(private input: ElementRef, private config: DaterangepickerConfig) { }
 
     ngAfterViewInit() {
-        //$('head').append('<style>'+require('./daterangepicker.css')+'</style>');
+        // $('head').append('<style>'+require('./daterangepicker.css')+'</style>');
+        // $('head').append('<style> rel="stylesheet" href="./app/components/product-detail/daterangepicker/daterangepicker.css" type="text/css" </style>');
 
         let targetOptions: any = Object.assign({}, this.config.settings, this.options);
 
