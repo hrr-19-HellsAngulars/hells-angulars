@@ -67,8 +67,10 @@
             <div *ngFor="let rental of rentals" class="card product">
                   <div class="row">
                     <div class="col-xs-3">
-                      <img class="img-circle img-responsive img-center" [src] = "rental.profilepic" />
-                      <p class="primary card-text">Renting From {{rental.firstname}}</p>
+                      <div class="center">
+                        <img class="img-circle img-responsive" [src] = "rental.profilepic" />
+                        <p class="primary card-text">Renting From {{rental.firstname}}</p>
+                      </div>
                     </div>
                     <div class="col-xs-6">
                       <h4 class="card-title">{{rental.productname}}</h4>
@@ -94,12 +96,15 @@
             <div *ngFor="let transaction of transactions" class="card product">
                 <div class="row">
                     <div class="col-xs-3">
+                      <div class="center">
+                        <img class="img-circle img-responsive" [src] = "transaction.profilepic" />
+                        <p class="primary card-text">Renting To {{transaction.firstname}}</p>
+                      </div>
 
-                      <p class="primary card-text date"> {{convertDate(transaction.bookedfrom)}}<br>TO <br>{{convertDate(transaction.bookedto)}}</p>
                     </div>
                     <div class="col-xs-6">
                       <h4 class="card-title">{{transaction.productname}}</h4>
-                      <p class="primary card-text">Renting To {{transaction.firstname}}</p>
+                      <p class="primary card-text date"> {{convertDate(transaction.bookedfrom)}} to {{convertDate(transaction.bookedto)}}</p>
                     </div>
                     <div class="col-xs-3 review">
                       <h4><strong>${{transaction.totalvalue}}</strong></h4>
