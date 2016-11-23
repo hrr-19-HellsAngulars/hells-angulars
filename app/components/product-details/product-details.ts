@@ -51,6 +51,7 @@ export class ProductDetails implements OnInit, DoCheck {
     this.product = this.product[0];
     this.selectedPic = this.product.url[0];
     this.getReviews(this.product.id);
+    console.log(this.product);
   }
 
   public onSelect(n: number) {

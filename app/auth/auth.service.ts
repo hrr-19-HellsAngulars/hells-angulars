@@ -26,7 +26,7 @@ export class Auth {
       },
     ],
     theme: {
-      primaryColor: '#579ed1'
+      primaryColor: "#579ed1",
     },
   });
 
