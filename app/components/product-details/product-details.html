@@ -36,24 +36,10 @@
         <hr>
 
         <h4 class="price"><span>$ {{product.priceperday}}</span> per day</h4>
-        <div class="form-group">
-          <label for="datefrom" class="control-label">From</label>
-          <div class="input-group">
-            <input class="form-control" placeholder="yyyy-mm-dd"  ngbDatepicker #df="ngbDatepicker" [(ngModel)]="fromDate" [minDate]="minDate">
-            <div class="input-group-addon" (click)="df.toggle()" >
-              <i class="fa fa-calendar"></i>
-            </div>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="dateto" class="control-label">To</label>
-            <div class="input-group">
-              <input class="form-control" placeholder="yyyy-mm-dd"  ngbDatepicker #dt="ngbDatepicker" [(ngModel)]="toDate" [minDate]="minDate">
-              <div class="input-group-addon" (click)="dt.toggle()" >
-                <i class="fa fa-calendar"></i>
-              </div>
-            </div>
-          </div>
+        <hr>
+        <h5>Booking/Availability</h5>
+        <input class="form-control" type="text" name="daterangeInput" daterangepicker [options]="options" (selected)="selectedDate($event)" />
+        <hr>
         <div *ngIf="totalAmount>0">
           <p>{{product.priceperday}} x {{daysBetween}} days<span class="right">${{totalAmount}}</span></p>
           <hr>
