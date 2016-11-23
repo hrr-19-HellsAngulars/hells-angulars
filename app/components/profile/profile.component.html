@@ -34,18 +34,17 @@
               <a (click)="open(content)"><i class="fa fa-plus-circle fa-2x pull-right"></i></a>
             </div>
             <div *ngFor="let product of products" class="card product">
-                <a class="link" href="#/product/{{product.id}}">
                   <div class="row">
                     <div class="col-xs-4 productImage">
-                      <img [src]=product.url[0] />
+                      <a class="link" href="#/product/{{product.id}}"><img [src]=product.url[0] /></a>
                     </div>
                     <div class="row col-xs-9 description">
                       <div class="col-xs-6">
-                        <h4 class="card-title">{{product.productname}}</h4>
-                        <p class="primary card-text">{{product.description}}</p>
+                        <a class="link" href="#/product/{{product.id}}"><h4 class="card-title">{{product.productname}}</h4>
+                        <p class="primary card-text">{{product.description}}</p></a>
                       </div>
                       <div class="col-xs-3 price">
-                        <p class="text-right"><strong>${{product.priceperday}}</strong> / day <br>{{product.location}}</p>
+                        <a class="link" href="#/product/{{product.id}}"><p class="text-right"><strong>${{product.priceperday}}</strong> / day <br>{{product.location}}</p></a>
                       </div>
                       <div class="col-xs-3 edit">
                         <button class="btn btn-primary pull-right">Edit Gear</button>
@@ -53,7 +52,6 @@
                       </div>
                     </div>
                   </div>
-                </a>
                 <hr>
             </div>
           </div>
@@ -65,17 +63,19 @@
             <div class="card-block">
             </div>
             <div *ngFor="let rental of rentals" class="card product">
-                <a class="link" href="#/product/{{rental.product_id}}">
                   <div class="row">
                     <div class="col-xs-3">
+                      <a class="link" href="#/product/{{rental.product_id}}">
                       <div class="center">
                         <img class="img-circle img-responsive" [src] = "rental.profilepic" />
                         <p class="primary card-text">Renting From {{rental.firstname}}</p>
-                      </div>
+                      </div></a>
                     </div>
                     <div class="col-xs-6">
-                      <h4 class="card-title">{{rental.productname}}</h4>
-                      <p class="primary card-text date"> {{convertDate(rental.bookedfrom)}} to {{convertDate(rental.bookedto)}}</p>
+                      <a class="link" href="#/product/{{rental.product_id}}">
+                        <h4 class="card-title">{{rental.productname}}</h4>
+                        <p class="primary card-text date"> {{convertDate(rental.bookedfrom)}} to {{convertDate(rental.bookedto)}}</p>
+                      </a>
                     </div>
                     <div class="col-xs-3 review">
                       <h4><strong>${{rental.totalvalue}}</strong></h4>
@@ -84,7 +84,6 @@
                       </p>
                     </div>
                   </div>
-                </a>
                 <hr>
             </div>
           </div>
@@ -96,28 +95,29 @@
             <div class="card-block">
             </div>
             <div *ngFor="let transaction of transactions" class="card product">
-              <a class="link" href="#/product/{{transaction.product_id}}">
-                <div class="row">
-                    <div class="col-xs-3">
-                      <div class="center">
-                        <img class="img-circle img-responsive" [src] = "transaction.profilepic" />
-                        <p class="primary card-text">Renting To {{transaction.firstname}}</p>
-                      </div>
-
+              <div class="row">
+                <div class="col-xs-3">
+                  <a class="link" href="#/product/{{transaction.product_id}}">
+                    <div class="center">
+                      <img class="img-circle img-responsive" [src] = "transaction.profilepic" />
+                      <p class="primary card-text">Renting To {{transaction.firstname}}</p>
                     </div>
-                    <div class="col-xs-6">
-                      <h4 class="card-title">{{transaction.productname}}</h4>
-                      <p class="primary card-text date"> {{convertDate(transaction.bookedfrom)}} to {{convertDate(transaction.bookedto)}}</p>
-                    </div>
-                    <div class="col-xs-3 review">
-                      <h4><strong>${{transaction.totalvalue}}</strong></h4>
-                      <p *ngIf="transaction.status_id===1">
-                        <button class="btn btn-primary" (click)="open(review)" (click)="onSelect(transaction)">Write a Review</button>
-                      </p>
-                    </div>
-                  </div>
-                </a>
-                <hr>
+                  </a>
+                </div>
+                <div class="col-xs-6">
+                  <a class="link" href="#/product/{{transaction.product_id}}">
+                    <h4 class="card-title">{{transaction.productname}}</h4>
+                    <p class="primary card-text date"> {{convertDate(transaction.bookedfrom)}} to {{convertDate(transaction.bookedto)}}</p>
+                  </a>
+                </div>
+                <div class="col-xs-3 review">
+                  <h4><strong>${{transaction.totalvalue}}</strong></h4>
+                  <p *ngIf="transaction.status_id===1">
+                    <button class="btn btn-primary" (click)="open(review)" (click)="onSelect(transaction)">Write a Review</button>
+                  </p>
+                </div>
+              </div>
+              <hr>
             </div>
           </div>
       </template>
