@@ -26,7 +26,11 @@ export class Auth {
       },
     ],
     theme: {
+      logo: "../../assets/cube.png",
       primaryColor: "#579ed1",
+    },
+    languageDictionary: {
+      title: "GEAR BOX",
     },
   });
 

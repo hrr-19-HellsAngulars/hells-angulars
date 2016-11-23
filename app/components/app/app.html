@@ -1,6 +1,8 @@
 <div class="page-wrap">
-  <nav class="navbar navbar-light bg-faded">
-    <a class="navbar-brand gearbox" href="#">Gear Box</a>
+  <nav class="navbar navbar-light">
+    <a class="navbar-brand gearbox" href="#">
+      GEAR BOX
+    </a>
     <form class="form-inline float-xs-left" #form="ngForm">
       <input type="text" class="left-nav form-control" placeholder="Dig in the Gear Box..." ngModel name="keyword">
       <a class="left-nav" uiSref="products-search" ui-sref-opts="{reload: true}" (click)="onSearch(form); form.reset()"><i class="fa fa-search fa-lg"></i></a>
