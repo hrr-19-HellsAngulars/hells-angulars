@@ -11,12 +11,6 @@
 //  types
 //  ;`
 
-//this table is for review types: buyer review (a buyer reviewing a seller), and seller review (vice versa)
-var types = `CREATE TABLE IF NOT EXISTS types (
-  id              SERIAL        PRIMARY KEY,
-  type            VARCHAR(30)   NOT NULL
-);`;
-
 // statuses might include: pending, in progress, completed, cancelled
 var statuses = `CREATE TABLE IF NOT EXISTS statuses (
   id              SERIAL        PRIMARY KEY,
@@ -46,11 +40,17 @@ var products = `CREATE TABLE IF NOT EXISTS products (
   id              SERIAL        PRIMARY KEY,
   category_id     INT           references categories(id),
   owner_id        INT           references users(id),
-  description     TEXT          NOT NULL,
   productname     VARCHAR(50)   NOT NULL,
+  description     TEXT          NOT NULL,
+  avgrating       INT           ,
   priceperday     INT           NOT NULL,
-  location        VARCHAR(255)  NOT NULL
-);`;
+  location        VARCHAR(100)  ,
+  lat             DECIMAL(12,9) NOT NULL,
+  lng             DECIMAL(12,9) NOT NULL,
+  city            VARCHAR(255)  ,
+  state           VARCHAR(50)   ,
+  zip             INT
+);`
 
 var transactions = `CREATE TABLE IF NOT EXISTS transactions (
   id              SERIAL        PRIMARY KEY,
@@ -74,11 +74,10 @@ var reviews = `CREATE TABLE IF NOT EXISTS reviews (
   rating          INT
 );`;
 
-
 var images = `CREATE TABLE IF NOT EXISTS images (
   id              SERIAL        PRIMARY KEY,
   product_id      INT           references products(id),
   url             VARCHAR(2000) NOT NULL
 );`;
 
-module.exports =   /*deleteTables +*/ types + statuses + categories + users + products + transactions + reviews + images;
+module.exports = /*deleteTables +*/ statuses + categories + users + products + transactions + reviews + images;
