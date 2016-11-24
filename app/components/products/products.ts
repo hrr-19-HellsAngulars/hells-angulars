@@ -16,8 +16,8 @@ import { UIROUTER_DIRECTIVES } from "ui-router-ng2";
 export class Products implements OnInit {
   public products: Array<any>;
   public markers: Array<any>;
-  public lat: number = -37.7863713;
-  public lng: number = 175.2796333;
+  public latitude: number;
+  public longitude: number;
   public searchControl: FormControl;
   public zoom: number = 4;
 
@@ -67,10 +67,9 @@ export class Products implements OnInit {
     this.getProducts();
 
     // set google maps defaults
-    this.zoom = 15;
-    this.latitude = -39.8282;
-    this.longitude = 111.5795;
-
+    this.zoom = 4;
+    this.latitude = 39.8282;
+    this.longitude = -98.5795;
     // set current position
     this.setCurrentPosition();
 
@@ -79,11 +78,14 @@ export class Products implements OnInit {
   }
 
   private setCurrentPosition() {
+    console.log('setCurrentPosition firing')
     if ("geolocation" in navigator) {
+      console.log('geolocation found')
       navigator.geolocation.getCurrentPosition((position) => {
+        console.log(position);
         this.latitude = position.coords.latitude;
         this.longitude = position.coords.longitude;
-        this.zoom = 12;
+        this.zoom = 4;
       });
     }
   }
