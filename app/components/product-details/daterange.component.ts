@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { DaterangepickerConfig } from './daterangepicker/index';
 
 import * as moment from 'moment';
@@ -9,12 +9,12 @@ import * as moment from 'moment';
     templateUrl: './daterange.component.html',
     styleUrls: ['./daterange.component.css']
 })
-export class DateRangeComponent implements OnInit{
+export class DateRangeComponent {
 
     public daterange: any = {};
 
     private selectedDate(value: any) {
-        daterange.start = value.start;
-        daterange.end = value.end;
+        this.daterange.start = value.start;
+        this.daterange.end = value.end;
     }
 }
