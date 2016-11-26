@@ -4,6 +4,7 @@
   "description": " ",
   "scripts": {
     "start": "node server/app.js",
+    "postinstall": "grunt deploy",
     "lite": "lite-server",
     "prod": "nodemon server/app.js",
     "tsc": "tsc",
@@ -14,7 +15,7 @@
     "test": "karma start karma.conf.js",
     "posttest": "node_modules/.bin/remap-istanbul -i coverage/coverage-final.json -o coverage -t html",
     "coverage": "http-server -c-1 -o -p 9875 ./coverage",
-    "postinstall": "grunt deploy",
+    "postinstall": "grunt deploy"
   },
   "repository": {
     "type": "git",
