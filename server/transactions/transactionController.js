@@ -1,7 +1,5 @@
 var pool = require('../db/db.js');
 
-var queryStringWithProducts =
-
 module.exports = {
 
   getTransactionsBySellerId: function (req, res) {

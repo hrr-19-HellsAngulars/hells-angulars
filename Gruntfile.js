@@ -104,4 +104,5 @@ module.exports = function(grunt) {
 
   grunt.registerTask('build', ['clean', 'tslint', 'ts','copy:css', 'copy:html']);
   grunt.registerTask('default', ['build', 'concurrent']);
+  grunt.registerTask('deploy', ['clean', 'ts', 'copy:css', 'copy:html']);
 };
