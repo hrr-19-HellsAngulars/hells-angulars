@@ -1,0 +1,79 @@
+<!-- product details -->
+<div class="card">
+  <div class="container">
+    <div class="wrapper row">
+      <div class="preview col-md-6">
+        <div class="preview-pic">
+          <img [src]="selectedPic" />
+        </div>
+        <ul class="nav nav-tabs">
+          <li *ngIf="product.url[0]"><a (click)="onSelect(0)"><img [src]="product.url[0]" /></a></li>
+          <li *ngIf="product.url[1]"><a (click)="onSelect(1)"><img [src]="product.url[1]" /></a></li>
+          <li *ngIf="product.url[2]"><a (click)="onSelect(2)"><img [src]="product.url[2]" /></a></li>
+          <li *ngIf="product.url[3]"><a (click)="onSelect(3)"><img [src]="product.url[3]" /></a></li>
+        </ul>
+      </div>
+
+      <div class="details col-md-6">
+        <div class="row">
+          <div class="col-xs-9">
+          <h3 class="product-title">{{product.productname}}</h3>
+          <p><i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;{{product.city}}, {{product.state}}</p>
+          <div class="rating">
+            <ngb-rating [(rate)]="averageRating"></ngb-rating>
+            <span>&nbsp; &nbsp;{{numberOfReviews}} reviews</span>
+          </div>
+          </div>
+          <div class="col-xs-3">
+            <img class="img-circle img-responsive img-center" [src]="product.profilepic" alt="">
+            <div class="text-center"><p><strong>{{product.firstname}}</strong></p></div>
+          </div>
+        </div>
+        <hr>
+
+        <h4>About this gear</h4>
+          <div class="product-description">{{product.description}}</div>
+        <hr>
+
+        <h4 class="price"><span>$ {{product.priceperday}}</span> per day</h4>
+        <hr>
+        <h5>Booking/Availability</h5>
+        <input class="form-control" type="text" name="daterangeInput" daterangepicker [options]="options" (selected)="selectedDate($event)" />
+        <hr>
+        <div *ngIf="totalAmount>0">
+          <p>{{product.priceperday}} x {{daysBetween}} days<span class="right">${{totalAmount}}</span></p>
+          <hr>
+          <p>Your total <span class="right">${{totalAmount}}</span></p>
+        </div>
+        <button class="rent btn btn-primary pull-right" (click)="openCheckOut()">Rent</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+<hr>
+
+<!-- Reviews -->
+<div class="container">
+  <h3 class="review-title">Customer Reviews</h3>
+  <div *ngIf="numberOfReviews === 0" class="no-review">
+    <h4> There is no review for this gear yet</h4>
+  </div>
+  <div *ngFor="let review of reviews" class="card reviews">
+    <div class="row ">
+      <div class="col-xs-3 div-center">
+          <img class="img-circle2 img-responsive img-center" [src]="review.profilepic" alt="">
+          <div class="div-center"><p><strong>{{review.firstname}}</strong></p></div>
+      </div>
+      <div class="col-xs-9 review-detail">
+        <ngb-rating [(rate)]="review.rating"></ngb-rating>
+        <br>
+        <br>
+        <p class="primary card-text">{{review.text}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+</div>
+
+

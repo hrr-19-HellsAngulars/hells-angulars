@@ -1,0 +1,71 @@
+img {
+  width: 100%;
+}
+
+.profile {
+  text-align: center;
+}
+
+.center{
+  margin: 0 auto;
+  text-align: center
+}
+
+.container {
+  margin-top: 50px;
+}
+
+.stripeImage {
+  max-width: 90%;
+}
+
+.description, .price{
+  margin-top: 10px;
+}
+
+.productImage{
+  height: 100%;
+  width: 150px;
+}
+
+.products {
+  overflow: scroll;
+  height: 700px;
+}
+
+.product {
+  margin: 0;
+  border: 0px;
+  padding: 0 15px 0 15px;
+}
+.fa-plus-circle{
+  color: #579ed1
+}
+
+.edit {
+  margin-top: 0;
+}
+.review {
+  text-align: center;
+}
+.btn-danger {
+  margin-top: 5px;
+  padding: 0.4em;
+}
+.link {
+  color: inherit;
+  text-decoration: inherit;
+}
+.img-circle {
+  height: 60px;
+  width: 60px;
+  border: 1px solid #FFFFFF;
+  border-radius: 50%;
+  margin: 0 auto;
+}
+
+.card-title, .review {
+  margin-top: 0.5em;
+  font-family: 'Raleway', serif;
+  text-transform: uppercase;
+}

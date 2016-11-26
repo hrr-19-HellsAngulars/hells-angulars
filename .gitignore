@@ -8,10 +8,6 @@ npm-debug.log
 .baseDir.ts
 .tscache
 
-dist/
-dist/
-dist/
-
 ## DATABASE CREDENTIALS ##
 server/db/dbConfig.js
 

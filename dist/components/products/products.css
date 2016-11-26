@@ -1,0 +1,39 @@
+img {
+  width: 100%;
+  height: 200px;
+}
+
+.container {
+  margin-top: 50px;
+}
+.thumbnail {
+  margin-top: 20px
+}
+
+.caption {
+  margin-top: 5px
+}
+p {
+  margin-bottom: 0px;
+  font-size: 15px;
+  color: #808080
+}
+.primary {
+  color: #696969
+}
+.right {
+  float: right
+}
+ngb-rating{
+  color: #579ed1;
+  font-size: 13px
+}
+.card {
+  cursor: pointer;
+}
+
+.sebm-google-map-container {
+  height: 300px;
+  max-width: 280px;
+}
+

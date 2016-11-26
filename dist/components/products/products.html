@@ -1,0 +1,89 @@
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <div class="well">
+        <sebm-google-map class="sebm-google-map-container"
+        [latitude]="lat"
+        [longitude]="lng"
+        [zoom]="zoom"
+        [disableDefaultUI]="true"
+        [zoomControl]="true"
+        >
+          <sebm-google-map-marker
+          *ngFor="let m of markers; let i = index"
+          (markerClick)="clickedMarker(m.label, i)"
+          [latitude]="m.lat"
+          [longitude]="m.lng"
+          [label]="m.label"
+          [markerDraggable]="false"></sebm-google-map-marker>
+        </sebm-google-map>
+        <br>
+      <h3 align="center">Narrow by</h3>
+        <form class="form-horizontal">
+          <div class="form-group">
+            <label for="category" class="control-label">Category</label>
+            <select class="form-control" name="">
+              <option value="">Any</option>
+              <option value="">Snow</option>
+              <option value="">Water</option>
+              <option value="">Hiking</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="pricefrom" class="control-label">Min Price</label>
+            <div class="input-group">
+              <div class="input-group-addon">$</div>
+              <input type="text" class="form-control" id="pricefrom" >
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="priceto" class="control-label">Max Price</label>
+            <div class="input-group">
+              <div class="input-group-addon">$</div>
+              <input type="text" class="form-control" id="priceto" >
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="datefrom" class="control-label">From</label>
+            <div class="input-group">
+              <input class="form-control" placeholder="yyyy-mm-dd"  ngbDatepicker #df="ngbDatepicker">
+              <div class="input-group-addon" (click)="df.toggle()" >
+                <i class="fa fa-calendar"></i>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="dateto" class="control-label">To</label>
+            <div class="input-group">
+              <input class="form-control" placeholder="yyyy-mm-dd"  ngbDatepicker #dt="ngbDatepicker">
+              <div class="input-group-addon" (click)="dt.toggle()" >
+                <i class="fa fa-calendar"></i>
+              </div>
+            </div>
+          </div>
+
+          <p align="center"><a href="#"><i class="fa fa-search fa-lg"></i></a></p>
+        </form>
+      </div>
+    </div>
+
+    <div class="col-md-9">
+      <div *ngFor="let row of products" class="row">
+        <div *ngFor="let product of row" class="col-md-4">
+          <div class="card" uiSref="productDetails" [uiParams]="{ productId: product.id }">
+            <img class="card-img-top" [src]="product.url[0]" alt="image">
+            <div class="card-block">
+              <p class="right card-text"><strong>${{product.priceperday}}</strong> / day</p>
+              <p class="primary card-text">{{product.productname}}</p>
+              <p class="card-text">{{product.city}}, {{product.state}}</p>
+              <ngb-rating  [(rate)]="product.averagerating"></ngb-rating>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

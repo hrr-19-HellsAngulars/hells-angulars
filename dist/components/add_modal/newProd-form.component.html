@@ -1,0 +1,38 @@
+<form>
+  <ul>
+    <li class="form-group">
+      Product Name <input class="form-control" type="text" placeholder="Brand/Model"
+       required
+       [(ngModel)]="model.productName" [ngModelOptions]="{standalone: true}">
+    </li>
+    <li class="form-group">
+      Product Description <input class="form-control" type="text" placeholder="Description" required
+      [(ngModel)]="model.productDescription" [ngModelOptions]="{standalone: true}">
+    </li>
+    <li class="form-group">
+      Price Per Day <input class="form-control" type="text" placeholder="$ per/day"
+      required
+      [(ngModel)]="model.pricePerDay" [ngModelOptions]="{standalone: true}">
+    </li>
+    <li class="form-group">
+      Picture URL <input class="form-control" type="text" placeholder="image link"
+      required
+      [(ngModel)]="model.imageLink" [ngModelOptions]="{standalone: true}">
+    </li>
+    <li class="form-group">
+      Location <input placeholder="search for location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control" #search [formControl]="searchControl"
+      required
+      [(ngModel)]="model.location">
+    </li>
+    <li>
+      <div class="form-group">
+        <label>Category</label>
+          <select class="form-control" id="power"
+          required
+          [(ngModel)]="model.categoryId" [ngModelOptions]="{standalone: true}">
+            <option *ngFor="let cat of categories" [value]="cat">{{cat}}</option>
+          </select>
+      </div>
+    </li>
+  </ul>
+</form>

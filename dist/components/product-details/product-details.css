@@ -1,0 +1,103 @@
+img {
+  max-width: 100%;
+}
+
+.preview {
+  margin-bottom: 20px;
+}
+
+.nav-tabs {
+  border: none;
+  margin-top: 15px;
+}
+
+.nav-tabs li {
+  width: 25%;
+  display: inline-block;
+  margin-left: 20px;
+}
+.nav-tabs li img {
+  max-width: 100%;
+}
+
+.preview-pic {
+  overflow: hidden;
+}
+.tab-content img {
+  width: 100%;
+}
+
+.card {
+  margin-top: 50px;
+  padding: 3em;
+  line-height: 1.5em;
+  border: none;
+}
+
+ngb-rating, .fa-map-marker{
+  color: #579ed1;
+}
+
+.product-title, .price, .review-title {
+  text-transform: UPPERCASE;
+  font-weight: bold;
+}
+
+.product-title, .rating, .product-description, .price {
+  margin-bottom: 15px;
+}
+
+.rent  {
+  padding: 1em 2em;
+  text-transform: UPPERCASE;
+  font-weight: bold;
+}
+
+.right {
+  float: right;
+}
+
+.img-circle {
+  height: 100px;
+  width: 100px;
+  border: 1px solid #FFFFFF;
+  border-radius: 50%;
+  margin: 0 auto;
+}
+
+.img-circle2 {
+  height: 60px;
+  width: 60px;
+  border: 1px solid #FFFFFF;
+  border-radius: 50%;
+  margin: 0 auto;
+}
+
+.text-center, .no-review {
+  text-align: center;
+  margin-top: 0.5em;
+}
+
+.div-center {
+  text-align: center;
+}
+
+.no-review {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+.review-title {
+  margin-top: 30px;
+  padding-left: 70px;
+  padding-right: 50px;
+}
+
+.review-detail {
+  padding-right: 40px;
+}
+
+.reviews {
+  margin-top:30px;
+  padding-bottom: 0px;
+  padding-top: 0px;
+}
