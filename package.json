@@ -14,8 +14,7 @@
     "pretest": "npm run build",
     "test": "karma start karma.conf.js",
     "posttest": "node_modules/.bin/remap-istanbul -i coverage/coverage-final.json -o coverage -t html",
-    "coverage": "http-server -c-1 -o -p 9875 ./coverage",
-    "postinstall": "grunt deploy"
+    "coverage": "http-server -c-1 -o -p 9875 ./coverage"
   },
   "repository": {
     "type": "git",
@@ -52,6 +51,17 @@
     "es6-shim": "^0.35.1",
     "express": "^4.14.0",
     "express-jwt": "^5.1.0",
+    "grunt": "0.4.5",
+    "grunt-cli": "1.2.0",
+    "grunt-concurrent": "^2.3.1",
+    "grunt-contrib-clean": "^1.0.0",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-karma": "^2.0.0",
+    "grunt-mocha-test": "^0.13.2",
+    "grunt-nodemon": "^0.4.2",
+    "grunt-ts": "^6.0.0-beta.3",
+    "grunt-tslint": "^3.3.0",
     "jquery": "^3.1.1",
     "morgan": "^1.7.0",
     "ng2-file-upload": "^1.1.4-2",
@@ -64,19 +74,8 @@
     "stripe": "^4.12.0",
     "systemjs": "0.19.39",
     "ui-router-ng2": "^1.0.0-beta.3",
-    "zone.js": "^0.6.25",
-    "grunt": "^0.4.5",
-    "grunt-concurrent": "^2.3.1",
-    "grunt-contrib-clean": "^1.0.0",
-    "grunt-contrib-copy": "^1.0.0",
-    "grunt-contrib-watch": "^1.0.0",
-    "grunt-karma": "^2.0.0",
-    "grunt-mocha-test": "^0.13.2",
-    "grunt-nodemon": "^0.4.2",
-    "grunt-ts": "^6.0.0-beta.3",
-    "grunt-tslint": "^3.3.0"
+    "zone.js": "^0.6.25"
   },
-
   "devDependencies": {
     "@types/core-js": "^0.9.34",
     "@types/jasmine": "^2.5.38",
