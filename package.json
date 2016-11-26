@@ -74,7 +74,9 @@
     "stripe": "^4.12.0",
     "systemjs": "0.19.39",
     "ui-router-ng2": "^1.0.0-beta.3",
-    "zone.js": "^0.6.25"
+    "zone.js": "^0.6.25",
+    "tslint": "^3.15.1",
+    "typescript": "^2.0.10"
   },
   "devDependencies": {
     "@types/core-js": "^0.9.34",
