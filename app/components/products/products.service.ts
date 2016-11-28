@@ -25,7 +25,7 @@ export class ProductsService {
   }
 
   public getProductsByQuery(): Promise<any> {
-    let url = "/api/products/search?query=" + this.keyword;
+    let url = "/api/products/search?query=" + this.keyword + "&lat=" + this.lat + "&lng=" + this.lng;
     return this.http.get(url)
                     .toPromise()
                     .then(response => response.json())
