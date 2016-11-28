@@ -9,6 +9,8 @@ import { Data } from "../../data/dummydata";
 
 export class ProductsService {
   keyword: string;
+  lat: number;
+  lng: number;
 
   constructor(
     private http: Http
@@ -23,7 +25,7 @@ export class ProductsService {
   }
 
   public getProductsByQuery(): Promise<any> {
-    let url = "/api/products/search?query=" + this.keyword;
+    let url = "/api/products/search?query=" + this.keyword + "&lat=" + this.lat + "&lng=" + this.lng;
     return this.http.get(url)
                     .toPromise()
                     .then(response => response.json())
