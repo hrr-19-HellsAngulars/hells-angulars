@@ -10,7 +10,13 @@
     *ngFor="let m of markers; let i = index"
     (markerClick)="clickedMarker(m.productname, i)"
     [latitude]="m.lat"
-    [longitude]="m.lng"></sebm-google-map-marker>
+    [longitude]="m.lng">
+      <sebm-google-map-info-window>
+        {{m.productname}}<br />
+        ${{m.priceperday}} per day
+
+      </sebm-google-map-info-window>
+    </sebm-google-map-marker>
   </sebm-google-map>
 
 
