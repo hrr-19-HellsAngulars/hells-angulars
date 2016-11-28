@@ -25,8 +25,8 @@ export class App {
   public content: any;
   public form: FormGroup;
   public searchControl: FormControl;
-  public lat: number;
-  public lng: number;
+  public lat: any;
+  public lng: any;
 
   @ViewChild("search")
   public searchElementRef: ElementRef;
@@ -49,7 +49,6 @@ export class App {
     // checks for user based on profile from Auth0 in localstorage
     this.auth.findOrCreateUser(localStorage.getItem("profile"));
 
-
     this.searchControl = new FormControl();
 
     this.mapsAPILoader.load().then(() => {
@@ -62,7 +61,6 @@ export class App {
         // set latitude and longitude
         this.lat = place.geometry.location.lat().toFixed(7);
         this.lng = place.geometry.location.lng().toFixed(7);
-        console.log(this.lat,this.lng);
       });
     });
   }
@@ -74,5 +72,4 @@ export class App {
   public close() {
     this.addModalService.close();
   }
-
 }
