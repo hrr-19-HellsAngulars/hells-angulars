@@ -1,44 +1,26 @@
-
-  <sebm-google-map class="sebm-google-map-container"
-  [latitude]="latitude"
-  [longitude]="longitude"
-  [zoom]="zoom"
-  [disableDefaultUI]="true"
-  [zoomControl]="true"
-  >
-    <sebm-google-map-marker
-    *ngFor="let m of markers; let i = index"
-    (markerClick)="clickedMarker(m.productname, i)"
-    [latitude]="m.lat"
-    [longitude]="m.lng">
-      <sebm-google-map-info-window>
-        {{m.productname}}<br />
-        ${{m.priceperday}} per day
-
-      </sebm-google-map-info-window>
-    </sebm-google-map-marker>
-  </sebm-google-map>
-
-
 <div class="container">
   <div class="row">
     <div class="col-md-3">
       <div class="well">
-        <sebm-google-map class="sebm-google-map-container"
-        [latitude]="lat"
-        [longitude]="lng"
-        [zoom]="zoom"
-        [disableDefaultUI]="true"
-        [zoomControl]="true"
-        >
-          <sebm-google-map-marker
-          *ngFor="let m of markers; let i = index"
-          (markerClick)="clickedMarker(m.label, i)"
-          [latitude]="m.lat"
-          [longitude]="m.lng"
-          [label]="m.label"
-          [markerDraggable]="false"></sebm-google-map-marker>
-        </sebm-google-map>
+          <sebm-google-map class="sebm-google-map-container"
+          [latitude]="latitude"
+          [longitude]="longitude"
+          [zoom]="zoom"
+          [disableDefaultUI]="true"
+          [zoomControl]="true"
+          >
+            <sebm-google-map-marker
+            *ngFor="let m of markers; let i = index"
+            (markerClick)="clickedMarker(m.productname, i)"
+            [latitude]="m.lat"
+            [longitude]="m.lng">
+              <sebm-google-map-info-window>
+                {{m.productname}}<br />
+                ${{m.priceperday}} per day
+
+              </sebm-google-map-info-window>
+            </sebm-google-map-marker>
+          </sebm-google-map>
         <br>
       <h3 align="center">Narrow by</h3>
         <form class="form-horizontal">
