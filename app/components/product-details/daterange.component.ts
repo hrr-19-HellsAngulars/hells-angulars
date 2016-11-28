@@ -7,7 +7,7 @@ import * as moment from "moment";
     moduleId: module.id,
     selector: "gb-date-range",
     templateUrl: "./daterange.component.html",
-    styleUrls: ["./daterange.component.css"],
+    styleUrls: [ "./daterange.component.css" ],
 })
 export class DateRangeComponent {
 
