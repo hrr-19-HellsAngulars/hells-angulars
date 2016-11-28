@@ -26,25 +26,30 @@
         <form class="form-horizontal">
           <div class="form-group">
             <label for="category" class="control-label">Category</label>
-            <select class="form-control" name="">
-              <option value="">Any</option>
-              <option value="">Snow</option>
-              <option value="">Water</option>
-              <option value="">Hiking</option>
+            <select type="string" [(ngModel)]="searchCategoryId" class="form-control" name="category">
+            <!--Category id's are currently hardcoded -->
+              <option value="" name="any">Any</option>
+              <option value="1" name="backpacking">Backpacking</option>
+              <option value="2" name="bike">Bike</option>
+              <option value="7" name="kayak">Kayak</option>
+              <option value="5" name="ski">Ski</option>
+              <option value="4" name="snowboard">Snowboard</option>
+              <option value="6" name="sup">SUP</option>
+              <option value="3" name="surf">Surf</option>
             </select>
           </div>
           <div class="form-group">
             <label for="pricefrom" class="control-label">Min Price</label>
             <div class="input-group">
               <div class="input-group-addon">$</div>
-              <input type="text" class="form-control" id="pricefrom" >
+              <input type="text" class="form-control" id="pricefrom" name="pricefrom" [(ngModel)]="minPrice">
             </div>
           </div>
           <div class="form-group">
             <label for="priceto" class="control-label">Max Price</label>
             <div class="input-group">
               <div class="input-group-addon">$</div>
-              <input type="text" class="form-control" id="priceto" >
+              <input type="text" class="form-control" id="priceto" name="priceto" [(ngModel)]="maxPrice">
             </div>
           </div>
           <div class="form-group">
@@ -67,12 +72,16 @@
             </div>
           </div>
 
-          <p align="center"><a href="#"><i class="fa fa-search fa-lg"></i></a></p>
+          <p align="center"><button (click)="refineSearch()"><i class="fa fa-search fa-lg"></i></button></p>
         </form>
       </div>
     </div>
 
     <div class="col-md-9">
+    <!--Displays error when no results match filter -->
+      <div *ngIf="products.length === 0">
+        <p class="no-products">Sorry, no products match your search!</p>
+      </div>
       <div *ngFor="let row of products" class="row">
         <div *ngFor="let product of row" class="col-md-4">
           <div class="card" uiSref="productDetails" [uiParams]="{ productId: product.id }">
