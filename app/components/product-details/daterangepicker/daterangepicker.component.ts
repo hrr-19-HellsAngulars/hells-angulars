@@ -1,5 +1,6 @@
-/* tslint:disable:max-line-length, no-var-keyword, no-var-requires, no-duplicate-variable */
-
+/* tslint:disable:max-line-length, no-var-keyword */
+/* tslint:disable:no-var-requires */
+/* tslint:disable:no-duplicate-variable */
 import { Directive, OnInit, AfterViewInit, Input, Output, EventEmitter, ElementRef } from "@angular/core";
 import { ControlValueAccessor } from "@angular/forms";
 import { DaterangepickerConfig } from "./config.service";
