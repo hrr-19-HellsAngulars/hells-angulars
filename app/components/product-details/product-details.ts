@@ -1,7 +1,7 @@
 import { ActivatedRoute }           from "@angular/router";
-import { Component, Input, OnInit, DoCheck } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 import { NgbRatingConfig }          from "@ng-bootstrap/ng-bootstrap";
-import { stripeConfig }        from "../../stripe/stripe.config";
+import { stripeConfig }        from "../../stripe/stripe.config.js";
 import { ProductDetailsService }    from "./product-details.service";
 import { UIROUTER_DIRECTIVES }      from "ui-router-ng2";
 import { DaterangepickerConfig }      from "./daterangepicker/index";
@@ -14,7 +14,7 @@ import { DaterangepickerConfig }      from "./daterangepicker/index";
   templateUrl: "product-details.html",
 })
 
-export class ProductDetails implements OnInit, DoCheck {
+export class ProductDetails implements OnInit {
 
   @Input() public product: any;
 

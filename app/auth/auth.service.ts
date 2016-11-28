@@ -1,7 +1,7 @@
 import { AuthHttp }        from "angular2-jwt";
 import { Headers, Http }   from "@angular/http";
 import { Injectable }      from "@angular/core";
-import { myConfig }        from "./auth.config";
+import { myConfig }        from "./auth.config.js";
 import { tokenNotExpired } from "angular2-jwt";
 
 // Avoid name not found warnings

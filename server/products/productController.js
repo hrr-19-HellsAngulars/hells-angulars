@@ -29,12 +29,12 @@ module.exports = {
   // Return products that match the query string.
   // If no string was provided, will return all products
   getProducts: function(req, res, next) {
-    console.log('query ' + JSON.stringify(req.query));
     if (req.query.query === 'undefined' || req.query.query === null || req.query.query === 'null') {
       req.query.query = '';
     }
-    var queryStr = " WHERE (productname LIKE '%" + req.query.query + "%')";
-    pool.query(queryStrWithImages + queryStr, function(err, result) {
+    console.log('query ' + req.query.query);
+    var queryStr = "SELECT products.id, products.category_id, products.owner_id, products.description, products.productname, products.priceperday, products.location, products.lat, products.lng, products.city, products.state, avg(reviews.rating) as AverageRating, images.url FROM products LEFT JOIN reviews ON products.id=reviews.product_id LEFT JOIN images ON products.id=images.product_id WHERE (productname LIKE '%" + req.query.query + "%') GROUP BY products.id, images.url";
+    pool.query(queryStr, function(err, result) {
       if (err) {
         console.log(err);
         res.send(err);
