@@ -19,7 +19,7 @@ export class Products implements OnInit {
   public latitude: number;
   public longitude: number;
   public searchControl: FormControl;
-  public zoom: number = 4;
+  public zoom: number;
 
   // Note: This is looking for #search in the HTML template
   @ViewChild("search")
@@ -82,7 +82,7 @@ export class Products implements OnInit {
       navigator.geolocation.getCurrentPosition((position) => {
         this.latitude = position.coords.latitude;
         this.longitude = position.coords.longitude;
-        this.zoom = 4;
+        this.zoom = 8;
       });
     }
   }
