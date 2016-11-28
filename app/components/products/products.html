@@ -27,6 +27,7 @@
           <div class="form-group">
             <label for="category" class="control-label">Category</label>
             <select type="string" [(ngModel)]="searchCategoryId" class="form-control" name="category">
+            <!--Category id's are currently hardcoded -->
               <option value="" name="any">Any</option>
               <option value="1" name="backpacking">Backpacking</option>
               <option value="2" name="bike">Bike</option>
@@ -71,12 +72,13 @@
             </div>
           </div>
 
-          <p align="center"><button (click)="filterByPrice()"><i class="fa fa-search fa-lg"></i></button></p>
+          <p align="center"><button (click)="refineSearch()"><i class="fa fa-search fa-lg"></i></button></p>
         </form>
       </div>
     </div>
 
     <div class="col-md-9">
+    <!--Displays error when no results match filter -->
       <div *ngIf="products.length === 0">
         <p class="no-products">Sorry, no products match your search!</p>
       </div>
