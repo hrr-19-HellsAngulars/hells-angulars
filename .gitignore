@@ -13,13 +13,13 @@ dist/
 dist/
 
 ## DATABASE CREDENTIALS ##
-app/auth/auth.config.ts
-app/auth/googleMaps.config.ts
 server/db/dbConfig.js
-app/stripe/stripe.config.ts
 
 ## CONFIG FILES ##
+app/auth/auth.config.ts
+app/auth/googleMaps.config.ts
 server/config
+app/stripe/stripe.config.ts
 
 ## Typescript command files ##
 *.tmp.txt
