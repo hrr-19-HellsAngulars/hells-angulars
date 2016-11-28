@@ -25,6 +25,8 @@ export class App {
   public content: any;
   public form: FormGroup;
   public searchControl: FormControl;
+  public lat: number;
+  public lng: number;
 
   @ViewChild("search")
   public searchElementRef: ElementRef;
@@ -39,6 +41,8 @@ export class App {
 
   public onSearch(form: any) {
     this.productsService.keyword = form.value.keyword;
+    this.productsService.lat = this.lat;
+    this.productsService.lng = this.lng;
   };
 
   ngOnInit(): void {
@@ -55,10 +59,10 @@ export class App {
       autocomplete.addListener("place_changed", () => {
         // get the place result
         let place: google.maps.places.PlaceResult = autocomplete.getPlace();
-        console.log(place);
         // set latitude and longitude
-        this.latitude = place.geometry.location.lat();
-        this.longitude = place.geometry.location.lng();
+        this.lat = place.geometry.location.lat().toFixed(7);
+        this.lng = place.geometry.location.lng().toFixed(7);
+        console.log(this.lat,this.lng);
       });
     });
   }
