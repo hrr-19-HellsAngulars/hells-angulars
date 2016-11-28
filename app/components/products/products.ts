@@ -76,7 +76,7 @@ export class Products implements OnInit {
     this.setCurrentPosition();
 
     // load Places Autocomplete
-    this.mapsAPILoader.load()
+    this.mapsAPILoader.load();
   }
 
   private setCurrentPosition() {

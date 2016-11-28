@@ -10,7 +10,7 @@ import { HttpModule, JsonpModule } from "@angular/http";
 import { NgbModule }               from "@ng-bootstrap/ng-bootstrap";
 import { NgModule }                from "@angular/core";
 import { UIRouterModule }          from "ui-router-ng2";
-import { Daterangepicker }         from "./components/product-details/daterangepicker/index"
+import { Daterangepicker }         from "./components/product-details/daterangepicker/index";
 
 import { AddReviewForm }           from "./components/add-review/add-review";
 import { AgmCoreModule }           from "angular2-google-maps/core";
@@ -39,7 +39,7 @@ import { MyUIRouterConfig }        from "./config/router.config.js";
 import { aboutState, googleState, homeState, productsState, productDetailsState, profileState, searchState } from "./states.js";
 
 let INITIAL_COMPONENTS =  [
-  App, About, AddReviewForm,  Google, Home, Products, ProductDetails, ProfileComponent, NewProductForm, DateRangeComponent
+  App, About, AddReviewForm, Google, Home, Products, ProductDetails, ProfileComponent, NewProductForm, DateRangeComponent,
 ];
 
 let INITIAL_PROVIDERS  =  [
