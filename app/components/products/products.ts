@@ -74,13 +74,13 @@ export class Products implements OnInit {
     this.products = this.allProducts;
     let context = this;
     let products = this.products.filter(function(product: any) {
-      debugger;
       return (
         product.priceperday >= parseInt(context.minPrice, 10)
         && product.priceperday <= parseInt(context.maxPrice, 10)
         && (context.searchCategoryId === "" || product.category_id === parseInt(context.searchCategoryId, 10))
         );
      });
+    // Rearrange products to have 3 products in one row
     let productsWithRows: Array<any> = [];
     let row: Array<any> = [];
     for (let i = 0; i < products.length; i++) {
