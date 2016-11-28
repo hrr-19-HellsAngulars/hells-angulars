@@ -14,7 +14,7 @@ import { UIROUTER_DIRECTIVES } from "ui-router-ng2";
 })
 
 export class Products implements OnInit {
-  public products: Array<any>;
+  public products: Array<any> = [];
   public markers: Array<any>;
   public latitude: number;
   public longitude: number;
@@ -23,6 +23,7 @@ export class Products implements OnInit {
   public allProducts: Array<any>;
   public minPrice: string;
   public maxPrice: string;
+  public searchCategoryId: string = "";
 
   // Note: This is looking for #search in the HTML template
   @ViewChild("search")
@@ -69,12 +70,16 @@ export class Products implements OnInit {
         });
   }
 
-  public filterByPrice(): void {
+  public refineSearch(): void {
     this.products = this.allProducts;
     let context = this;
     let products = this.products.filter(function(product: any) {
-      return (product.priceperday >= parseInt(context.minPrice, 10)
-        && product.priceperday <= parseInt(context.maxPrice, 10));
+      debugger;
+      return (
+        product.priceperday >= parseInt(context.minPrice, 10)
+        && product.priceperday <= parseInt(context.maxPrice, 10)
+        && (context.searchCategoryId === "" || product.category_id === parseInt(context.searchCategoryId, 10))
+        );
      });
     let productsWithRows: Array<any> = [];
     let row: Array<any> = [];
