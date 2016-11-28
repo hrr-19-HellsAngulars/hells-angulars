@@ -26,14 +26,15 @@
         <form class="form-horizontal">
           <div class="form-group">
             <label for="category" class="control-label">Category</label>
-            <select class="form-control" name="category">
-              <option value="any">Any</option>
-              <option value="bike">Bike</option>
-              <option value="kayak">Kayak</option>
-              <option value="ski">Ski</option>
-              <option value="snow">Snow</option>
-              <option value="sup">SUP</option>
-              <option value="surf">Surf</option>
+            <select type="string" [(ngModel)]="searchCategoryId" class="form-control" name="category">
+              <option value="" name="any">Any</option>
+              <option value="1" name="backpacking">Backpacking</option>
+              <option value="2" name="bike">Bike</option>
+              <option value="7" name="kayak">Kayak</option>
+              <option value="5" name="ski">Ski</option>
+              <option value="4" name="snowboard">Snowboard</option>
+              <option value="6" name="sup">SUP</option>
+              <option value="3" name="surf">Surf</option>
             </select>
           </div>
           <div class="form-group">
@@ -76,6 +77,9 @@
     </div>
 
     <div class="col-md-9">
+      <div *ngIf="products.length === 0">
+        <p class="no-products">Sorry, no products match your search!</p>
+      </div>
       <div *ngFor="let row of products" class="row">
         <div *ngFor="let product of row" class="col-md-4">
           <div class="card" uiSref="productDetails" [uiParams]="{ productId: product.id }">
