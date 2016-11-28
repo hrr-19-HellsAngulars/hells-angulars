@@ -78,11 +78,8 @@ export class Products implements OnInit {
   }
 
   private setCurrentPosition() {
-    console.log('setCurrentPosition firing')
     if ("geolocation" in navigator) {
-      console.log('geolocation found')
       navigator.geolocation.getCurrentPosition((position) => {
-        console.log(position);
         this.latitude = position.coords.latitude;
         this.longitude = position.coords.longitude;
         this.zoom = 4;
