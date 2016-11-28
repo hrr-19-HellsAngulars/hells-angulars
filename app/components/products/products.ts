@@ -20,6 +20,9 @@ export class Products implements OnInit {
   public longitude: number;
   public searchControl: FormControl;
   public zoom: number;
+  public allProducts: Array<any>;
+  public minPrice: string;
+  public maxPrice: string;
 
   // Note: This is looking for #search in the HTML template
   @ViewChild("search")
@@ -44,6 +47,7 @@ export class Products implements OnInit {
         .then(products => {
           // Rearrange products to have 3 products in one row
           let allProducts: Array<any> = [];
+          this.allProducts = products.slice();
           let productsWithRows: Array<any> = [];
           let row: Array<any> = [];
           for (let i = 0; i < products.length; i++) {
@@ -63,6 +67,28 @@ export class Products implements OnInit {
           this.markers = allProducts;
 
         });
+  }
+
+  public filterByPrice(): void {
+    this.products = this.allProducts;
+    let context = this;
+    let products = this.products.filter(function(product: any) {
+      return (product.priceperday >= parseInt(context.minPrice, 10)
+        && product.priceperday <= parseInt(context.maxPrice, 10));
+     });
+    let productsWithRows: Array<any> = [];
+    let row: Array<any> = [];
+    for (let i = 0; i < products.length; i++) {
+      if (i % 3 === 0 && row.length > 0) {
+        productsWithRows.push(row);
+        row = [];
+      }
+      row.push(products[i]);
+      if (i === products.length - 1) {
+        productsWithRows.push(row);
+      }
+    }
+    this.products = productsWithRows;
   }
 
   public ngOnInit(): void {
