@@ -15,7 +15,6 @@ import { Daterangepicker }         from "./components/product-details/daterangep
 import { AddReviewForm }           from "./components/add-review/add-review";
 import { AgmCoreModule }           from "angular2-google-maps/core";
 
-import { AddModalService }         from "./components/add_modal/addModal.service";
 import { About }                   from "./components/about/about.js";
 
 import { App }                     from "./components/app/app.js";
@@ -27,7 +26,7 @@ import { ProductDetails }          from "./components/product-details/product-de
 import { ProfileComponent }        from "./components/profile/profile.component";
 import { DateRangeComponent }      from "./components/product-details/daterange.component";
 
-import { GOOGLE_API_KEY }          from "./auth/googleMaps.config";
+import { GOOGLE_API_KEY }          from "./auth/googleMaps.config.js";
 
 import { AddModalService }         from "./components/add_modal/addModal.service";
 import { AddReviewService }        from "./components/add-review/add-review.service";
