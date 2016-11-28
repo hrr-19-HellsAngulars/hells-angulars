@@ -9,6 +9,8 @@ import { Data } from "../../data/dummydata";
 
 export class ProductsService {
   keyword: string;
+  lat: number;
+  lng: number;
 
   constructor(
     private http: Http
