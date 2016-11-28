@@ -37,3 +37,9 @@ ngb-rating{
   max-width: 280px;
 }
 
+.no-products {
+  font-size: 2em;
+  font-weight: 600;
+  color: #000000;
+}
+
