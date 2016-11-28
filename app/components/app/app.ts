@@ -1,6 +1,7 @@
 import { Auth }                from "../../auth/auth.service";
-import { Component, OnInit }   from "@angular/core";
-import { FormGroup }           from "@angular/forms";
+import { Component, OnInit, ViewChild, ElementRef }   from "@angular/core";
+import { FormGroup, FormControl }           from "@angular/forms";
+import { MapsAPILoader }       from "angular2-google-maps/core";
 
 import { AddModalService }     from "../add_modal/addModal.service";
 import { ProductsService }     from "../products/products.service";
@@ -23,12 +24,17 @@ export class App {
   public modal: NgbModalRef;
   public content: any;
   public form: FormGroup;
+  public searchControl: FormControl;
+
+  @ViewChild("search")
+  public searchElementRef: ElementRef;
 
   constructor(
     private auth: Auth,
     private productsService: ProductsService,
     private addModalService: AddModalService,
     private modalService: NgbModal,
+    private mapsAPILoader: MapsAPILoader,
    ) { }
 
   public onSearch(form: any) {
@@ -38,6 +44,23 @@ export class App {
   ngOnInit(): void {
     // checks for user based on profile from Auth0 in localstorage
     this.auth.findOrCreateUser(localStorage.getItem("profile"));
+
+
+    this.searchControl = new FormControl();
+
+    this.mapsAPILoader.load().then(() => {
+      let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {
+        types: ["(cities)"],
+      });
+      autocomplete.addListener("place_changed", () => {
+        // get the place result
+        let place: google.maps.places.PlaceResult = autocomplete.getPlace();
+        console.log(place);
+        // set latitude and longitude
+        this.latitude = place.geometry.location.lat();
+        this.longitude = place.geometry.location.lng();
+      });
+    });
   }
 
   public open(content: any) {
