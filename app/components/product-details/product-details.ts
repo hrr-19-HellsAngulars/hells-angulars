@@ -1,7 +1,7 @@
 import { ActivatedRoute }           from "@angular/router";
 import { Component, Input, OnInit } from "@angular/core";
 import { NgbRatingConfig }          from "@ng-bootstrap/ng-bootstrap";
-import { stripeConfig }        from "../../stripe/stripe.config";
+import { stripeConfig }        from "../../stripe/stripe.config.js";
 import { ProductDetailsService }    from "./product-details.service";
 import { UIROUTER_DIRECTIVES }      from "ui-router-ng2";
 import { DaterangepickerConfig }      from "./daterangepicker/index";
