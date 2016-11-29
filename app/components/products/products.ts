@@ -21,9 +21,10 @@ export class Products implements OnInit {
   public zoom: number = 10;
   public searchControl: FormControl;
   public allProducts: Array<any>;
-  public minPrice: string;
-  public maxPrice: string;
+  public minPrice: string = "0";
+  public maxPrice: string = "500";
   public searchCategoryId: string = "";
+  public searchRadius: number = 50; // miles
 
   // Note: This is looking for #search in the HTML template
   @ViewChild("search")
@@ -78,6 +79,11 @@ export class Products implements OnInit {
         product.priceperday >= parseInt(context.minPrice, 10)
         && product.priceperday <= parseInt(context.maxPrice, 10)
         && (context.searchCategoryId === "" || product.category_id === parseInt(context.searchCategoryId, 10))
+        && (
+          context.haversineDistance(
+              [context.latitude, context.longitude], [product.lat, product.lng], true
+            ) <= context.searchRadius
+          )
         );
      });
     // Rearrange products to have 3 products in one row
@@ -94,6 +100,36 @@ export class Products implements OnInit {
       }
     }
     this.products = productsWithRows;
+  }
+
+  public haversineDistance(coords1: number[], coords2: number[], isMiles: boolean) {
+    function toRad(x: number): number {
+      return x * Math.PI / 180;
+    }
+
+    let lat1: number = coords1[0];
+    let lon1: number = coords1[1];
+
+    let lat2: number = coords2[0];
+    let lon2: number = coords2[1];
+
+    let R: number = 6371; // earth radius in km
+
+    let x1 = lat2 - lat1;
+    let dLat = toRad(x1);
+    let x2 = lon2 - lon1;
+    let dLon = toRad(x2);
+    let a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) *
+      Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    let d = R * c;
+
+    if (isMiles) {
+      d /= 1.60934;
+    }
+
+    return d;
   }
 
   public ngOnInit(): void {
