@@ -64,9 +64,7 @@ export class Products implements OnInit {
             }
           }
           this.products = productsWithRows;
-          console.log(this.products);
           this.markers = allProducts;
-
         });
   }
 
