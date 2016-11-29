@@ -16,10 +16,10 @@ import { UIROUTER_DIRECTIVES } from "ui-router-ng2";
 export class Products implements OnInit {
   public products: Array<any> = [];
   public markers: Array<any>;
-  public latitude: number;
-  public longitude: number;
+  public latitude: number = 39.8282;
+  public longitude: number = -98.5795;
   public searchControl: FormControl;
-  public zoom: number;
+  public zoom: number = 4;
   public allProducts: Array<any>;
   public minPrice: string;
   public maxPrice: string;
@@ -43,9 +43,14 @@ export class Products implements OnInit {
   }
 
   public getProducts() {
+    const context = this;
     this.productsService
         .getProductsByQuery()
-        .then(products => {
+        .then(response => {
+          let products = response.products;
+          this.latitude = response.location.lat;
+          this.longitude = response.location.lng;
+          // debugger;
           // Rearrange products to have 3 products in one row
           let allProducts: Array<any> = [];
           this.allProducts = products.slice();
@@ -97,15 +102,19 @@ export class Products implements OnInit {
   public ngOnInit(): void {
     this.getProducts();
 
-    // set google maps defaults
-    this.zoom = 4;
-    this.latitude = 39.8282;
-    this.longitude = -98.5795;
-    // set current position
+    // set current position of map
     this.setCurrentPosition();
 
     // load Places Autocomplete
     this.mapsAPILoader.load();
+
+    // testing how to update Google map center
+    const context = this;
+    setTimeout(function() {
+      context.latitude = 40;
+      context.longitude = 50;
+      console.log('fin');
+    }, 4000)
   }
 
   private setCurrentPosition() {
