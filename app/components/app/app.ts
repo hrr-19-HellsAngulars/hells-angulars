@@ -25,8 +25,8 @@ export class App {
   public content: any;
   public form: FormGroup;
   public searchControl: FormControl;
-  public lat: any;
-  public lng: any;
+  public lat: any = 37.7749295;    // set default lat for San Francisco
+  public lng: any = -122.4194155;  // set default lng for San Francisco
 
   @ViewChild("search")
   public searchElementRef: ElementRef;
