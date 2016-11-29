@@ -39,6 +39,7 @@ export class NewProductForm {
   ) { }
 
   public upload(fileInput:any) {
+    let context = this;
     let AWSService = (<any>window).AWS;
     console.log(AWSService);
     let file = fileInput.target.files[0];
@@ -47,9 +48,12 @@ export class NewProductForm {
     AWSService.config.secretAccessKey = amazonS3Config.secretAccessKey;
     let bucket = new AWSService.S3({params:{Bucket: "gear-box"}});
     let params = {Key: file.name, Body: file};
+    console.log(context.model);
     bucket.upload(params, function (error:any, result:any) {
       if (error) { console.log(error)};
-      console.log(result);
+      
+      context.model.imageLink = result.Location;
+      console.log(this.model.imageLink)
     })
   }
 
