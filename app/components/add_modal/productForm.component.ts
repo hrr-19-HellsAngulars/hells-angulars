@@ -7,6 +7,7 @@ import { MapsAPILoader }                 from "angular2-google-maps/core";
 import { NewProduct }        from "./newProduct";
 import { NewProductService } from "./newProduct.service";
 
+import { amazonS3Config } from "../../auth/amazonS3.config";
 declare const AWS: any;
 
 @Component({
@@ -42,8 +43,8 @@ export class NewProductForm {
     console.log(AWSService);
     let file = fileInput.target.files[0];
     console.log(file);
-    AWSService.config.accessKeyId = "AKIAJO6XKSBA5K4EGRYA";
-    AWSService.config.secretAccessKey = "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";
+    AWSService.config.accessKeyId = amazonS3Config.accessKeyId;
+    AWSService.config.secretAccessKey = amazonS3Config.secretAccessKey;
     let bucket = new AWSService.S3({params:{Bucket: "gear-box"}});
     let params = {Key: file.name, Body: file};
     bucket.upload(params, function (error:any, result:any) {
