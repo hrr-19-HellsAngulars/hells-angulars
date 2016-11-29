@@ -38,7 +38,7 @@ module.exports = {
     var maxLng = parseFloat(req.query.lng) + 0.5;
     var minLng = parseFloat(req.query.lng) - 0.5;
 
-    var queryStr = "SELECT products.id, products.category_id, products.owner_id, products.description, products.productname, products.priceperday, products.location, products.lat, products.lng, products.city, products.state, avg(reviews.rating) as AverageRating, images.url FROM products LEFT JOIN reviews ON products.id=reviews.product_id LEFT JOIN images ON products.id=images.product_id WHERE (productname LIKE '%" + req.query.query + "%') GROUP BY products.id, images.url";
+    var queryStr = `SELECT products.id, products.category_id, products.owner_id, products.description, products.productname, products.priceperday, products.location, products.lat, products.lng, products.city, products.state, avg(reviews.rating) as AverageRating, images.url FROM products LEFT JOIN reviews ON products.id=reviews.product_id LEFT JOIN images ON products.id=images.product_id WHERE (productname LIKE '%${req.query.query}%') GROUP BY products.id, images.url`;
     pool.query(queryStr, function(err, result) {
       if (err) {
         console.log(err);
