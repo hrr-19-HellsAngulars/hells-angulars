@@ -18,8 +18,8 @@ export class Products implements OnInit {
   public markers: Array<any>;
   public latitude: number = 39.8282;
   public longitude: number = -98.5795;
+  public zoom: number = 10;
   public searchControl: FormControl;
-  public zoom: number = 4;
   public allProducts: Array<any>;
   public minPrice: string;
   public maxPrice: string;
