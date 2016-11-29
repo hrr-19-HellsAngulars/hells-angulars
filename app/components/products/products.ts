@@ -99,8 +99,10 @@ export class Products implements OnInit {
   public ngOnInit(): void {
     this.getProducts();
 
-    // set current position of map
-    // this.setCurrentPosition();
+    // if map center is still default, attempt to set center to user's current location
+    // if (this.latitude === 39.8282 && this.longitude === -98.5795) {
+    //   this.setCurrentPosition();
+    // }
 
     // load Places Autocomplete
     this.mapsAPILoader.load();
