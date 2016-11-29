@@ -7,6 +7,8 @@ import { MapsAPILoader }                 from "angular2-google-maps/core";
 import { NewProduct }        from "./newProduct";
 import { NewProductService } from "./newProduct.service";
 
+declare const AWS: any;
+
 @Component({
   moduleId: module.id,
   selector: "newprod-form",
@@ -34,7 +36,10 @@ export class NewProductForm {
     private newProductService: NewProductService,
     private mapsAPILoader: MapsAPILoader
   ) { }
-
+  public onChange(file:any) {
+    let AWSService = (<any>window).AWS;
+    console.log(AWSService);
+  }
   public onSubmit(model: NewProduct) {
     model.lat = this.place.geometry.location.lat().toFixed(7);
     model.lng = this.place.geometry.location.lng().toFixed(7);

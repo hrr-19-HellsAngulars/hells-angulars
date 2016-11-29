@@ -1,6 +1,10 @@
 <form>
   <ul>
     <li class="form-group">
+      File <input class="form-control" type="file" (change)="onChange($event)"
+       >
+    </li>
+    <li class="form-group">
       Product Name <input class="form-control" type="text" placeholder="Brand/Model"
        required
        [(ngModel)]="model.productName" [ngModelOptions]="{standalone: true}">
