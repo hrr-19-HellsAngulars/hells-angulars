@@ -44,7 +44,9 @@ module.exports = {
         console.log(err);
         res.send(err);
       }
-      res.json(addImagesArray(result.rows));
+      var responseObj = {products: addImagesArray(result.rows), location: {lat: req.query.lat, lng: req.query.lng} };
+      // var responseObj = addImagesArray(result.rows);
+      res.json(responseObj);
     });
   },
 
