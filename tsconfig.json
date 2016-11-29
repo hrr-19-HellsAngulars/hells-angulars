@@ -8,6 +8,10 @@
         "removeComments": false,
         "experimentalDecorators": true
     },
+    "lib": [
+        "es5",
+        "es2015.promise"
+    ],
     "include": [
         "app/**/*.ts",
         "states.ts",

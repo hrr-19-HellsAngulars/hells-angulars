@@ -15,9 +15,8 @@
       [(ngModel)]="model.pricePerDay" [ngModelOptions]="{standalone: true}">
     </li>
     <li class="form-group">
-      Picture URL <input class="form-control" type="text" placeholder="image link"
-      required
-      [(ngModel)]="model.imageLink" [ngModelOptions]="{standalone: true}">
+      Picture<input class="form-control" type="file" (change)="upload($event)"
+       multiple>
     </li>
     <li class="form-group">
       Location <input placeholder="search for location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control" #search [formControl]="searchControl"

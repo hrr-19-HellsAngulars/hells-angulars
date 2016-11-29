@@ -108,17 +108,34 @@ module.exports = {
   createProduct: function (req, res, next) {
     console.log('>>>>>', req.body.lat);
     var body = req.body;
+    var params = [body.categoryId, body.userId, body.productDescription, body.productName, body.pricePerDay, body.lat, body.lng, body.city, body.state, body.zip]
+    console.log(body);
     // query string for storing product in product table
     var queryStr = `WITH ins1 AS (
                       INSERT INTO products(category_id, owner_id, description, productname, priceperday, lat, lng, city, state, zip)
                       VALUES ((SELECT id from categories where category = $1), (SELECT id from users where authid = $2), $3, $4, $5, $6, $7, $8, $9, $10)
                       RETURNING id
                       )
-                      INSERT INTO images(product_id, url)
-                      SELECT id, $11
-                      FROM ins1`;
+                      INSERT INTO images(product_id, url)`;
+    // User can upload up to 4 pictures. 
+    // This function only adds more queryStr when imageLink exists
+    // parameter index starting from $11;
+    var paramIndex = 11;
+    for(var i = 0; i < 4; i++) {
+      var imageLink = 'imageLink' + i;
+      // if exists
+      if (body[imageLink]) {
+        // add to queryStr
+        queryStr += 'SELECT id, $' + paramIndex +' FROM ins1 UNION all ';
+        paramIndex ++;
+        // add to params
+        params.push(body[imageLink]);
+      }
+    }
+    // Delete the last 'union all'
+    queryStr = queryStr.slice(0, queryStr.length - 10);
 
-    pool.query(queryStr, [body.categoryId, body.userId, body.productDescription, body.productName, body.pricePerDay, body.lat, body.lng, body.city, body.state, body.zip, body.imageLink], function(err, result) {
+    pool.query(queryStr, params, function(err, result) {
       if (err) {
         res.status(404).send();
         return;
