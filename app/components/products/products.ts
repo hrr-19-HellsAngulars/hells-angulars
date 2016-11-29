@@ -43,15 +43,12 @@ export class Products implements OnInit {
   }
 
   public getProducts() {
-    const context = this;
     this.productsService
         .getProductsByQuery()
         .then(response => {
           let products = response.products;
-          this.latitude = response.location.lat;
-          this.longitude = response.location.lng;
-          // debugger;
-          // Rearrange products to have 3 products in one row
+          this.latitude = parseFloat(response.location.lat);
+          this.longitude = parseFloat(response.location.lng);
           let allProducts: Array<any> = [];
           this.allProducts = products.slice();
           let productsWithRows: Array<any> = [];
@@ -103,18 +100,10 @@ export class Products implements OnInit {
     this.getProducts();
 
     // set current position of map
-    this.setCurrentPosition();
+    // this.setCurrentPosition();
 
     // load Places Autocomplete
     this.mapsAPILoader.load();
-
-    // testing how to update Google map center
-    const context = this;
-    setTimeout(function() {
-      context.latitude = 40;
-      context.longitude = 50;
-      console.log('fin');
-    }, 4000)
   }
 
   private setCurrentPosition() {
