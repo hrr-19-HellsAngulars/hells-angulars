@@ -38,18 +38,18 @@ export class NewProductForm {
     private mapsAPILoader: MapsAPILoader
   ) { }
 
-  public upload(fileInput:any) {
+  public upload(fileInput: any) {
     let context = this;
-    let AWSService = (<any>window).AWS;
+    let AWSService = (<any> window).AWS;
     let file = fileInput.target.files[0];
     AWSService.config.accessKeyId = amazonS3Config.accessKeyId;
     AWSService.config.secretAccessKey = amazonS3Config.secretAccessKey;
-    let bucket = new AWSService.S3({params:{Bucket: "gear-box"}});
+    let bucket = new AWSService.S3({params: {Bucket: "gear-box"}});
     let params = {Key: file.name, Body: file};
-    bucket.upload(params, function (error:any, result:any) {
-      if (error) { console.log(error)};
+    bucket.upload(params, function (error: any, result: any) {
+      if (error) { console.log(error); };
       context.model.imageLink = result.Location;
-    })
+    });
   }
 
   public onSubmit(model: NewProduct) {
