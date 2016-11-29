@@ -36,10 +36,22 @@ export class NewProductForm {
     private newProductService: NewProductService,
     private mapsAPILoader: MapsAPILoader
   ) { }
-  public onChange(file:any) {
+
+  public upload(fileInput:any) {
     let AWSService = (<any>window).AWS;
     console.log(AWSService);
+    let file = fileInput.target.files[0];
+    console.log(file);
+    AWSService.config.accessKeyId = "AKIAJO6XKSBA5K4EGRYA";
+    AWSService.config.secretAccessKey = "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";
+    let bucket = new AWSService.S3({params:{Bucket: "gear-box"}});
+    let params = {Key: file.name, Body: file};
+    bucket.upload(params, function (error:any, result:any) {
+      if (error) { console.log(error)};
+      console.log(result);
+    })
   }
+
   public onSubmit(model: NewProduct) {
     model.lat = this.place.geometry.location.lat().toFixed(7);
     model.lng = this.place.geometry.location.lng().toFixed(7);
