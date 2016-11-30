@@ -89,6 +89,10 @@ export class ProfileComponent implements OnInit {
     this.availableFunds = funds;
   }
 
+  editGear(productId) {
+    console.log(productId);
+  }
+
   ngOnInit(): void {
     this.getUserIdFromProfile();
     this.getUserInfo();
