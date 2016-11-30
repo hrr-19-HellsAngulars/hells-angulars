@@ -55,7 +55,7 @@
           <div class="form-group">
             <label for="datefrom" class="control-label">From</label>
             <div class="input-group">
-              <input class="form-control" placeholder="yyyy-mm-dd"  ngbDatepicker #df="ngbDatepicker">
+              <input class="form-control" placeholder="yyyy-mm-dd" name="available-from" [(ngModel)]="availableFrom"  ngbDatepicker #df="ngbDatepicker">
               <div class="input-group-addon" (click)="df.toggle()" >
                 <i class="fa fa-calendar"></i>
               </div>
@@ -65,7 +65,7 @@
           <div class="form-group">
             <label for="dateto" class="control-label">To</label>
             <div class="input-group">
-              <input class="form-control" placeholder="yyyy-mm-dd"  ngbDatepicker #dt="ngbDatepicker">
+              <input class="form-control" placeholder="yyyy-mm-dd" name="available-to" [(ngModel)]="availableTo" ngbDatepicker #dt="ngbDatepicker">
               <div class="input-group-addon" (click)="dt.toggle()" >
                 <i class="fa fa-calendar"></i>
               </div>
