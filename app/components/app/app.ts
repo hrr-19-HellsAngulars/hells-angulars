@@ -66,7 +66,11 @@ export class App {
   }
 
   public open(content: any) {
-    this.addModalService.open(content);
+    if (this.auth.authenticated()) {
+      this.addModalService.open(content);
+    } else {
+      this.auth.login();
+    }
   }
 
   public close() {
