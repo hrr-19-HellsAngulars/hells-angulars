@@ -65,7 +65,7 @@
           <div class="form-group">
             <label for="dateto" class="control-label">To</label>
             <div class="input-group">
-              <input class="form-control" placeholder="yyyy-mm-dd" name="available-to" [(ngModel)]="availableTo" ngbDatepicker #dt="ngbDatepicker">
+              <input type="text" class="form-control" placeholder="yyyy-mm-dd" name="available-to" [(ngModel)]="availableTo" ngbDatepicker #dt="ngbDatepicker">
               <div class="input-group-addon" (click)="dt.toggle()" >
                 <i class="fa fa-calendar"></i>
               </div>
