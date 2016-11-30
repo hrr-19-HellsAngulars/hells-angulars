@@ -63,7 +63,7 @@ export class ProfileService {
 
 //  }
 
-  public getImages(productId): Promise<any> {
+  public getImages(productId:number): Promise<any> {
     return this.http.get(`/api/products/images/${productId}`)
     .toPromise()
     .then(response => {
@@ -72,11 +72,12 @@ export class ProfileService {
     .catch(this.handleError);
   }
 
-  public closeTransaction(id:number) {
+  public closeTransaction(id:number): Promise<any> {
     let requestBody = {status_id: 2};
     return this.http.put(`/api/transactions/${id}`, requestBody, {headers: this.headers})
-      .map(res => res)
-      .subscribe(data => data)
+      .toPromise()
+      .then(response => response)
+      .catch(this.handleError)
   }
 
   private handleError(error: any): Promise<any> {

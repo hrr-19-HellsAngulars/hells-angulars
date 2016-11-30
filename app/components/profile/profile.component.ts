@@ -3,6 +3,8 @@ import { ProfileService }    from "./profile.service";
 
 import { AddModalService }     from "../add_modal/addModal.service";
 
+import * as moment from "moment";
+
 @Component({
   moduleId: module.id,
   selector: "profile",
@@ -20,7 +22,7 @@ export class ProfileComponent implements OnInit {
   public userId: string;
   public availableFunds: Number;
   private stripeAccount: any;
-  private today: Date = new Date();
+  private today: any = moment();
 
   constructor(
     private profileService: ProfileService,
@@ -75,7 +77,6 @@ export class ProfileComponent implements OnInit {
       .then(response => {
         const rentals = JSON.parse(response._body);
         this.rentals = rentals;
-        console.log(this.rentals);
       })
       .catch(err => console.log(err));
   }
@@ -98,7 +99,12 @@ export class ProfileComponent implements OnInit {
   }
 
   closeTransaction(id: number) {
-    this.profileService.closeTransaction(id);
+    let context = this;
+    this.profileService.closeTransaction(id)
+      .then(response => {
+        console.log(response);
+        context.getUserTransactions(context.user.id);
+      });
   }
   public open(content: any) {
     this.addModalService.open(content);
@@ -112,4 +118,13 @@ export class ProfileComponent implements OnInit {
   public convertDate(date: string) {
     return date.slice(0, 10);
   }
+
+  public compare(dateTimeA:any, dateTimeB:any) {
+    var momentA = moment(dateTimeA,"YYYY-MM-DD");
+    var momentB = moment(dateTimeB,"YYYY-MM-DD");
+    if (momentA > momentB) return 1;
+    else if (momentA < momentB) return -1;
+    else return 0;
+  }
+
 }

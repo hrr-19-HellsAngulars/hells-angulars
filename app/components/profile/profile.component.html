@@ -82,6 +82,9 @@
                       <p *ngIf="rental.status_id===2">
                         <button class="btn btn-primary" (click)="open(review)" (click)="onSelect(rental)">Write a Review</button>
                       </p>
+                      <p *ngIf="rental.status_id === 1">
+                      <button class="btn btn-secondary" disabled>Write a Reivew</button>
+                      </p>
                     </div>
                   </div>
                 <hr>
@@ -112,14 +115,14 @@
                 </div>
                 <div class="col-xs-3 review">
                   <h4><strong>${{transaction.totalvalue}}</strong></h4>
-                  <p *ngIf="transaction.bookto < today || transaction.status_id!==2">
-                    <button class="btn btn-secondary btn-block" disabled>Not Available</button>
+                  <p *ngIf="compare(transaction.bookedto, today) >= 0  && transaction.status_id === 1">
+                    <button class="btn btn-secondary" disabled>Complete Rental</button>
                   </p>
-                  <p *ngIf="transaction.bookto >= today && transaction.status_id === 1">
-                    <button class="btn btn-primary btn-block" (click)="closeTransaction(transaction.id)">Complete Rental</button>
+                  <p *ngIf="compare(transaction.bookedto, today) < 0  && transaction.status_id === 1">
+                    <button class="btn btn-primary" (click)="closeTransaction(transaction.id)">Complete Rental</button>
                   </p>
                   <p *ngIf="transaction.status_id===2">
-                    <button class="btn btn-primary btn-block" (click)="open(review)" (click)="onSelect(transaction)">Write a Review</button>
+                    <button class="btn btn-primary" (click)="open(review)" (click)="onSelect(transaction)">Write a Review</button>
                   </p>
                 </div>
               </div>

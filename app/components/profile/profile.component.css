@@ -38,6 +38,7 @@ img {
   border: 0px;
   padding: 0 15px 0 15px;
 }
+
 .fa-plus-circle{
   color: #579ed1
 }
@@ -45,17 +46,21 @@ img {
 .edit {
   margin-top: 0;
 }
+
 .review {
   text-align: center;
 }
+
 .btn-danger {
   margin-top: 5px;
   padding: 0.4em;
 }
+
 .link {
   color: inherit;
   text-decoration: inherit;
 }
+
 .img-circle {
   height: 60px;
   width: 60px;
