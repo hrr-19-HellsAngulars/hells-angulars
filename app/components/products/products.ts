@@ -25,12 +25,15 @@ export class Products implements OnInit {
   public maxPrice: string = "500";
   public searchCategoryId: string = "";
   public searchRadius: number = 50; // miles
+  public availableFrom: any;
+  public availableTo: any;
 
   // Note: This is looking for #search in the HTML template
   @ViewChild("search")
   public searchElementRef: ElementRef;
 
   constructor(
+    public activeTransactions: Array<any>,
     private mapsAPILoader: MapsAPILoader,
     private productsService: ProductsService,
     private config: NgbRatingConfig
@@ -43,13 +46,42 @@ export class Products implements OnInit {
     console.log(`clicked the marker: ${label || index}`);
   }
 
+  public getActiveTransactions() {
+    this.productsService
+        .getActiveTransactions()
+        .then(transactions => {
+          let activeTransactions: Array<any> = [];
+          // an array of all active transactions
+          this.activeTransactions = transactions.slice();
+          console.log(this.activeTransactions);
+
+          // vv Filtering the activeTransactions array to only contain correct dates vv
+          // for each active transaction
+            // if all dates within the selection range are not within the booked range
+              // remove this transaction from the array because it is available when needed
+
+          this.activeTransactions.filter(function(transaction) {
+            transaction.bookedfrom = transaction.bookedfrom.substr(0, 10);
+            transaction.bookedto = transaction.bookedto.substr(0, 10);
+          });
+          // for (let i = 0; i < this.activeTransactions.length; i++) {
+          //   this.activeTransactions[i] = this.activeTransactions[i].product_id;
+          // }
+        });
+  }
+
   public getProducts() {
+    let context = this;
     this.productsService
         .getProductsByQuery()
         .then(response => {
           let products = response.products;
           this.latitude = parseFloat(response.location.lat);
           this.longitude = parseFloat(response.location.lng);
+          // Rearrange products to have 3 products in one row
+          products = products.filter(function(product: any) {
+            return !context.activeTransactions.includes(product.id);
+          });
           let allProducts: Array<any> = [];
           this.allProducts = products.slice();
           let productsWithRows: Array<any> = [];
@@ -133,6 +165,7 @@ export class Products implements OnInit {
   }
 
   public ngOnInit(): void {
+    this.getActiveTransactions();
     this.getProducts();
 
     // if map center is still default, attempt to set center to user's current location
