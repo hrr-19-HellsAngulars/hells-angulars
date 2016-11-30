@@ -76,10 +76,6 @@ export class Products implements OnInit {
     }
 
     let dateArray = getDates(start, end);
-    // for (let i = 0; i < dateArray.length; i ++ ) {
-    //   // dateArray[i] = moment(dateArray[i]).format("YYYY-MM-DD");
-    //   console.log(dateArray[i]);
-    // }
     return dateArray;
   }
 
@@ -105,14 +101,6 @@ export class Products implements OnInit {
     for (let i = 0; i < this.activeTransactions.length; i++) {
       let bookedfrom = this.activeTransactions[i].bookedfrom.substr(0, 10);
       let bookedto = this.activeTransactions[i].bookedto.substr(0, 10);
-      // console.log("this.activeTransactions[i].bookedfrom");
-      // console.log(bookedfrom);
-      // console.log("this.activeTransactions[i].bookedto");
-      // console.log(bookedto);
-      // console.log("this.availableFrom");
-      // console.log(this.availableFrom);
-      // console.log("this.availableTo");
-      // console.log(this.availableTo);
       let transactionRange =
       this.makeRange(bookedfrom, bookedto);
       for (let j = 0; j < transactionRange.length; j++) {
@@ -133,9 +121,6 @@ export class Products implements OnInit {
           this.latitude = parseFloat(response.location.lat);
           this.longitude = parseFloat(response.location.lng);
           // Rearrange products to have 3 products in one row
-          // products = products.filter(function(product: any) {
-          //   return !context.activeTransactions.includes(product.id);
-          // });
           let allProducts: Array<any> = [];
           this.allProducts = products.slice();
           let productsWithRows: Array<any> = [];
