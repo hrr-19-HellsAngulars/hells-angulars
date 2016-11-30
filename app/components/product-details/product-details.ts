@@ -1,4 +1,5 @@
 /* tslint:disable:no-string-literal */
+import { Auth }                     from "../../auth/auth.service";
 import { ActivatedRoute }           from "@angular/router";
 import { Component, Input, OnInit } from "@angular/core";
 import { NgbRatingConfig }          from "@ng-bootstrap/ng-bootstrap";
@@ -46,11 +47,10 @@ export class ProductDetails implements OnInit {
   private totalAmount: Number;
   private daysBetween: Number;
 
-  private userId = JSON.parse(localStorage.getItem("profile")).user_id;
-
   private isInvalidDate: any = undefined;
 
   constructor(
+    private auth: Auth,
     private config: NgbRatingConfig,
     private productDetailsService: ProductDetailsService,
     private uiRouter: UIRouter,
@@ -90,6 +90,7 @@ export class ProductDetails implements OnInit {
 
     this.drpOptions.settings = {
       opens: "center",
+      minDate: moment(new Date()),
       isInvalidDate: function(date: any) {
         for (let i = 0; i < context.formattedDays.length; i++) {
           if (date.format("MM-DD-YYYY") === context.formattedDays[i]) {
@@ -145,27 +146,29 @@ export class ProductDetails implements OnInit {
   }
 
   public openCheckOut() {
-    console.log(this.product);
-    let handler = (<any> window).StripeCheckout.configure({
-      key: stripeConfig.apiKey,
-      locale: "auto",
-      token: (token: any) => {
-        this.productDetailsService.charge(token, {
-          amount: this.totalAmount,
-          buyer_id: this.userId,
-          seller_id: this.product.owner_id,
-          status_id: 1,
-          product_id: this.product.id,
-          bookedfrom: this.fromDate._d,
-          bookedto: this.toDate._d,
-        });
-      },
-    });
-
-    handler.open({
-      name: "Gear Box",
-      amount: +this.totalAmount * 100,
-    });
+    if(this.auth.authenticated()) {
+      let handler = (<any> window).StripeCheckout.configure({
+        key: stripeConfig.apiKey,
+        locale: "auto",
+        token: (token: any) => {
+          this.productDetailsService.charge(token, {
+            amount: this.totalAmount,
+            buyer_id: JSON.parse(localStorage.getItem("profile")).user_id,
+            seller_id: this.product.owner_id,
+            status_id: 1,
+            product_id: this.product.id,
+            bookedfrom: this.fromDate._d,
+            bookedto: this.toDate._d,
+          });
+        },
+      });
+      handler.open({
+        name: "Gear Box",
+        amount: +this.totalAmount * 100,
+      });
+    } else {
+      this.auth.login();
+    }
   }
 
   public convertObjToDate(obj: any) {
