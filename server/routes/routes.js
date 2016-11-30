@@ -31,8 +31,6 @@ module.exports = function(app, express) {
   // app.get('/api/products/images/:id', productController.getImages);
   app.post('/api/products', productController.createProduct);
   app.put('/api/products/:id', productController.updateProduct);
-  app.get('/api/transactions/:id', productController.getInvalidDays);
-
 
   //Review routes
   // app.get('/api/reviews', productController.getReviews);
@@ -42,13 +40,11 @@ module.exports = function(app, express) {
   //Transaction routes
   app.get('/api/transactions/seller/:id', transactionController.getTransactionsBySellerId);
   app.get('/api/transactions/buyer/:id', transactionController.getRentalsByBuyerId);
+  app.get('/api/transactions/:id', transactionController.getInvalidDays);
 
   // Stripe routes
   app.get('/connect', stripeController.getCode);
   app.post('/api/charge', stripeController.createCharge);
-
-  // Image Routes
-
 
 };
 

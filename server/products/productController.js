@@ -191,16 +191,5 @@ module.exports = {
     });
   },
 
-  getInvalidDays: function (req, res, next) {
-    var id = req.params.id;
-
-    var queryStr = `SELECT bookedfrom, bookedto FROM transactions WHERE product_id=($1)`;
-
-    pool.query(queryStr, [id], function(err, result) {
-      if (err) return console.log(err);
-      console.log('dates', result);
-      res.json(result.rows);
-    });
-  }
 };
 
