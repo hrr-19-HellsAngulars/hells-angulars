@@ -1,0 +1,34 @@
+<form>
+  <ul>
+    <label>Update your gear listing</label>
+    <li class="form-group">
+      Product Name <input class="form-control" type="text" value="hello" placeholder="Brand/Model"
+       required
+       [(ngModel)]="model.productName" [ngModelOptions]="{standalone: true}">
+    </li>
+    <li class="form-group">
+      Product Description <input class="form-control" type="text" placeholder="Description" required
+      [(ngModel)]="model.productDescription" [ngModelOptions]="{standalone: true}">
+    </li>
+    <li class="form-group">
+      Price Per Day <input class="form-control" type="text" placeholder="$ per/day"
+      required
+      [(ngModel)]="model.pricePerDay" [ngModelOptions]="{standalone: true}">
+    </li>
+    <li class="form-group">
+      Picture<input class="form-control" type="file" (change)="upload($event)"
+       multiple>
+    </li>
+
+    <li>
+      <div class="form-group">
+        <label>Category</label>
+          <select class="form-control" id="power"
+          required
+          [(ngModel)]="model.categoryId" [ngModelOptions]="{standalone: true}">
+            <option *ngFor="let cat of categories" [value]="cat">{{cat}}</option>
+          </select>
+      </div>
+    </li>
+  </ul>
+</form>

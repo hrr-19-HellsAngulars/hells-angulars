@@ -1,0 +1,16 @@
+ul {
+  list-style: none;
+  padding: 5px;
+}
+
+ngb-rating{
+  color: #579ed1;
+  font-size: 20px
+}
+
+label {
+  font-size: 20px;
+}
+span {
+  font-size: 18px
+}
