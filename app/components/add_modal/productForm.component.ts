@@ -42,8 +42,10 @@ export class NewProductForm {
     let context = this;
     let AWSService = (<any> window).AWS;
     let pictures = [
-      fileInput.target.files[0], fileInput.target.files[1],
-      fileInput.target.files[2], fileInput.target.files[3],
+      fileInput.target.files[0],
+      fileInput.target.files[1],
+      fileInput.target.files[2],
+      fileInput.target.files[3],
     ];
     AWSService.config.accessKeyId = amazonS3Config.accessKeyId;
     AWSService.config.secretAccessKey = amazonS3Config.secretAccessKey;
