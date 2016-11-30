@@ -1,9 +1,10 @@
-import { Component, OnInit, ViewChild, ElementRef }   from "@angular/core";
+import { Component, OnInit, ViewChild, ElementRef, Input }   from "@angular/core";
 import { FormControl }         from "@angular/forms";
 import { MapsAPILoader }       from "angular2-google-maps/core";
 import { NgbRatingConfig }     from "@ng-bootstrap/ng-bootstrap";
 import { ProductsService }     from "./products.service";
 import { UIROUTER_DIRECTIVES } from "ui-router-ng2";
+import * as moment             from "moment";
 
 @Component({
   moduleId: module.id,
@@ -25,8 +26,19 @@ export class Products implements OnInit {
   public maxPrice: string = "500";
   public searchCategoryId: string = "";
   public searchRadius: number = 50; // miles
-  public availableFrom: any;
-  public availableTo: any;
+  @Input()
+  public availableFrom: any = {
+    year: new Date().getFullYear(),
+    month: new Date().getMonth() + 1,
+    day: new Date().getDate(),
+  };
+  @Input()
+  public availableTo: any = {
+    year: new Date().getFullYear(),
+    month: new Date().getMonth() + 1,
+    day: new Date().getDate(),
+  };
+  public activeProducts: Array<any> = [];
 
   // Note: This is looking for #search in the HTML template
   @ViewChild("search")
@@ -46,6 +58,31 @@ export class Products implements OnInit {
     console.log(`clicked the marker: ${label || index}`);
   }
 
+  public makeRange(start: any, end: any): String[] {
+    function addDays(date: any, days: any) {
+      let dat = new Date(date.valueOf());
+      dat.setDate(dat.getDate() + days);
+      return moment(dat).format("YYYY-MM-DD");
+    }
+
+    function getDates(startDate: any, stopDate: any) {
+      let dateArray: String[] = [];
+      let currentDate = startDate;
+      while (currentDate <= stopDate) {
+        dateArray.push(currentDate);
+        currentDate = addDays(currentDate, 2);
+      }
+      return dateArray;
+    }
+
+    let dateArray = getDates(start, end);
+    // for (let i = 0; i < dateArray.length; i ++ ) {
+    //   // dateArray[i] = moment(dateArray[i]).format("YYYY-MM-DD");
+    //   console.log(dateArray[i]);
+    // }
+    return dateArray;
+  }
+
   public getActiveTransactions() {
     this.productsService
         .getActiveTransactions()
@@ -53,21 +90,38 @@ export class Products implements OnInit {
           let activeTransactions: Array<any> = [];
           // an array of all active transactions
           this.activeTransactions = transactions.slice();
+          console.log("this.activeTransactions");
           console.log(this.activeTransactions);
-
-          // vv Filtering the activeTransactions array to only contain correct dates vv
-          // for each active transaction
-            // if all dates within the selection range are not within the booked range
-              // remove this transaction from the array because it is available when needed
-
-          // this.activeTransactions.filter(function(transaction) {
-          //   transaction.bookedfrom = transaction.bookedfrom.substr(0, 10);
-          //   transaction.bookedto = transaction.bookedto.substr(0, 10);
-          // });
-          for (let i = 0; i < this.activeTransactions.length; i++) {
-            this.activeTransactions[i] = this.activeTransactions[i].product_id;
-          }
         });
+  }
+
+  public getActiveProducts() {
+    let from = this.convertObjToDate(this.availableFrom);
+    let to = this.convertObjToDate(this.availableTo);
+    let userRange = this.makeRange(from, to);
+    console.log("userRange");
+    console.log(userRange);
+    this.activeProducts = [];
+    for (let i = 0; i < this.activeTransactions.length; i++) {
+      let bookedfrom = this.activeTransactions[i].bookedfrom.substr(0, 10);
+      let bookedto = this.activeTransactions[i].bookedto.substr(0, 10);
+      // console.log("this.activeTransactions[i].bookedfrom");
+      // console.log(bookedfrom);
+      // console.log("this.activeTransactions[i].bookedto");
+      // console.log(bookedto);
+      // console.log("this.availableFrom");
+      // console.log(this.availableFrom);
+      // console.log("this.availableTo");
+      // console.log(this.availableTo);
+      let transactionRange =
+      this.makeRange(bookedfrom, bookedto);
+      for (let j = 0; j < transactionRange.length; j++) {
+        if (userRange.includes(transactionRange[j])) {
+          this.activeProducts.push(this.activeTransactions[i].product_id);
+          break;
+        }
+      }
+    }
   }
 
   public getProducts() {
@@ -79,9 +133,9 @@ export class Products implements OnInit {
           this.latitude = parseFloat(response.location.lat);
           this.longitude = parseFloat(response.location.lng);
           // Rearrange products to have 3 products in one row
-          products = products.filter(function(product: any) {
-            return !context.activeTransactions.includes(product.id);
-          });
+          // products = products.filter(function(product: any) {
+          //   return !context.activeTransactions.includes(product.id);
+          // });
           let allProducts: Array<any> = [];
           this.allProducts = products.slice();
           let productsWithRows: Array<any> = [];
@@ -100,13 +154,23 @@ export class Products implements OnInit {
           }
           this.products = productsWithRows;
           this.markers = allProducts;
+          this.refineSearch();
         });
   }
 
   public refineSearch(): void {
+    this.getActiveProducts();
+    let from = this.convertObjToDate(this.availableFrom);
+    let to = this.convertObjToDate(this.availableTo);
+    console.log("vv availables vv");
+    console.log(from, to);
     this.products = this.allProducts;
     let context = this;
     let products = this.products.filter(function(product: any) {
+      console.log("product");
+      console.log(context.activeProducts.includes(product.id));
+      console.log("this.activeProducts");
+      console.log(context.activeProducts);
       return (
         product.priceperday >= parseInt(context.minPrice, 10)
         && product.priceperday <= parseInt(context.maxPrice, 10)
@@ -116,6 +180,7 @@ export class Products implements OnInit {
               [context.latitude, context.longitude], [product.lat, product.lng], true
             ) <= context.searchRadius
           )
+        && (!context.activeProducts.includes(product.id))
         );
      });
     // Rearrange products to have 3 products in one row
@@ -175,6 +240,17 @@ export class Products implements OnInit {
 
     // load Places Autocomplete
     this.mapsAPILoader.load();
+  }
+
+  public convertObjToDate(obj: any) {
+    if (String(obj.day).length === 1) {
+      obj.day = "0" + String(obj.day);
+    }
+    if (String(obj.month).length === 1) {
+      obj.month = "0" + String(obj.month);
+    }
+    let date = obj.year + "-" + obj.month + "-" + obj.day;
+    return date;
   }
 
   private setCurrentPosition() {
