@@ -8,6 +8,7 @@ import { ProductDetailsService }    from "./product-details.service";
 import { UIROUTER_DIRECTIVES }      from "ui-router-ng2";
 import { UIRouter }                 from "ui-router-ng2";
 import { DaterangepickerConfig }    from "./daterangepicker/index";
+import { ProfileService }           from "../profile/profile.service";
 
 import * as moment from "moment";
 
@@ -25,6 +26,7 @@ export class ProductDetails implements OnInit {
 
   @Input() public selectedPic: String;
 
+  public user: any;
   public fromDate: any;
   public toDate: any;
   public prodId: any;
@@ -49,6 +51,7 @@ export class ProductDetails implements OnInit {
     private productDetailsService: ProductDetailsService,
     private uiRouter: UIRouter,
     private drpOptions: DaterangepickerConfig,
+    private profileService: ProfileService,
   ) {
     // get invalid dates from transaction table
     this.prodId = this.uiRouter.globals.params["productId"];
@@ -115,6 +118,7 @@ export class ProductDetails implements OnInit {
     this.product = this.product[0];
     this.selectedPic = this.product.url[0];
     this.getReviews(this.product.id);
+    this.getUserInfo();
   }
 
   public onSelect(n: number) {
@@ -165,5 +169,16 @@ export class ProductDetails implements OnInit {
   public convertObjToDate(obj: any) {
     let date = obj.year + "-" + obj.month + "-" + obj.day;
     return new Date(date);
+  }
+
+  public getUserInfo() {
+    this.profileService
+      .getUserInfo(this.userId)
+      .then(response => {
+        const user = JSON.parse(response._body);
+        this.user = user;
+        console.log(user);
+      })
+      .catch(err => console.log(err));
   }
 }

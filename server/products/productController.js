@@ -171,6 +171,15 @@ module.exports = {
     });
   },
 
+  // deleteReview: function(req, res, next) {
+  //   var body = req.body;
+  //   var queryStr = `DELETE FROM reviews WHERE id = ($1)`;
+  //   pool.query(queryStr, [id], function(err, result) {
+  //     if (err) return console.error(err);
+  //     res.status(201).send('Deleted review');
+  //   });
+  // },
+
   updateProduct: function (req, res, next) {
     var id = req.params.id;
     var body = req.body;
