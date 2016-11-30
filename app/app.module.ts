@@ -24,7 +24,6 @@ import { NewProductForm }          from "./components/add_modal/productForm.comp
 import { Products }                from "./components/products/products";
 import { ProductDetails }          from "./components/product-details/product-details";
 import { ProfileComponent }        from "./components/profile/profile.component";
-import { DateRangeComponent }      from "./components/product-details/daterange.component";
 
 import { GOOGLE_API_KEY }          from "./auth/googleMaps.config.js";
 
@@ -39,7 +38,7 @@ import { MyUIRouterConfig }        from "./config/router.config.js";
 import { aboutState, googleState, homeState, productsState, productDetailsState, profileState, searchState } from "./states.js";
 
 let INITIAL_COMPONENTS =  [
-  App, About, AddReviewForm, Google, Home, Products, ProductDetails, ProfileComponent, NewProductForm, DateRangeComponent,
+  App, About, AddReviewForm,  Google, Home, Products, ProductDetails, ProfileComponent, NewProductForm,
 ];
 
 let INITIAL_PROVIDERS  =  [

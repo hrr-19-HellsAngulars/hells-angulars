@@ -1,10 +1,13 @@
 import { ActivatedRoute }           from "@angular/router";
 import { Component, Input, OnInit } from "@angular/core";
 import { NgbRatingConfig }          from "@ng-bootstrap/ng-bootstrap";
-import { stripeConfig }        from "../../stripe/stripe.config.js";
+import { stripeConfig }             from "../../stripe/stripe.config";
 import { ProductDetailsService }    from "./product-details.service";
 import { UIROUTER_DIRECTIVES }      from "ui-router-ng2";
-import { DaterangepickerConfig }      from "./daterangepicker/index";
+import { UIRouter }                 from "ui-router-ng2";
+import { DaterangepickerConfig }    from "./daterangepicker/index";
+
+import * as moment from "moment";
 
 @Component({
   moduleId: module.id,
@@ -22,6 +25,10 @@ export class ProductDetails implements OnInit {
 
   public fromDate: any;
   public toDate: any;
+  public prodId: any;
+  public invalidDays: Array<any>;
+  public formattedDays: Array<any> = [];
+  public context: any = this;
 
   private minDate: any = {
     "year": new Date().getFullYear(),
@@ -33,20 +40,66 @@ export class ProductDetails implements OnInit {
   private numberOfReviews: Number;
   private averageRating: Number;
 
-  private oldFromDate: any = undefined;
-  private oldToDate: any = undefined;
+  // private oldFromDate: any = undefined;
+  // private oldToDate: any = undefined;
   private totalAmount: Number;
   private daysBetween: Number;
 
   private userId = JSON.parse(localStorage.getItem("profile")).user_id;
 
+  private isInvalidDate: any = undefined;
+
   constructor(
     private config: NgbRatingConfig,
-    private productDetailsService: ProductDetailsService
+    private productDetailsService: ProductDetailsService,
+    private uiRouter: UIRouter,
+    private drpOptions: DaterangepickerConfig,
   ) {
+    // get invalid dates from transaction table
+    this.prodId = this.uiRouter.globals.params["productId"];
+    this.productDetailsService
+    .getInvalidDays(this.prodId)
+    .then(response => {
+      const invalidDates = response;
+      this.invalidDays = invalidDates;
+
+    // format invalid days
+      let oneDay = 1000 * 60 * 60 * 24;
+
+      for (let i = 0; i < this.invalidDays.length; i++) {
+        let from: any = moment(this.invalidDays[i].bookedfrom);
+        let to: any = moment(this.invalidDays[i].bookedto);
+        let diffMs = to - from;
+        let numDays = Math.round(diffMs / oneDay);
+
+        let currentDay = from;
+
+        do {
+          this.formattedDays.push(currentDay.format("MM-DD-YYYY"));
+          currentDay = currentDay.add(1, "d");
+          numDays--;
+        } while (numDays > 0);
+      }
+    });
+
     config.max = 5;
     config.readonly = true;
+
+    let context = this;
+
+    this.drpOptions.settings = {
+      opens: "center",
+      isInvalidDate: function(date: any) {
+        for (let i = 0; i < context.formattedDays.length; i++) {
+          if (date.format("MM-DD-YYYY") === context.formattedDays[i]) {
+            return true;
+          }
+        }
+      },
+    };
   }
+
+// Product Details Methods
 
   public selectedDate(value: any) {
     this.fromDate = value.start;
@@ -88,7 +141,6 @@ export class ProductDetails implements OnInit {
         console.log(this.reviews);
       })
       .catch(err => console.log(err));
-
   }
 
   public openCheckOut() {
@@ -113,7 +165,6 @@ export class ProductDetails implements OnInit {
       name: "Gear Box",
       amount: +this.totalAmount * 100,
     });
-
   }
 
   public convertObjToDate(obj: any) {

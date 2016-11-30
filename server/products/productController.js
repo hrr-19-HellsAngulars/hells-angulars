@@ -189,6 +189,7 @@ module.exports = {
       console.log('success', result);
       res.status(201).send('updated product');
     });
-  }
+  },
+
 };
 
