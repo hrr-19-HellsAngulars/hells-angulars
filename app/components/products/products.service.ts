@@ -17,7 +17,7 @@ export class ProductsService {
   ) {}
 
   public getActiveTransactions(): Promise<any> {
-    return this.http.get("/api/transactions/active")
+    return this.http.get("/api/transactions/active/all")
                   .toPromise()
                   .then(response => response.json())
                   .catch(this.handleError);
