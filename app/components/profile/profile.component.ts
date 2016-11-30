@@ -20,6 +20,7 @@ export class ProfileComponent implements OnInit {
   public userId: string;
   public availableFunds: Number;
   private stripeAccount: any;
+  private today: Date = new Date();
 
   constructor(
     private profileService: ProfileService,
@@ -94,6 +95,10 @@ export class ProfileComponent implements OnInit {
 
   onSelect(rental: any) {
     this.selectedTransaction = rental;
+  }
+
+  closeTransaction(id: number) {
+    this.profileService.closeTransaction(id);
   }
   public open(content: any) {
     this.addModalService.open(content);

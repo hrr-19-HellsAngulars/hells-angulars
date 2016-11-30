@@ -7,7 +7,10 @@ import { UserData }      from "../../data/dummyusers";
 
 @Injectable()
 export class ProfileService {
-
+    public headers: Headers = new Headers({
+      "Content-Type": "application/json",
+      Accept: "application/json",
+     });
   constructor(
     private http: Http,
     private authHttp: AuthHttp,
@@ -67,6 +70,13 @@ export class ProfileService {
       return response;
     })
     .catch(this.handleError);
+  }
+
+  public closeTransaction(id:number) {
+    let requestBody = {status_id: 2};
+    return this.http.put(`/api/transactions/${id}`, requestBody, {headers: this.headers})
+      .map(res => res)
+      .subscribe(data => data)
   }
 
   private handleError(error: any): Promise<any> {

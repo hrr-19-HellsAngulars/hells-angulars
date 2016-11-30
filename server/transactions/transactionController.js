@@ -93,5 +93,18 @@ module.exports = {
       }
       res.json(result.rows);
     });
+  },
+
+  updateTransaction: function (req, res) {
+    var id = req.params.id;
+    var body = req.body;
+    console.log(body);
+    var queryStr = `UPDATE transactions SET
+      status_id=($1) WHERE transactions.id = ($2)`;
+    pool.query(queryStr, [body.status_id, id], function(err, result) {
+      if (err) return console.log(err);
+      console.log('success', result);
+      res.status(201).send('updated product');
+    });
   }
 };
