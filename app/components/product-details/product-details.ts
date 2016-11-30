@@ -1,3 +1,4 @@
+/* tslint:disable:no-string-literal */
 import { ActivatedRoute }           from "@angular/router";
 import { Component, Input, OnInit } from "@angular/core";
 import { NgbRatingConfig }          from "@ng-bootstrap/ng-bootstrap";
