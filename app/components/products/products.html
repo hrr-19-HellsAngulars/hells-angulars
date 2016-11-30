@@ -85,7 +85,9 @@
       <div *ngFor="let row of products" class="row">
         <div *ngFor="let product of row" class="col-md-4">
           <div class="card" uiSref="productDetails" [uiParams]="{ productId: product.id }">
-            <img class="card-img-top" [src]="product.url[0]" alt="image">
+            <div class="card-img-top"
+     [ngStyle]="{ 'background': 'url(' + product.url[0] + ')'}"></div>
+<!--             <img class="card-img-top" [src]="product.url[0]" alt="image"> -->
             <div class="card-block">
               <p class="right card-text"><strong>${{product.priceperday}}</strong> / day</p>
               <p class="primary card-text">{{product.productname}}</p>
