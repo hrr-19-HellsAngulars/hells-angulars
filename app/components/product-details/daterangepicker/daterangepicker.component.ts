@@ -18,7 +18,6 @@ import * as moment from "moment";
 
 export class DaterangePickerComponent implements AfterViewInit {
 
-
     @Input() options: any = {};
     @Output() selected = new EventEmitter();
 

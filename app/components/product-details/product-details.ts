@@ -7,7 +7,7 @@ import { UIROUTER_DIRECTIVES }      from "ui-router-ng2";
 import { UIRouter }                 from "ui-router-ng2";
 import { DaterangepickerConfig }    from "./daterangepicker/index";
 
-import * as moment from 'moment';
+import * as moment from "moment";
 
 @Component({
   moduleId: module.id,
@@ -66,7 +66,7 @@ export class ProductDetails implements OnInit {
     // format invalid days
       let oneDay = 1000 * 60 * 60 * 24;
 
-      for(var i = 0; i < this.invalidDays.length; i++) {
+      for (let i = 0; i < this.invalidDays.length; i++) {
         let from: any = moment(this.invalidDays[i].bookedfrom);
         let to: any = moment(this.invalidDays[i].bookedto);
         let diffMs = to - from;
@@ -76,11 +76,11 @@ export class ProductDetails implements OnInit {
 
         do {
           this.formattedDays.push(currentDay.format("MM-DD-YYYY"));
-          currentDay = currentDay.add(1, 'd');
+          currentDay = currentDay.add(1, "d");
           numDays--;
         } while (numDays > 0);
       }
-    })
+    });
 
     config.max = 5;
     config.readonly = true;
@@ -90,13 +90,13 @@ export class ProductDetails implements OnInit {
     this.drpOptions.settings = {
       opens: "center",
       isInvalidDate: function(date: any) {
-        for(var i = 0; i < context.formattedDays.length; i++) {
-          if(date.format('MM-DD-YYYY') == context.formattedDays[i]) {
+        for (let i = 0; i < context.formattedDays.length; i++) {
+          if (date.format("MM-DD-YYYY") === context.formattedDays[i]) {
             return true;
           }
         }
-      }
-    }
+      },
+    };
   }
 
 // Product Details Methods
