@@ -12,9 +12,9 @@ var config = {
   host: dbConfig.host,
   port: 5432,
   database: dbConfig.dbName,
-  max: 10, //max clients in the pool
+  max: 20, //max clients in the pool
   idleTimeoutMillis: 30000 //how long a client can be idle before being closed
-}
+};
 // var connection = 'postgres://localhost:5432/hells';
 // var client = new pg.Client(connection);
 // client.connect();
