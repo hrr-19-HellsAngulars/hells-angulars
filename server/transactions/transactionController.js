@@ -27,7 +27,7 @@ module.exports = {
         res.send(err);
       }
       res.json(result.rows);
-    })
+    });
   },
 
   getRentalsByBuyerId: function (req, res) {
@@ -54,7 +54,7 @@ module.exports = {
         res.send(err);
       }
       res.json(result.rows);
-    })
+    });
   },
 
   getInvalidDays: function (req, res, next) {
@@ -65,7 +65,33 @@ module.exports = {
     pool.query(queryStr, [id], function(err, result) {
       if (err) return console.log(err);
       console.log('dates', result);
+    });
+  },
+
+  getActiveTransactions: function (req, res) {
+    var queryStr = `SELECT transactions.id
+      , transactions.bookedfrom
+      , transactions.bookedto
+      , transactions.totalValue
+      , transactions.status_id
+      , transactions.product_id
+      , products.productname
+      , users.firstname
+      , users.profilepic
+      , transactions.buyer_id
+      , transactions.seller_id
+      FROM transactions
+      INNER JOIN products
+          on products.id = transactions.product_id
+      INNER JOIN users
+          on users.id = transactions.seller_id
+      WHERE transactions.status_id = 1`;
+    pool.query(queryStr, function(err, result) {
+      if (err) {
+        console.log(err);
+        res.send(err);
+      }
       res.json(result.rows);
     });
   }
-}
+};
