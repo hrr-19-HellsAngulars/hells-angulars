@@ -47,7 +47,7 @@
                         <a class="link" href="#/product/{{product.id}}"><p class="text-right"><strong>${{product.priceperday}}</strong> / day <br>{{product.location}}</p></a>
                       </div>
                       <div class="col-xs-3 edit">
-                        <button class="btn btn-primary pull-right">Edit Gear</button>
+                        <button class="btn btn-primary pull-right" (click)="editGear(product.id)">Edit Gear</button>
                         <button class="btn btn-danger pull-right">Delete Gear</button>
                       </div>
                     </div>
