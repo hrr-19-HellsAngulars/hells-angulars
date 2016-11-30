@@ -2,20 +2,37 @@
   <ngb-carousel>
   <div class="carouselSlide">
     <template ngbSlide>
-      <img id="clip" src="../../assets/surfBanner.jpg">
+    <div class="carousel"
+     [ngStyle]="{ 'background': 'url(../../../assets/camp.jpg)'}"></div>
+    <div class="carousel-caption">
+      <h3>CAMPING</h3>
+    </div>
+  </template>
+    <template ngbSlide>
+      <div class="carousel"
+     [ngStyle]="{ 'background': 'url(../../../assets/surfBanner.jpg)'}"></div>
       <div class="carousel-caption">
         <h3>SURF</h3>
       </div>
     </template>
   </div>
   <template ngbSlide>
-    <img src="../../assets/chairLift.jpg" >
+    <div class="carousel"
+     [ngStyle]="{ 'background': 'url(../../../assets/chairLift.jpg)'}"></div>
     <div class="carousel-caption">
       <h3>SNOW</h3>
     </div>
   </template>
   <template ngbSlide>
-    <img src="../../assets/enchilada.jpg">
+    <div class="carousel"
+     [ngStyle]="{ 'background': 'url(../../../assets/kayak.jpg)'}"></div>
+    <div class="carousel-caption">
+      <h3>KAYAK</h3>
+    </div>
+  </template>
+  <template ngbSlide>
+    <div class="carousel"
+     [ngStyle]="{ 'background': 'url(../../../assets/enchilada.jpg)'}"></div>
     <div class="carousel-caption">
       <h3>BIKE</h3>
     </div>
