@@ -16,6 +16,13 @@ export class ProductsService {
     private http: Http
   ) {}
 
+  public getActiveTransactions(): Promise<any> {
+    return this.http.get("/api/transactions/active")
+                  .toPromise()
+                  .then(response => response.json())
+                  .catch(this.handleError);
+  }
+
   public getProducts(): Promise<any> {
     // return Promise.resolve(Data);
     return this.http.get("/api/products")
