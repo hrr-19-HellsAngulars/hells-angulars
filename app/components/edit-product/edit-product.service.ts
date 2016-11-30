@@ -17,9 +17,9 @@ export class EditProductService {
   // sends PUT request to server to update an existing product
   public editProduct(product: NewProduct): Promise<any> {
     return this.http.put("/api/products/" + product.id, product, { headers: this.headers })
-    .toPromise()
-    .then(res => res)
-    .catch(this.handleError);
+      .toPromise()
+      .then(res => res)
+      .catch(this.handleError);
   }
 
   private handleError(error: any): Promise<any> {
