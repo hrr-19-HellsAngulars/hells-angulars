@@ -32,12 +32,6 @@ export class ProductDetails implements OnInit {
   public formattedDays: Array<any> = [];
   public context: any = this;
 
-  private minDate: any = {
-    "year": new Date().getFullYear(),
-    "month": +new Date().getMonth() + 1,
-    "day": +new Date().getDate(),
-  };
-
   private reviews: Array<any>;
   private numberOfReviews: Number;
   private averageRating: Number;
@@ -158,7 +152,7 @@ export class ProductDetails implements OnInit {
             status_id: 1,
             product_id: this.product.id,
             bookedfrom: this.fromDate._d,
-            bookedto: this.toDate._d,
+            bookedto: this.toDate.subtract(0, 'days')._d,
           });
         },
       });

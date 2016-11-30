@@ -1,7 +1,7 @@
 import "rxjs/add/operator/toPromise";
 import { AuthHttp }      from "angular2-jwt";
 import { Data, Rentals } from "../../data/dummydata";
-import { Http }          from "@angular/http";
+import { Http, Headers }          from "@angular/http";
 import { Injectable }    from "@angular/core";
 import { UserData }      from "../../data/dummyusers";
 

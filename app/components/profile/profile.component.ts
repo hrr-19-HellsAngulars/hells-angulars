@@ -83,7 +83,7 @@ export class ProfileComponent implements OnInit {
   getAvailableFunds() {
     let funds = 0;
     this.completedTransactions.forEach(transaction => {
-      funds += transaction.totalValue;
+      funds += +transaction.totalvalue;
     });
     this.availableFunds = funds;
   }
