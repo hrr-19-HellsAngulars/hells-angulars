@@ -9,6 +9,7 @@ import { UIROUTER_DIRECTIVES }      from "ui-router-ng2";
 import { UIRouter }                 from "ui-router-ng2";
 import { DaterangepickerConfig }    from "./daterangepicker/index";
 import { ProfileService }           from "../profile/profile.service";
+import { AddModalService }          from "../add_modal/addModal.service";
 
 import * as moment from "moment";
 
@@ -52,6 +53,7 @@ export class ProductDetails implements OnInit {
     private uiRouter: UIRouter,
     private drpOptions: DaterangepickerConfig,
     private profileService: ProfileService,
+    private addModalService: AddModalService
   ) {
     // get invalid dates from transaction table
     this.prodId = this.uiRouter.globals.params["productId"];
@@ -180,5 +182,9 @@ export class ProductDetails implements OnInit {
         console.log(user);
       })
       .catch(err => console.log(err));
+  }
+
+  public open(content: any) {
+    this.addModalService.open(content);
   }
 }

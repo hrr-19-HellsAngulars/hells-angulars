@@ -25,6 +25,7 @@ import { NewProductForm }          from "./components/add_modal/productForm.comp
 import { Products }                from "./components/products/products";
 import { ProductDetails }          from "./components/product-details/product-details";
 import { ProfileComponent }        from "./components/profile/profile.component";
+import { EditReviewForm }          from "./components/edit-reviews/editReviews";
 
 import { GOOGLE_API_KEY }          from "./auth/googleMaps.config.js";
 
@@ -36,16 +37,17 @@ import { NewProductService }       from "./components/add_modal/newProduct.servi
 import { ProductsService }         from "./components/products/products.service";
 import { ProductDetailsService }   from "./components/product-details/product-details.service";
 import { ProfileService }          from "./components/profile/profile.service";
+import { EditReviewService }       from "./components/edit-reviews/editReviews.service";
 
 import { MyUIRouterConfig }        from "./config/router.config.js";
 import { aboutState, googleState, homeState, productsState, productDetailsState, profileState, searchState } from "./states.js";
 
 let INITIAL_COMPONENTS =  [
-  App, About, AddReviewForm, EditProductForm, Google, Home, Products, ProductDetails, ProfileComponent, NewProductForm,
+  App, About, AddReviewForm,  Google, Home, Products, ProductDetails, ProfileComponent, NewProductForm, EditReviewForm,
 ];
 
 let INITIAL_PROVIDERS  =  [
-  AddModalService, AddReviewService, AppService, EditProductService, ProductsService, ProfileService, ProductDetailsService, AUTH_PROVIDERS, NewProductService,
+  AddModalService, AddReviewService, AppService, EditProductService, ProductsService, ProfileService, ProductDetailsService, AUTH_PROVIDERS, NewProductService, EditReviewService,
 ];
 
 let INITIAL_STATES     =  [

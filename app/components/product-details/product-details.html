@@ -75,7 +75,7 @@
       <div *ngIf="user">
         <div *ngIf="user.id === review.author_id">
           {{user.id}}, {{review.author_id}}
-          <button>Edit</button>
+          <button class= "btn btn-primary" (click)="open(editReview)">Edit</button>
         </div>
       </div>
     </div>
@@ -85,21 +85,21 @@
 
 <!-- Edit Reviews Modal -->
 
-<!-- <template #review ngbModalContainer let-c="close" let-d="dismiss">
+<template #editReview ngbModalContainer let-c="close" let-d="dismiss">
   <div class="modal-header">
     <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
-    <h4 class="modal-title">Add Review</h4>
+    <h4 class="modal-title">Edit Review Below</h4>
   </div>
   <div class="modal-body">
-    <addreview-form #review (close)="close()" [transaction]=
-  "selectedTransaction" [userId]="user.id"></addreview-form>
+    <editreview-form #review (close)="close()" [transaction]=
+  "selectedTransaction" [userId]="user.id"></editreview-form>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-primary" (click)="c('Close click')">Close</button>
     <button type="button" class="btn btn-primary" (click)="review.onSubmit(review.model)">Submit</button>
   </div>
 </template>
- -->
+
 
