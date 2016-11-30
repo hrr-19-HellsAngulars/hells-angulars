@@ -60,13 +60,13 @@ export class Products implements OnInit {
             // if all dates within the selection range are not within the booked range
               // remove this transaction from the array because it is available when needed
 
-          this.activeTransactions.filter(function(transaction) {
-            transaction.bookedfrom = transaction.bookedfrom.substr(0, 10);
-            transaction.bookedto = transaction.bookedto.substr(0, 10);
-          });
-          // for (let i = 0; i < this.activeTransactions.length; i++) {
-          //   this.activeTransactions[i] = this.activeTransactions[i].product_id;
-          // }
+          // this.activeTransactions.filter(function(transaction) {
+          //   transaction.bookedfrom = transaction.bookedfrom.substr(0, 10);
+          //   transaction.bookedto = transaction.bookedto.substr(0, 10);
+          // });
+          for (let i = 0; i < this.activeTransactions.length; i++) {
+            this.activeTransactions[i] = this.activeTransactions[i].product_id;
+          }
         });
   }
 
