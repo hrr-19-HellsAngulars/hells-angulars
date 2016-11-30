@@ -16,10 +16,10 @@ import { UIROUTER_DIRECTIVES } from "ui-router-ng2";
 export class Products implements OnInit {
   public products: Array<any> = [];
   public markers: Array<any>;
-  public latitude: number;
-  public longitude: number;
+  public latitude: number = 39.8282;
+  public longitude: number = -98.5795;
+  public zoom: number = 10;
   public searchControl: FormControl;
-  public zoom: number;
   public allProducts: Array<any>;
   public minPrice: string;
   public maxPrice: string;
@@ -45,8 +45,10 @@ export class Products implements OnInit {
   public getProducts() {
     this.productsService
         .getProductsByQuery()
-        .then(products => {
-          // Rearrange products to have 3 products in one row
+        .then(response => {
+          let products = response.products;
+          this.latitude = parseFloat(response.location.lat);
+          this.longitude = parseFloat(response.location.lng);
           let allProducts: Array<any> = [];
           this.allProducts = products.slice();
           let productsWithRows: Array<any> = [];
@@ -64,9 +66,7 @@ export class Products implements OnInit {
             }
           }
           this.products = productsWithRows;
-          console.log(this.products);
           this.markers = allProducts;
-
         });
   }
 
@@ -99,12 +99,10 @@ export class Products implements OnInit {
   public ngOnInit(): void {
     this.getProducts();
 
-    // set google maps defaults
-    this.zoom = 4;
-    this.latitude = 39.8282;
-    this.longitude = -98.5795;
-    // set current position
-    this.setCurrentPosition();
+    // if map center is still default, attempt to set center to user's current location
+    // if (this.latitude === 39.8282 && this.longitude === -98.5795) {
+    //   this.setCurrentPosition();
+    // }
 
     // load Places Autocomplete
     this.mapsAPILoader.load();
