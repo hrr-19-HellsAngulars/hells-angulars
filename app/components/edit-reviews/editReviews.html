@@ -1,7 +1,7 @@
 <form>
   <ul>
     <li class="form-group">
-      <label>Blah overall rating</label>
+      <label>Your overall rating</label>
       <div class="rating">
         <ngb-rating [(rate)]="selected" (hover)="hovered=$event" (leave)="hovered=0" (click)="selected=hovered" [readonly]="readonly" ></ngb-rating>
         <span *ngIf="hovered === 5">&nbsp; &nbsp;Excellent</span>
@@ -14,6 +14,9 @@
     <li class="form-group">
       <label>Your review</label>
       <textarea class="form-control" placeholder="Tell people about your experience" cols="40" rows="5" [(ngModel)]="model.text" [ngModelOptions]="{standalone: true}"></textarea>
+    </li>
+    <li>
+      <button class= "btn btn-danger" (click)="deleteReview()">Delete Review</button>
     </li>
   </ul>
 </form>

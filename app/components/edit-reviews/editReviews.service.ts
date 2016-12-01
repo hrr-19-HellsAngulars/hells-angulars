@@ -15,8 +15,19 @@ export class EditReviewService {
   constructor(private http: Http) { }
 
   // edits  a review in the database
-  public editReivew(newReview: NewReview): Promise<any> {
-    return this.http.post("/api/reviews", newReview, { headers: this.headers })
+  public updateReview(newReview: NewReview, id: number): Promise<any> {
+    let requestBody = {review: newReview, id: id};
+    return this.http.post("/api/reviews", requestBody, { headers: this.headers })
+    .toPromise()
+    .then(res => res)
+    .catch(this.handleError);
+  }
+
+  public deleteReview(id: number): Promise<any> {
+    console.log('lets begin');
+    let url = "/api/reviews/" + id;
+    let requestBody = {id: id}
+    return this.http.post(url, requestBody, { headers: this.headers })
     .toPromise()
     .then(res => res)
     .catch(this.handleError);

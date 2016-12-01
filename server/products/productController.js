@@ -150,7 +150,7 @@ module.exports = {
 
   getReviewByProductId: function(req, res, next) {
     var id = req.params.id;
-    var queryStr = `SELECT reviews.author_id, reviews.text, reviews.rating, users.profilepic, users.username, users.firstname, users.lastname
+    var queryStr = `SELECT reviews.id, reviews.author_id, reviews.text, reviews.rating, users.profilepic, users.username, users.firstname, users.lastname
       FROM reviews
       INNER JOIN users
         on users.id = reviews.author_id
@@ -171,14 +171,28 @@ module.exports = {
     });
   },
 
-  // deleteReview: function(req, res, next) {
-  //   var body = req.body;
-  //   var queryStr = `DELETE FROM reviews WHERE id = ($1)`;
-  //   pool.query(queryStr, [id], function(err, result) {
-  //     if (err) return console.error(err);
-  //     res.status(201).send('Deleted review');
-  //   });
-  // },
+  deleteReview: function(req, res, next) {
+    console.log('productController');
+    var id = req.body.id;
+    var queryStr = `DELETE FROM reviews WHERE id = ($1)`;
+    pool.query(queryStr, [id], function(err, result) {
+      if (err) return console.error(err);
+      res.status(201).send('Deleted review');
+    });
+  },
+
+  updateReview: function (req, res, next) {
+    var id = req.body.id;
+    var body = req.body.review;
+    var queryStr = `UPDATE reviews SET
+      transaction_id = $1, product_id = $2, buyer_id = $3, seller_id = $4, author_id = $5, text = $6, rating = $7, WHERE id=($8)`;
+
+    pool.query(queryStr, [body.transactionId, body.productId, body.buyerId, body.sellerId, body.authorId, body.text, body.rating, id], function(err, result) {
+      if (err) return console.log(err);
+      console.log('success', result);
+      res.status(201).send('updated review');
+    });
+  },
 
   updateProduct: function (req, res, next) {
     var id = req.params.id;

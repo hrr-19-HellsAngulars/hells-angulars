@@ -74,8 +74,7 @@
       <!-- <div *ngIf="{{user.id}} === {{review.author_id}}"> -->
       <div *ngIf="user">
         <div *ngIf="user.id === review.author_id">
-          {{user.id}}, {{review.author_id}}
-          <button class= "btn btn-primary" (click)="open(editReview)">Edit</button>
+          <button class= "btn btn-primary col-xs-12" (click)="open(editReview)" (click)="onSelectReview(review)">Edit Review</button>
         </div>
       </div>
     </div>
@@ -93,12 +92,12 @@
     <h4 class="modal-title">Edit Review Below</h4>
   </div>
   <div class="modal-body">
-    <editreview-form #review (close)="close()" [transaction]=
-  "selectedTransaction" [userId]="user.id"></editreview-form>
+    <editreview-form #editReview (close)="close()" [transaction]=
+  "selectedTransaction" [userId]="user.id" [review]="selectedReview"></editreview-form>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-primary" (click)="c('Close click')">Close</button>
-    <button type="button" class="btn btn-primary" (click)="review.onSubmit(review.model)">Submit</button>
+    <button type="button" class="btn btn-primary" (click)="editReview.onSubmit(editReview.model)">Submit</button>
   </div>
 </template>
 

@@ -28,6 +28,9 @@ export class ProductDetails implements OnInit {
   @Input() public selectedPic: String;
 
   public user: any;
+  public selectedReview: any;
+  public selectedTransaction: any;
+
   public fromDate: any;
   public toDate: any;
   public prodId: any;
@@ -186,5 +189,11 @@ export class ProductDetails implements OnInit {
 
   public open(content: any) {
     this.addModalService.open(content);
+  }
+
+  public onSelectReview(review: any) {
+    this.selectedReview = review;
+    console.log('reviews', this.reviews);
+    console.log("product-details selectedReview", this.selectedReview);
   }
 }
