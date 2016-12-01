@@ -50,7 +50,6 @@ export class NewProductForm {
     AWSService.config.accessKeyId = amazonS3Config.accessKeyId;
     AWSService.config.secretAccessKey = amazonS3Config.secretAccessKey;
     let bucket = new AWSService.S3({params: {Bucket: "gear-box"}});
-    console.log(pictures);
     pictures.forEach((pic: any, index: number) => {
       if (pic !== undefined) {
         let params = {Key: pic.name, Body: pic};
@@ -109,7 +108,6 @@ export class NewProductForm {
         // get the place result
         let place: google.maps.places.PlaceResult = autocomplete.getPlace();
         this.place = place;
-        console.log(place);
 
         // set latitude and longitude
         this.latitude = place.geometry.location.lat();

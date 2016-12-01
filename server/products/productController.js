@@ -59,16 +59,6 @@ module.exports = {
     });
   },
 
-
-  // getImages: function(req, res, next) {
-  //   var queryStr = `SELECT url FROM images WHERE product_id=${req.params.id}`;
-  //   pool.query(queryStr, function(err, result) {
-  //     if (err) return console.log(err);
-  //     console.log('success', result);
-  //     res.json(result.rows);
-  //   })
-  // },
-
   getProductById: function(req, res, next) {
     var id = req.params.id;
     var body = req.body;
@@ -98,22 +88,9 @@ module.exports = {
     });
   },
 
-  // getProductsByQuery: function(req, res, next) {
-  //   var query = req.params.query;
-  //   console.log(query);
-  //   var queryStr = ` SELECT * FROM products WHERE productname LIKE '%" + ${query} + "%'
-  //   `;
-  //   pool.query(queryStr, function(err, result) {
-  //     if (err) {
-  //       return console.log(err);
-  //     }
-  //     res.json(result.rows);
-  //   });
-  // },
-
   createProduct: function (req, res, next) {
     var body = req.body;
-    var params = [body.categoryId, body.userId, body.productDescription, body.productName, body.pricePerDay, body.lat, body.lng, body.city, body.state, body.zip]
+    var params = [body.categoryId, body.userId, body.productDescription, body.productName, body.pricePerDay, body.lat, body.lng, body.city, body.state, body.zip];
     // query string for storing product in product table
     var queryStr = `WITH ins1 AS (
                       INSERT INTO products(category_id, owner_id, description, productname, priceperday, lat, lng, city, state, zip)
