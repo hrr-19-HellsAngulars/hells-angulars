@@ -29,6 +29,7 @@ import { ProfileComponent }        from "./components/profile/profile.component"
 import { GOOGLE_API_KEY }          from "./auth/googleMaps.config.js";
 
 import { AddModalService }         from "./components/add_modal/addModal.service";
+import { AppService }              from "./components/app/app.service";
 import { AddReviewService }        from "./components/add-review/add-review.service";
 import { EditProductService }      from "./components/edit-product/edit-product.service";
 import { NewProductService }       from "./components/add_modal/newProduct.service";
@@ -44,7 +45,7 @@ let INITIAL_COMPONENTS =  [
 ];
 
 let INITIAL_PROVIDERS  =  [
-  AddModalService, AddReviewService, EditProductService, ProductsService, ProfileService, ProductDetailsService, AUTH_PROVIDERS, NewProductService,
+  AddModalService, AddReviewService, AppService, EditProductService, ProductsService, ProfileService, ProductDetailsService, AUTH_PROVIDERS, NewProductService,
 ];
 
 let INITIAL_STATES     =  [
