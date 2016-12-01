@@ -135,7 +135,6 @@ export class Products implements OnInit {
           }
           this.products = productsWithRows;
           this.markers = allProducts;
-          this.refineSearch();
         });
   }
 
