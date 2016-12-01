@@ -49,6 +49,7 @@ module.exports = {
       source: token,
     }, function (error, body) {
       if (error) {
+        console.log(error);
         res.send(400, 'Payment rejected');
       } else {
         console.log(req.body.transaction);

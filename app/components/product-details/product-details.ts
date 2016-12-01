@@ -98,13 +98,13 @@ export class ProductDetails implements OnInit {
 // Product Details Methods
 
   public selectedDate(value: any) {
-    this.fromDate = value.start;
-    this.toDate = value.end;
+    this.fromDate = value.start.format('YYYY-MM-DD');
+    this.toDate = value.end.format('YYYY-MM-DD');
 
     let oneDay = 1000 * 60 * 60 * 24;
 
     // Calculate the difference in milliseconds
-    let differenceMs = this.toDate - this.fromDate;
+    let differenceMs = moment(this.toDate) - moment(this.fromDate);
 
     // this.Convert back to days and return
     let days = Math.round(differenceMs / oneDay);
@@ -151,8 +151,8 @@ export class ProductDetails implements OnInit {
             seller_id: this.product.owner_id,
             status_id: 1,
             product_id: this.product.id,
-            bookedfrom: this.fromDate._d,
-            bookedto: this.toDate.subtract(0, 'days')._d,
+            bookedfrom: this.fromDate,
+            bookedto: this.toDate,
           });
         },
       });
