@@ -42,6 +42,7 @@ module.exports = function(app, express) {
   app.get('/api/transactions/buyer/:id', transactionController.getRentalsByBuyerId);
   app.get('/api/transactions/:id', transactionController.getInvalidDays);
   app.get('/api/transactions/active/all', transactionController.getActiveTransactions);
+  app.put('/api/transactions/:id', transactionController.updateTransaction);
 
   // Stripe routes
   app.get('/connect', stripeController.getCode);

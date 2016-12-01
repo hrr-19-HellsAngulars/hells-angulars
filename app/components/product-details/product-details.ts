@@ -1,4 +1,5 @@
 /* tslint:disable:no-string-literal */
+import { Auth }                     from "../../auth/auth.service";
 import { ActivatedRoute }           from "@angular/router";
 import { Component, Input, OnInit } from "@angular/core";
 import { NgbRatingConfig }          from "@ng-bootstrap/ng-bootstrap";
@@ -31,12 +32,6 @@ export class ProductDetails implements OnInit {
   public formattedDays: Array<any> = [];
   public context: any = this;
 
-  private minDate: any = {
-    "year": new Date().getFullYear(),
-    "month": +new Date().getMonth() + 1,
-    "day": +new Date().getDate(),
-  };
-
   private reviews: Array<any>;
   private numberOfReviews: Number;
   private averageRating: Number;
@@ -46,11 +41,10 @@ export class ProductDetails implements OnInit {
   private totalAmount: Number;
   private daysBetween: Number;
 
-  private userId = JSON.parse(localStorage.getItem("profile")).user_id;
-
   private isInvalidDate: any = undefined;
 
   constructor(
+    private auth: Auth,
     private config: NgbRatingConfig,
     private productDetailsService: ProductDetailsService,
     private uiRouter: UIRouter,
@@ -90,6 +84,7 @@ export class ProductDetails implements OnInit {
 
     this.drpOptions.settings = {
       opens: "center",
+      minDate: moment(new Date()),
       isInvalidDate: function(date: any) {
         for (let i = 0; i < context.formattedDays.length; i++) {
           if (date.format("MM-DD-YYYY") === context.formattedDays[i]) {
@@ -103,13 +98,12 @@ export class ProductDetails implements OnInit {
 // Product Details Methods
 
   public selectedDate(value: any) {
-    this.fromDate = value.start;
-    this.toDate = value.end;
+    this.fromDate = value.start.format("YYYY-MM-DD");
+    this.toDate = value.end.format("YYYY-MM-DD");
 
     let oneDay = 1000 * 60 * 60 * 24;
-
     // Calculate the difference in milliseconds
-    let differenceMs = this.toDate - this.fromDate;
+    let differenceMs: any = (<any> moment)(this.toDate) - (<any> moment)(this.fromDate);
 
     // this.Convert back to days and return
     let days = Math.round(differenceMs / oneDay);
@@ -145,27 +139,29 @@ export class ProductDetails implements OnInit {
   }
 
   public openCheckOut() {
-    console.log(this.product);
-    let handler = (<any> window).StripeCheckout.configure({
-      key: stripeConfig.apiKey,
-      locale: "auto",
-      token: (token: any) => {
-        this.productDetailsService.charge(token, {
-          amount: this.totalAmount,
-          buyer_id: this.userId,
-          seller_id: this.product.owner_id,
-          status_id: 1,
-          product_id: this.product.id,
-          bookedfrom: this.fromDate._d,
-          bookedto: this.toDate._d,
-        });
-      },
-    });
-
-    handler.open({
-      name: "Gear Box",
-      amount: +this.totalAmount * 100,
-    });
+    if (this.auth.authenticated()) {
+      let handler = (<any> window).StripeCheckout.configure({
+        key: stripeConfig.apiKey,
+        locale: "auto",
+        token: (token: any) => {
+          this.productDetailsService.charge(token, {
+            amount: this.totalAmount,
+            buyer_id: JSON.parse(localStorage.getItem("profile")).user_id,
+            seller_id: this.product.owner_id,
+            status_id: 1,
+            product_id: this.product.id,
+            bookedfrom: this.fromDate,
+            bookedto: this.toDate,
+          });
+        },
+      });
+      handler.open({
+        name: "Gear Box",
+        amount: +this.totalAmount * 100,
+      });
+    } else {
+      this.auth.login();
+    }
   }
 
   public convertObjToDate(obj: any) {

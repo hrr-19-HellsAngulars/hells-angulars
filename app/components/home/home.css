@@ -20,11 +20,6 @@ h3 {
   height: 50px;
 }
 
-img {
-  height: 600px !important;
-  width: 100%;
-}
-
 .home-content {
   padding-bottom: 1em;
   margin-top: 20px;
@@ -43,4 +38,10 @@ img {
 
 .center {
   text-align: center;
+}
+.carousel {
+  height: 500px;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+  background-position: center center !important;
 }

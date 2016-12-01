@@ -71,7 +71,7 @@
                         <p class="primary card-text">Renting From {{rental.firstname}}</p>
                       </div></a>
                     </div>
-                    <div class="col-xs-6">
+                    <div class="col-xs-5">
                       <a class="link" href="#/product/{{rental.product_id}}">
                         <h4 class="card-title">{{rental.productname}}</h4>
                         <p class="primary card-text date"> {{convertDate(rental.bookedfrom)}} to {{convertDate(rental.bookedto)}}</p>
@@ -79,8 +79,11 @@
                     </div>
                     <div class="col-xs-3 review">
                       <h4><strong>${{rental.totalvalue}}</strong></h4>
-                      <p *ngIf="rental.status_id===1">
+                      <p *ngIf="rental.status_id===2">
                         <button class="btn btn-primary" (click)="open(review)" (click)="onSelect(rental)">Write a Review</button>
+                      </p>
+                      <p *ngIf="rental.status_id === 1">
+                      <button class="btn btn-secondary" disabled>Write a Reivew</button>
                       </p>
                     </div>
                   </div>
@@ -104,7 +107,7 @@
                     </div>
                   </a>
                 </div>
-                <div class="col-xs-6">
+                <div class="col-xs-5">
                   <a class="link" href="#/product/{{transaction.product_id}}">
                     <h4 class="card-title">{{transaction.productname}}</h4>
                     <p class="primary card-text date"> {{convertDate(transaction.bookedfrom)}} to {{convertDate(transaction.bookedto)}}</p>
@@ -112,7 +115,13 @@
                 </div>
                 <div class="col-xs-3 review">
                   <h4><strong>${{transaction.totalvalue}}</strong></h4>
-                  <p *ngIf="transaction.status_id===1">
+                  <p *ngIf="compare(transaction.bookedto, today) >= 0  && transaction.status_id === 1">
+                    <button class="btn btn-secondary" disabled>Complete Rental</button>
+                  </p>
+                  <p *ngIf="compare(transaction.bookedto, today) < 0  && transaction.status_id === 1">
+                    <button class="btn btn-primary" (click)="closeTransaction(transaction.id)">Complete Rental</button>
+                  </p>
+                  <p *ngIf="transaction.status_id===2">
                     <button class="btn btn-primary" (click)="open(review)" (click)="onSelect(transaction)">Write a Review</button>
                   </p>
                 </div>

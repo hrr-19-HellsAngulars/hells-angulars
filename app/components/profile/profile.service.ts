@@ -1,13 +1,16 @@
 import "rxjs/add/operator/toPromise";
 import { AuthHttp }      from "angular2-jwt";
 import { Data, Rentals } from "../../data/dummydata";
-import { Http }          from "@angular/http";
+import { Http, Headers }          from "@angular/http";
 import { Injectable }    from "@angular/core";
 import { UserData }      from "../../data/dummyusers";
 
 @Injectable()
 export class ProfileService {
-
+    public headers: Headers = new Headers({
+      "Content-Type": "application/json",
+      Accept: "application/json",
+     });
   constructor(
     private http: Http,
     private authHttp: AuthHttp,
@@ -60,13 +63,21 @@ export class ProfileService {
 
 //  }
 
-  public getImages(productId): Promise<any> {
+  public getImages(productId: number): Promise<any> {
     return this.http.get(`/api/products/images/${productId}`)
     .toPromise()
     .then(response => {
       return response;
     })
     .catch(this.handleError);
+  }
+
+  public closeTransaction(id: number): Promise<any> {
+    let requestBody = {status_id: 2};
+    return this.http.put(`/api/transactions/${id}`, requestBody, {headers: this.headers})
+      .toPromise()
+      .then(response => response)
+      .catch(this.handleError);
   }
 
   private handleError(error: any): Promise<any> {
