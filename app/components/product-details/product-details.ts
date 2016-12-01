@@ -202,4 +202,9 @@ export class ProductDetails implements OnInit {
     console.log('reviews', this.reviews);
     console.log("product-details selectedReview", this.selectedReview);
   }
+
+  public close() {
+    this.addModalService.close();
+    this.getReviews(this.product.id);
+  }
 }

@@ -1,7 +1,6 @@
 import { Component, Input, Output, EventEmitter, OnInit }         from "@angular/core";
 import { EditedReview }        from "./editedReview";
 import { EditReviewService } from "./editReviews.service";
-import { FormControl } from "@angular/forms";
 
 import { NgbRatingConfig } from "@ng-bootstrap/ng-bootstrap";
 
@@ -23,7 +22,6 @@ export class EditReviewForm {
   public selected = 0;
   public hovered = 0;
   public readonly = false;
-  public searchControl: FormControl;
 
   public model = new EditedReview();
 
@@ -35,7 +33,6 @@ export class EditReviewForm {
   }
 
   public ngOnInit(): void {
-    this.searchControl = new FormControl();
     this.model.text = this.review.text
   }
 
@@ -43,7 +40,9 @@ export class EditReviewForm {
     model.rating = this.selected;
     this.editReviewService.updateReview(model, this.review.id)
         .then(result => {
+          console.log('SO');
           this.close.emit();
+          console.log('FUN');
         })
         .catch(error => {
           console.log(error);
