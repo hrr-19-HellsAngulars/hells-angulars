@@ -27,6 +27,10 @@ npm install
 grunt
 ```
 
+### Database
+
+Instructions exist inside of theserver/db/schema.js file for deleting tables and creating tables in the database as necessary with ElephantSQL. Uncomment provided code to wipe the specified tables.
+
 ## Style Guide
 
 We are using tslint and following the recommended style guide, borrowing many styling choices from their preferred format.
