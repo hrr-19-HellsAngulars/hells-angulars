@@ -29,6 +29,7 @@ export class EditProductForm {
   public zip: number;
   public place: any;
   public model = new NewProduct();
+  public selectedCat: any;
 
   @ViewChild("search")
   public searchElementRef: ElementRef;
@@ -90,6 +91,7 @@ export class EditProductForm {
     this.model.productDescription = this.product.description;
     this.model.pricePerDay = this.product.priceperday;
     this.model.categoryId = this.product.category_id;
+    this.selectedCat = this.categories[this.model.categoryId - 1];
     this.model.lat = this.product.lat;
     this.model.lng = this.product.lng;
     this.model.city = this.product.city;
@@ -97,6 +99,10 @@ export class EditProductForm {
     this.cityState = this.product.city + ", " + this.product.state;
     this.model.zip = this.product.zip;
     this.model.userId = this.product.owner_id;
+  }
+  public selectChange(event:any) {
+    this.model.categoryId = this.categories.indexOf(event.target.value) + 1;
+    this.selectedCat = event.target.value;
   }
 
 }
