@@ -29,6 +29,7 @@ export class EditProductForm {
   public city: string;
   public state: string;
   public zip: number;
+  public place: any;
   public model = new NewProduct();
 
   @ViewChild("search")
@@ -40,6 +41,22 @@ export class EditProductForm {
   ) { }
 
   public onSubmit(model: NewProduct) {
+    // this block parses out the address_components and gets out what we need.
+    // It's needed because the address_components array sort is not stable.
+    this.place.address_components.forEach(component => {
+      component.types.forEach(type => {
+        if (type === "locality") {
+          model.city = component.long_name;
+        }
+        if (type === "administrative_area_level_1") {
+          model.state = component.short_name;
+        }
+        if (type === "postal_code") {
+          model.zip = component.long_name;
+        }
+      });
+    });
+
     this.editProductService.editProduct(model)
         .then(result => {
           this.close.emit();
@@ -60,10 +77,10 @@ export class EditProductForm {
       autocomplete.addListener("place_changed", () => {
         // get the place result
         let place: google.maps.places.PlaceResult = autocomplete.getPlace();
-
+        this.place = place;
         // set latitude and longitude
-        this.lat = place.geometry.location.lat();
-        this.lng = place.geometry.location.lng();
+        this.model.lat = place.geometry.location.lat();
+        this.model.lng = place.geometry.location.lng();
       });
     });
 
