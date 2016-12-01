@@ -31,6 +31,7 @@ module.exports = function(app, express) {
   // app.get('/api/products/images/:id', productController.getImages);
   app.post('/api/products', productController.createProduct);
   app.put('/api/products/:id', productController.updateProduct);
+  // app.delete('/api/products/:id', productController.deleteProduct);
 
   //Review routes
   // app.get('/api/reviews', productController.getReviews);
