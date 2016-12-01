@@ -28,6 +28,7 @@ export class ProductDetails implements OnInit {
   @Input() public selectedPic: String;
 
   public user: any;
+  public userId: any;
   public selectedReview: any;
   public selectedTransaction: any;
 
@@ -123,6 +124,7 @@ export class ProductDetails implements OnInit {
     this.product = this.product[0];
     this.selectedPic = this.product.url[0];
     this.getReviews(this.product.id);
+    this.getUserIdFromProfile();
     this.getUserInfo();
   }
 
@@ -174,6 +176,10 @@ export class ProductDetails implements OnInit {
   public convertObjToDate(obj: any) {
     let date = obj.year + "-" + obj.month + "-" + obj.day;
     return new Date(date);
+  }
+
+  public getUserIdFromProfile() {
+    this.userId = JSON.parse(localStorage.getItem("profile")).user_id;
   }
 
   public getUserInfo() {
