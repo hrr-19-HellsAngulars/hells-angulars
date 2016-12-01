@@ -36,6 +36,7 @@ nav {
   overflow: visible;
   margin-right: 0px;
 }
+
 .nav-link, .fa-search, .gearbox {
   color: #fff !important;
 }
@@ -43,6 +44,7 @@ nav {
 .nav-item {
   border-bottom: 3px solid transparent;
 }
+
 .nav-item:hover {
   border-bottom: 3px solid #fff;
 }
