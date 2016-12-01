@@ -87,7 +87,7 @@ export class App {
       navigator.geolocation.getCurrentPosition((position) => {
         this.lat = position.coords.latitude;
         this.lng = position.coords.longitude;
-
+        this.cityState = "";
         // The rest of the code in this block translates lat/lng to city, state
         const url = `http://maps.googleapis.com/maps/api/geocode/json?latlng=${this.lat},${this.lng}&sensor=true`;
         this.appService.getCityState(url)
