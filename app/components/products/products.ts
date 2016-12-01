@@ -215,6 +215,7 @@ export class Products implements OnInit {
   }
 
   public ngOnInit(): void {
+    console.log(this.productsService.lat, this.productsService.lng);
     this.getActiveTransactions();
     this.getProducts();
 

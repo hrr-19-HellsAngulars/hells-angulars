@@ -100,7 +100,7 @@ export class EditProductForm {
     this.model.zip = this.product.zip;
     this.model.userId = this.product.owner_id;
   }
-  public selectChange(event:any) {
+  public selectChange(event: any) {
     this.model.categoryId = this.categories.indexOf(event.target.value) + 1;
     this.selectedCat = event.target.value;
   }
