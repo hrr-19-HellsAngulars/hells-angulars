@@ -26,7 +26,7 @@ export class NewProductForm {
   public searchControl: FormControl;
   public zoom: number;
   public categories = [ "Backpacking", "Bike", "Surf", "Snowboard", "Ski", "SUP", "Kayak" ];
-  public model = new NewProduct();
+  public model: any = new NewProduct();
   public place: any;
 
   // Note: This is looking for #search in the HTML template
@@ -41,7 +41,10 @@ export class NewProductForm {
   public upload(fileInput: any) {
     let context = this;
     let AWSService = (<any> window).AWS;
-    let pictures = [fileInput.target.files[0], fileInput.target.files[1], fileInput.target.files[2], fileInput.target.files[3]];
+    let pictures = [
+      fileInput.target.files[0], fileInput.target.files[1],
+      fileInput.target.files[2], fileInput.target.files[3],
+    ];
     AWSService.config.accessKeyId = amazonS3Config.accessKeyId;
     AWSService.config.secretAccessKey = amazonS3Config.secretAccessKey;
     let bucket = new AWSService.S3({params: {Bucket: "gear-box"}});
@@ -51,7 +54,7 @@ export class NewProductForm {
         let params = {Key: pic.name, Body: pic};
         bucket.upload(params, function (error: any, result: any) {
           if (error) { console.log(error); };
-          let thisImageLink = "imageLink" + index;
+          let thisImageLink: any = "imageLink" + index;
           context.model[thisImageLink] = result.Location;
         });
       }
