@@ -29,6 +29,7 @@ export class App {
   public lat: any = 37.7749295;    // set default lat for San Francisco
   public lng: any = -122.4194155;  // set default lng for San Francisco
   public cityState: string = "San Jose, CA";
+  public userCityFound: boolean = false;
 
   @ViewChild("search")
   public searchElementRef: ElementRef;
@@ -74,6 +75,7 @@ export class App {
     if ("geolocation" in navigator) {
       this.cityState = "finding your city..."
       navigator.geolocation.getCurrentPosition((position) => {
+        this.userCityFound = true;
         this.lat = position.coords.latitude;
         this.lng = position.coords.longitude;
 
@@ -101,6 +103,9 @@ export class App {
             this.cityState = city + ", " + state;
           })
       });
+      if (!this.userCityFound) {
+        this.cityState = "San Francisco, CA"
+      }
     }
   }
 
