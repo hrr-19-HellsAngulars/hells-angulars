@@ -32,7 +32,6 @@ module.exports = {
     if (req.query.query === 'undefined' || req.query.query === null || req.query.query === 'null') {
       req.query.query = '';
     }
-    console.log('query ' + req.query.query);
     var maxLat = parseFloat(req.query.lat) + 0.5 || 360;
     var minLat = parseFloat(req.query.lat) - 0.5 || 0;
     var maxLng = parseFloat(req.query.lng) + 0.5 || 360;
@@ -54,7 +53,6 @@ module.exports = {
     var queryStr = queryStrWithImages + ` WHERE products.owner_id = ($1)`;
     pool.query(queryStr, [req.params.id], function(err, result) {
       if (err) return console.log(err);
-      console.log('success', result);
       res.json(addImagesArray(result.rows));
     });
   },
@@ -94,7 +92,6 @@ module.exports = {
       WHERE products.id = ($1)`;
     pool.query(queryStr, [id], function(err, result) {
       if (err) return console.log(err);
-      console.log('success', result);
       res.json(addImagesArray(result.rows));
     });
   },
@@ -113,10 +110,8 @@ module.exports = {
   // },
 
   createProduct: function (req, res, next) {
-    console.log('>>>>>', req.body.lat);
     var body = req.body;
     var params = [body.categoryId, body.userId, body.productDescription, body.productName, body.pricePerDay, body.lat, body.lng, body.city, body.state, body.zip]
-    console.log(body);
     // query string for storing product in product table
     var queryStr = `WITH ins1 AS (
                       INSERT INTO products(category_id, owner_id, description, productname, priceperday, lat, lng, city, state, zip)
@@ -124,7 +119,7 @@ module.exports = {
                       RETURNING id
                       )
                       INSERT INTO images(product_id, url)`;
-    // User can upload up to 4 pictures. 
+    // User can upload up to 4 pictures.
     // This function only adds more queryStr when imageLink exists
     // parameter index starting from $11;
     var paramIndex = 11;
@@ -147,7 +142,6 @@ module.exports = {
         res.status(404).send();
         return;
       }
-      console.log('success', result);
       res.status(201).send('product created');
     });
     // add images to images table
@@ -164,7 +158,6 @@ module.exports = {
     `;
     pool.query(queryStr, [id], function(err, result) {
       if (err) return console.log(err);
-      console.log('reviews ', result);
       res.json(result.rows);
     });
   },
@@ -181,10 +174,12 @@ module.exports = {
   updateProduct: function (req, res, next) {
     var id = req.params.id;
     var body = req.body;
+    console.log("category, userId, productDescription, productName, pricePerDay, lat, lng, city, state, zip");
+    console.log(body.categoryId, body.userId, body.productDescription, body.productName, body.pricePerDay, body.lat, body.lng, body.city, body.state, body.zip)
     var queryStr = `UPDATE products SET
-      category_id=((SELECT id from categories where category = $1)), productname=($2), priceperday=($3), location=($4) WHERE id=($5)`;
+      category_id=((SELECT id from categories where category = $1)), productname=($2), priceperday=($3), lat=($4), lng=($5), description=($6), city=($7), state=($8), zip=($9) WHERE id=($10)`;
 
-    pool.query(queryStr, [body.category, body.productname, body.priceperday, body.location, id], function(err, result) {
+    pool.query(queryStr, [body.categoryId, body.productName, body.pricePerDay, body.lat, body.lng, body.productDescription, body.city, body.state, body.zip, id], function(err, result) {
       if (err) return console.log(err);
       console.log('success', result);
       res.status(201).send('updated product');

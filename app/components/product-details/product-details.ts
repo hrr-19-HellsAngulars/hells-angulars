@@ -132,8 +132,6 @@ export class ProductDetails implements OnInit {
           return prev + acc.rating;
         }, 0);
         this.averageRating =  +total / reviews.length;
-
-        console.log(this.reviews);
       })
       .catch(err => console.log(err));
   }

@@ -18,6 +18,7 @@ export class ProfileComponent implements OnInit {
   public rentals: Array<any>;
   public transactions: Array<any>;
   public selectedTransaction: any;
+  public selectedProduct: any;
   public completedTransactions: Array<any>;
   public userId: string;
   public availableFunds: Number;
@@ -106,6 +107,11 @@ export class ProfileComponent implements OnInit {
         context.getUserTransactions(context.user.id);
       });
   }
+
+  onSelectProduct(product: any) {
+    this.selectedProduct = product;
+  }
+
   public open(content: any) {
     this.addModalService.open(content);
   }

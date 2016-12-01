@@ -47,8 +47,8 @@
                         <a class="link" href="#/product/{{product.id}}"><p class="text-right"><strong>${{product.priceperday}}</strong> / day <br>{{product.location}}</p></a>
                       </div>
                       <div class="col-xs-3 edit">
-                        <button class="btn btn-primary pull-right">Edit Gear</button>
-                        <button class="btn btn-danger pull-right">Delete Gear</button>
+                        <button class="btn btn-primary pull-right" (click)="open(editProduct)" (click)="onSelectProduct(product)">Edit Gear</button>
+
                       </div>
                     </div>
                   </div>
@@ -172,6 +172,25 @@
     <button type="button" class="btn btn-primary" (click)="review.onSubmit(review.model)">Submit</button>
   </div>
 </template>
+
+<!-- Edit Product Modal -->
+<template #editProduct ngbModalContainer let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <h4 class="modal-title">Edit Product</h4>
+  </div>
+  <div class="modal-body">
+    <editproduct-form #editProduct (close)="close()" [product]="selectedProduct"></editproduct-form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-danger pull-left">Delete Gear</button>
+    <button type="button" class="btn btn-primary" (click)="c('Close click')">Close</button>
+    <button type="button" class="btn btn-primary" (click)="editProduct.onSubmit(editProduct.model)">Submit</button>
+  </div>
+</template>
+
 
 
 
