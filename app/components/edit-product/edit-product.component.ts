@@ -20,7 +20,7 @@ export class EditProductForm {
 
   public selected = 0;
   public hovered = 0;
-  public readonly = false;
+  public addressChanged: boolean = false;
   public categories = [ "Backpacking", "Bike", "Surf", "Snowboard", "Ski", "SUP", "Kayak" ];
   public searchControl: FormControl;
   public cityState: string = "";
@@ -43,19 +43,21 @@ export class EditProductForm {
   public onSubmit(model: NewProduct) {
     // this block parses out the address_components and gets out what we need.
     // It's needed because the address_components array sort is not stable.
-    this.place.address_components.forEach(component => {
-      component.types.forEach(type => {
-        if (type === "locality") {
-          model.city = component.long_name;
-        }
-        if (type === "administrative_area_level_1") {
-          model.state = component.short_name;
-        }
-        if (type === "postal_code") {
-          model.zip = component.long_name;
-        }
+    if (this.addressChanged) {
+      this.place.address_components.forEach(component => {
+        component.types.forEach(type => {
+          if (type === "locality") {
+            model.city = component.long_name;
+          }
+          if (type === "administrative_area_level_1") {
+            model.state = component.short_name;
+          }
+          if (type === "postal_code") {
+            model.zip = component.long_name;
+          }
+        });
       });
-    });
+    }
 
     this.editProductService.editProduct(model)
         .then(result => {
@@ -75,10 +77,11 @@ export class EditProductForm {
         types: ["address"],
       });
       autocomplete.addListener("place_changed", () => {
+        this.addressChanged = true;
         // get the place result
         let place: google.maps.places.PlaceResult = autocomplete.getPlace();
         this.place = place;
-        // set latitude and longitude
+        // set new latitude and longitude
         this.model.lat = place.geometry.location.lat();
         this.model.lng = place.geometry.location.lng();
       });
