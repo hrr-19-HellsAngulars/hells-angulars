@@ -98,13 +98,12 @@ export class ProductDetails implements OnInit {
 // Product Details Methods
 
   public selectedDate(value: any) {
-    this.fromDate = value.start.format('YYYY-MM-DD');
-    this.toDate = value.end.format('YYYY-MM-DD');
+    this.fromDate = value.start.format("YYYY-MM-DD");
+    this.toDate = value.end.format("YYYY-MM-DD");
 
     let oneDay = 1000 * 60 * 60 * 24;
-    debugger;
     // Calculate the difference in milliseconds
-    let differenceMs:any = (<any>moment)(this.toDate) - (<any>moment)(this.fromDate);
+    let differenceMs: any = (<any> moment)(this.toDate) - (<any> moment)(this.fromDate);
 
     // this.Convert back to days and return
     let days = Math.round(differenceMs / oneDay);
@@ -140,7 +139,7 @@ export class ProductDetails implements OnInit {
   }
 
   public openCheckOut() {
-    if(this.auth.authenticated()) {
+    if (this.auth.authenticated()) {
       let handler = (<any> window).StripeCheckout.configure({
         key: stripeConfig.apiKey,
         locale: "auto",

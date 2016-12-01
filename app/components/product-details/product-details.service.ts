@@ -42,7 +42,6 @@ export class ProductDetailsService {
   }
 
   public charge(token, transaction) {
-    console.log('charge fired', transaction);
     let requestBody = {token: token, transaction: transaction};
     return this.http.post("api/charge", requestBody, {headers: this.headers})
       .map(res => res)

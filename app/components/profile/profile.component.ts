@@ -119,12 +119,15 @@ export class ProfileComponent implements OnInit {
     return date.slice(0, 10);
   }
 
-  public compare(dateTimeA:any, dateTimeB:any) {
-    var momentA = moment(dateTimeA,"YYYY-MM-DD");
-    var momentB = moment(dateTimeB,"YYYY-MM-DD");
-    if (momentA > momentB) return 1;
-    else if (momentA < momentB) return -1;
-    else return 0;
+  public compare(dateTimeA: any, dateTimeB: any) {
+    let momentA = moment(dateTimeA, "YYYY-MM-DD");
+    let momentB = moment(dateTimeB, "YYYY-MM-DD");
+    if (momentA > momentB) {
+      return 1;
+    } else if (momentA < momentB) {
+      return -1;
+    } else {
+      return 0;
+    }
   }
-
 }
