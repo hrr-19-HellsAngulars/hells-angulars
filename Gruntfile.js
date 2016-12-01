@@ -1,8 +1,10 @@
 module.exports = function(grunt) {
 
   grunt.initConfig({
+    // removes files from the dist (built files) folder
     clean: ['dist'],
 
+    // compiles ts code into js
     ts: {
       base: {
         src: ['app/**/*.ts', 'spec/*.ts'],
@@ -20,6 +22,7 @@ module.exports = function(grunt) {
       }
     },
 
+    // lints ts code for errors
     tslint: {
       options: {
           // can be a configuration object or a filepath to tslint.json
@@ -33,6 +36,7 @@ module.exports = function(grunt) {
       }
     },
 
+    // copies static asset files to the dist (built files) folder
     copy: {
       css: {
         expand: true,
@@ -47,6 +51,7 @@ module.exports = function(grunt) {
         dest: 'dist/',
       }
     },
+    // concurrently runs grunt tasks more info at https://github.com/sindresorhus/grunt-concurrent
     concurrent: {
       dev: {
         tasks: ['nodemon', 'mochaTest', 'karma', 'watch'],
@@ -61,7 +66,7 @@ module.exports = function(grunt) {
         script: 'server/app.js'
       }
     },
-
+    // watch ts files and static asset files for changes and re-builds
     watch: {
       ts: {
         files: ['app/**/*.ts', 'spec/*.ts'],
@@ -72,12 +77,14 @@ module.exports = function(grunt) {
         tasks: ['copy:css', 'copy:html']
       }
     },
+    // run front end unit tests with karma
     karma: {
       unit: {
         configFile: 'karma.conf.js',
         autoWatch: true
       }
     },
+    // run back end unit tests with mocha
     mochaTest: {
       test: {
         options: {

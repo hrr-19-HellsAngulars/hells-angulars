@@ -1,10 +1,12 @@
 var pool = require('../db/db.js');
 
+// Selects products with their associated images
 var queryStrWithImages = `SELECT products.id, products.category_id, products.owner_id, products.description, products.productname, products.priceperday, products.location, products.lat, products.lng, products.city, products.state, images.url
       FROM products
       LEFT JOIN images
       ON products.id=images.product_id`;
 
+// Adds images form the db to the results returned from the query for products
 var addImagesArray = function (result) {
   var resultWithImages = [];
   for (var i = 0; i < result.length; i++) {

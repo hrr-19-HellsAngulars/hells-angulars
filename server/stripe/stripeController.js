@@ -40,7 +40,7 @@ module.exports = {
         pool.query(queryString , [stripeUserId, userId], function(err, result) {
           if (err) return console.log(err);
           console.log('success', result);
-        })
+        });
         res.redirect('/#/profile');
       });
     }
@@ -67,8 +67,8 @@ module.exports = {
           if (err) return console.log(err);
           console.log('add new transaction');
           res.send(200, 'Success');
-        })
+        });
       }
     });
   }
-}
+};

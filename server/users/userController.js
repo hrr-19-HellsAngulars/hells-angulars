@@ -1,4 +1,4 @@
-var pool = require('../db/db.js')
+var pool = require('../db/db.js');
 
 module.exports = {
   getAllUsers: function(req, res, next) {
@@ -10,7 +10,7 @@ module.exports = {
         res.send(err);
       }
       res.send(result.rows);
-    })
+    });
   },
 
   createUser: function(req, res, next) {
@@ -19,7 +19,7 @@ module.exports = {
     // NOTE: you must use single quotes for the values section of the query
     var searchUserStr = `SELECT * FROM users
       WHERE authid = ($1)
-    `
+    `;
     pool.query(searchUserStr, [body.user_id], function(err, result) {
       if (err) return console.log(err);
       console.log(result);
