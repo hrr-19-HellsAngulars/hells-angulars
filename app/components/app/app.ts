@@ -1,3 +1,4 @@
+import { AppService }          from "./app.service";
 import { Auth }                from "../../auth/auth.service";
 import { Component, OnInit, ViewChild, ElementRef }   from "@angular/core";
 import { FormGroup, FormControl }           from "@angular/forms";
@@ -27,12 +28,14 @@ export class App {
   public searchControl: FormControl;
   public lat: any = 37.7749295;    // set default lat for San Francisco
   public lng: any = -122.4194155;  // set default lng for San Francisco
+  public cityState: string = "finding your city...";
 
   @ViewChild("search")
   public searchElementRef: ElementRef;
 
   constructor(
     private auth: Auth,
+    private appService: AppService,
     private productsService: ProductsService,
     private addModalService: AddModalService,
     private modalService: NgbModal,
@@ -50,6 +53,8 @@ export class App {
     this.auth.findOrCreateUser(localStorage.getItem("profile"));
 
     this.searchControl = new FormControl();
+
+    this.setCurrentPosition();
 
     this.mapsAPILoader.load().then(() => {
       let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {
@@ -75,5 +80,39 @@ export class App {
 
   public close() {
     this.addModalService.close();
+  }
+
+  private setCurrentPosition() {
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        this.lat = position.coords.latitude;
+        this.lng = position.coords.longitude;
+
+        // The rest of the code in this block translates lat/lng to city, state
+        const url = `http://maps.googleapis.com/maps/api/geocode/json?latlng=${this.lat},${this.lng}&sensor=true`;
+        this.appService.getCityState(url)
+          .then(response => {
+            response.results.forEach(item => {
+              item.types.forEach(type => {
+                if (type === "locality") {
+                  item.address_components.forEach(component => {
+                    if (component.types[0] === "locality") {
+                      this.cityState += component.long_name;
+                    }
+                    if (component.types[0] === "administrative_area_level_1") {
+                      this.cityState += ", " + component.short_name;
+                    }
+                  });
+                }
+              });
+            });
+          });
+      }, (error) => {
+        this.cityState = "San Francisco, CA";
+      });
+      // if (!this.userCityFound) {
+      //   this.cityState = "San Francisco, CA";
+      // }
+    }
   }
 }
