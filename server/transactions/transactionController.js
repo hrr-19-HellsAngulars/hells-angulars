@@ -65,6 +65,7 @@ module.exports = {
     pool.query(queryStr, [id], function(err, result) {
       if (err) return console.log(err);
       console.log('dates', result);
+      res.json(result.rows);
     });
   },
 
