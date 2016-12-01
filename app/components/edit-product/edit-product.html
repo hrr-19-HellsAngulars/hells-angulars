@@ -29,7 +29,7 @@
         <label>Category</label>
           <select class="form-control" id="power"
           required
-          [(ngModel)]="model.categoryId" [ngModelOptions]="{standalone: true}"
+          [(ngModel)]="selectedCat" [ngModelOptions]="{standalone: true}"
           (change)="selectChange($event)">
             <option *ngFor="let cat of categories" [value]="cat">{{cat}}</option>
           </select>
