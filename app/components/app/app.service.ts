@@ -18,7 +18,6 @@ export class AppService {
   ) {}
 
   public getCityState(url: any) {
-    console.log("getCityState fired");
     return this.http.get(url)
         .toPromise()
         .then(response => response.json())
