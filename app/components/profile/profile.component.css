@@ -39,8 +39,8 @@ img {
   color: #579ed1
 }
 
-.edit {
-  margin-top: 0;
+.price, .edit {
+  margin-top: 0.5em;
 }
 
 .review {
