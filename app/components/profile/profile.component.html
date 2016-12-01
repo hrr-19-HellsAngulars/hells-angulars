@@ -48,7 +48,7 @@
                       </div>
                       <div class="col-xs-3 edit">
                         <button class="btn btn-primary pull-right" (click)="open(editProduct)" (click)="onSelectProduct(product)">Edit Gear</button>
-                        <button class="btn btn-danger pull-right">Delete Gear</button>
+
                       </div>
                     </div>
                   </div>
@@ -185,6 +185,7 @@
     <editproduct-form #editProduct (close)="close()" [product]="selectedProduct"></editproduct-form>
   </div>
   <div class="modal-footer">
+    <button type="button" class="btn btn-danger pull-left">Delete Gear</button>
     <button type="button" class="btn btn-primary" (click)="c('Close click')">Close</button>
     <button type="button" class="btn btn-primary" (click)="editProduct.onSubmit(editProduct.model)">Submit</button>
   </div>
