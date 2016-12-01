@@ -84,7 +84,7 @@ export class ProductDetails implements OnInit {
 
     this.drpOptions.settings = {
       opens: "center",
-      // minDate: moment(new Date()),
+      minDate: moment(new Date()),
       isInvalidDate: function(date: any) {
         for (let i = 0; i < context.formattedDays.length; i++) {
           if (date.format("MM-DD-YYYY") === context.formattedDays[i]) {
@@ -102,9 +102,9 @@ export class ProductDetails implements OnInit {
     this.toDate = value.end.format('YYYY-MM-DD');
 
     let oneDay = 1000 * 60 * 60 * 24;
-
+    debugger;
     // Calculate the difference in milliseconds
-    let differenceMs = moment(this.toDate) - moment(this.fromDate);
+    let differenceMs:any = (<any>moment)(this.toDate) - (<any>moment)(this.fromDate);
 
     // this.Convert back to days and return
     let days = Math.round(differenceMs / oneDay);
