@@ -1,6 +1,6 @@
 var express = require('express');
 var jwt = require('express-jwt');
-//var authConfig = require('../config/authConfig');
+var authConfig = require('../config/authConfig');
 
 //require controllers
 var userController = require('../users/userController.js');
@@ -8,16 +8,16 @@ var productController = require('../products/productController.js');
 var stripeController = require('../stripe/stripeController');
 var transactionController = require('../transactions/transactionController');
 
-// var authCheck = jwt({
-//   secret: new Buffer(authConfig.secret, 'base64'),
-//   audience: authConfig.clientId
-// });
+var authCheck = jwt({
+  secret: new Buffer(authConfig.secret, 'base64'),
+  audience: authConfig.clientId
+});
 
 //deployment
-var authCheck = jwt({
-  secret: new Buffer(process.env.authSecret, 'base64'),
-  audience: process.env.authClientID
-});
+// var authCheck = jwt({
+//   secret: new Buffer(process.env.authSecret, 'base64'),
+//   audience: process.env.authClientID
+// });
 
 module.exports = function(app, express) {
   // NOTE: To protect a route, simply pass authCheck as the middle argument for a request route.
