@@ -83,20 +83,6 @@ export class NewProductForm {
       });
     });
 
-    // for (const i = 0; i < this.place.address_components.length; i++) {
-    //   for (const j = 0; j < this.place.address_components[i].types.length; j++) {
-    //     if (this.place.address_components[i].types[j] === "locality") {
-    //       model.city = this.place.address_components[i].long_name;
-    //     }
-    //     if (this.place.address_components[i].types[j] === "administrative_area_level_1") {
-    //       model.state = this.place.address_components[i].short_name;
-    //     }
-    //     if (this.place.address_components[i].types[j] === "postal_code") {
-    //       model.zip = this.place.address_components[i].long_name;
-    //     }
-    //   }
-    // }
-
     model.userId = JSON.parse(localStorage.getItem("profile")).user_id;
     this.newProductService.postProduct(model)
         .then(result => {
