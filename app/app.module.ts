@@ -43,11 +43,11 @@ import { MyUIRouterConfig }        from "./config/router.config.js";
 import { aboutState, googleState, homeState, productsState, productDetailsState, profileState, searchState } from "./states.js";
 
 let INITIAL_COMPONENTS =  [
-  App, About, AddReviewForm,  Google, Home, Products, ProductDetails, ProfileComponent, NewProductForm, EditReviewForm,
+  App, About, AddReviewForm,  Google, Home, Products, ProductDetails, ProfileComponent, NewProductForm, EditReviewForm, EditProductForm,
 ];
 
 let INITIAL_PROVIDERS  =  [
-  AddModalService, AddReviewService, AppService, EditProductService, ProductsService, ProfileService, ProductDetailsService, AUTH_PROVIDERS, NewProductService, EditReviewService,
+  AddModalService, AddReviewService, AppService, EditProductService, ProductsService, ProfileService, ProductDetailsService, AUTH_PROVIDERS, NewProductService, EditReviewService, EditProductService,
 ];
 
 let INITIAL_STATES     =  [

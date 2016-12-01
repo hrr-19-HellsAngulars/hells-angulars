@@ -33,7 +33,6 @@ export class EditReviewForm {
   }
 
   public ngOnInit(): void {
-    console.log(this.review);
     this.model.text = this.review.text
   }
 
