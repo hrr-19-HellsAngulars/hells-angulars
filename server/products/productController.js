@@ -154,7 +154,7 @@ module.exports = {
       FROM reviews
       INNER JOIN users
         on users.id = reviews.author_id
-      WHERE product_id = ($1)
+      WHERE product_id = ($1) AND reviews.author_id = reviews.buyer_id;
     `;
     pool.query(queryStr, [id], function(err, result) {
       if (err) return console.log(err);
