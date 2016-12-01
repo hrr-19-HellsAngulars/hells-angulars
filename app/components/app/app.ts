@@ -1,3 +1,4 @@
+import { AppService }          from "./app.service";
 import { Auth }                from "../../auth/auth.service";
 import { Component, OnInit, ViewChild, ElementRef }   from "@angular/core";
 import { FormGroup, FormControl }           from "@angular/forms";
@@ -27,12 +28,14 @@ export class App {
   public searchControl: FormControl;
   public lat: any = 37.7749295;    // set default lat for San Francisco
   public lng: any = -122.4194155;  // set default lng for San Francisco
+  public cityState: string = "San Jose, CA";
 
   @ViewChild("search")
   public searchElementRef: ElementRef;
 
   constructor(
     private auth: Auth,
+    private appService: AppService,
     private productsService: ProductsService,
     private addModalService: AddModalService,
     private modalService: NgbModal,
@@ -51,6 +54,8 @@ export class App {
 
     this.searchControl = new FormControl();
 
+    this.setCurrentPosition();
+
     this.mapsAPILoader.load().then(() => {
       let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {
         types: ["(cities)"],
@@ -63,6 +68,40 @@ export class App {
         this.lng = place.geometry.location.lng().toFixed(7);
       });
     });
+  }
+
+  private setCurrentPosition() {
+    if ("geolocation" in navigator) {
+      this.cityState = "finding your city..."
+      navigator.geolocation.getCurrentPosition((position) => {
+        this.lat = position.coords.latitude;
+        this.lng = position.coords.longitude;
+
+        // The rest of the code in this block translates lat/lng to city, state
+        const city = "";
+        const state = "";
+
+        const url = "http://maps.googleapis.com/maps/api/geocode/json?latlng="+this.lat+","+this.lng+"&sensor=true";
+        this.appService.getCityState(url)
+          .then(response => {
+            response.results.forEach(item => {
+              item.types.forEach(type => {
+                if (type === "locality") {
+                  item.address_components.forEach(component => {
+                    if (component.types[0] === "locality") {
+                      city = component.long_name;
+                    }
+                    if (component.types[0] === "administrative_area_level_1") {
+                      state = component.short_name;
+                    }
+                  })
+                }
+              })
+            })
+            this.cityState = city + ", " + state;
+          })
+      });
+    }
   }
 
   public open(content: any) {
