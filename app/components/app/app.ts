@@ -80,8 +80,7 @@ export class App {
         this.lng = position.coords.longitude;
 
         // The rest of the code in this block translates lat/lng to city, state
-        const city = "";
-        const state = "";
+        this.cityState = ""
 
         const url = "http://maps.googleapis.com/maps/api/geocode/json?latlng="+this.lat+","+this.lng+"&sensor=true";
         this.appService.getCityState(url)
@@ -91,16 +90,15 @@ export class App {
                 if (type === "locality") {
                   item.address_components.forEach(component => {
                     if (component.types[0] === "locality") {
-                      city = component.long_name;
+                      this.cityState += component.long_name;
                     }
                     if (component.types[0] === "administrative_area_level_1") {
-                      state = component.short_name;
+                      this.cityState += ", " + component.short_name;
                     }
                   })
                 }
               })
             })
-            this.cityState = city + ", " + state;
           })
       });
       if (!this.userCityFound) {
