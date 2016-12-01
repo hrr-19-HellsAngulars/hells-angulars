@@ -177,7 +177,7 @@ module.exports = {
     console.log("category, userId, productDescription, productName, pricePerDay, lat, lng, city, state, zip");
     console.log(body.categoryId, body.userId, body.productDescription, body.productName, body.pricePerDay, body.lat, body.lng, body.city, body.state, body.zip)
     var queryStr = `UPDATE products SET
-      category_id=((SELECT id from categories where category = $1)), productname=($2), priceperday=($3), lat=($4), lng=($5), description=($6), city=($7), state=($8), zip=($9) WHERE id=($10)`;
+      category_id=($1), productname=($2), priceperday=($3), lat=($4), lng=($5), description=($6), city=($7), state=($8), zip=($9) WHERE id=($10)`;
 
     pool.query(queryStr, [body.categoryId, body.productName, body.pricePerDay, body.lat, body.lng, body.productDescription, body.city, body.state, body.zip, id], function(err, result) {
       if (err) return console.log(err);

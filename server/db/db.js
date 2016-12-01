@@ -15,6 +15,18 @@ var config = {
   max: 50, //max clients in the pool
   idleTimeoutMillis: 30000 //how long a client can be idle before being closed
 };
+
+//deploy
+// var config = {
+//   user: process.env.dbUsername,
+//   password: process.env.dbPassword,
+//   host: process.env.dbHost,
+//   port: 5432,
+//   database: process.env.dbName,
+//   max: 50, //max clients in the pool
+//   idleTimeoutMillis: 30000 //how long a client can be idle before being closed
+// };
+
 // var connection = 'postgres://localhost:5432/hells';
 // var client = new pg.Client(connection);
 // client.connect();

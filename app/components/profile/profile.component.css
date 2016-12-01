@@ -19,10 +19,6 @@ img {
   max-width: 90%;
 }
 
-.description, .price{
-  margin-top: 10px;
-}
-
 .productImage{
   height: 100%;
   width: 150px;
@@ -43,8 +39,8 @@ img {
   color: #579ed1
 }
 
-.edit {
-  margin-top: 0;
+.price, .edit {
+  margin-top: 0.5em;
 }
 
 .review {

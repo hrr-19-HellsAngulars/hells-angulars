@@ -121,6 +121,10 @@ export class ProfileComponent implements OnInit {
     this.getUserInfo();
   }
 
+  public transfer() {
+    window.alert("We have received your request. Please allow 3-5 business days to process the payment");
+  }
+
   public convertDate(date: string) {
     return date.slice(0, 10);
   }

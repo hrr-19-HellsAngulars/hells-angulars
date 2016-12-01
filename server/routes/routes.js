@@ -13,6 +13,12 @@ var authCheck = jwt({
   audience: authConfig.clientId
 });
 
+//deployment
+// var authCheck = jwt({
+//   secret: new Buffer(process.env.authSecret, 'base64'),
+//   audience: process.env.authClientID
+// });
+
 module.exports = function(app, express) {
   // NOTE: To protect a route, simply pass authCheck as the middle argument for a request route.
   // E.g. app.get('/api/someroute', authCheck, controller.method);
