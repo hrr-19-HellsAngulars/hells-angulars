@@ -18,8 +18,6 @@ export class EditProductForm {
   @Output()
   close: EventEmitter<any> = new EventEmitter();
 
-  public selected = 0;
-  public hovered = 0;
   public addressChanged: boolean = false;
   public categories = [ "Backpacking", "Bike", "Surf", "Snowboard", "Ski", "SUP", "Kayak" ];
   public searchControl: FormControl;
@@ -99,7 +97,7 @@ export class EditProductForm {
     this.cityState = this.product.city + ", " + this.product.state;
     this.model.zip = this.product.zip;
     this.model.userId = this.product.owner_id;
-    console.log(this.cityState);
+    console.log(this.model.categoryId, this.product.category_id;);
   }
 
 }
