@@ -71,18 +71,30 @@ export class App {
     });
   }
 
+  public open(content: any) {
+    if (this.auth.authenticated()) {
+      this.addModalService.open(content);
+    } else {
+      this.auth.login();
+    }
+  }
+
+  public close() {
+    this.addModalService.close();
+  }
+
   private setCurrentPosition() {
     if ("geolocation" in navigator) {
-      this.cityState = "finding your city..."
+      this.cityState = "finding your city...";
       navigator.geolocation.getCurrentPosition((position) => {
         this.userCityFound = true;
         this.lat = position.coords.latitude;
         this.lng = position.coords.longitude;
 
         // The rest of the code in this block translates lat/lng to city, state
-        this.cityState = ""
+        this.cityState = "";
 
-        const url = "http://maps.googleapis.com/maps/api/geocode/json?latlng="+this.lat+","+this.lng+"&sensor=true";
+        const url = `http://maps.googleapis.com/maps/api/geocode/json?latlng=${this.lat},${this.lng}&sensor=true`;
         this.appService.getCityState(url)
           .then(response => {
             response.results.forEach(item => {
@@ -95,27 +107,15 @@ export class App {
                     if (component.types[0] === "administrative_area_level_1") {
                       this.cityState += ", " + component.short_name;
                     }
-                  })
+                  });
                 }
-              })
-            })
-          })
+              });
+            });
+          });
       });
       if (!this.userCityFound) {
-        this.cityState = "San Francisco, CA"
+        this.cityState = "San Francisco, CA";
       }
     }
-  }
-
-  public open(content: any) {
-    if (this.auth.authenticated()) {
-      this.addModalService.open(content);
-    } else {
-      this.auth.login();
-    }
-  }
-
-  public close() {
-    this.addModalService.close();
   }
 }
