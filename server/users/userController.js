@@ -2,7 +2,6 @@ var pool = require('../db/db.js');
 
 module.exports = {
   getAllUsers: function(req, res, next) {
-    console.log('getAllUsers fired');
     var queryStr = 'SELECT * FROM users';
     pool.query(queryStr, function(err, result) {
       if (err) {
@@ -14,7 +13,6 @@ module.exports = {
   },
 
   createUser: function(req, res, next) {
-    //console.log('request body is ' + JSON.stringify(req)); //we need to parse this out and add the info to the queryStr
     var body = req.body;
     // NOTE: you must use single quotes for the values section of the query
     var searchUserStr = `SELECT * FROM users
@@ -22,7 +20,6 @@ module.exports = {
     `;
     pool.query(searchUserStr, [body.user_id], function(err, result) {
       if (err) return console.log(err);
-      console.log(result);
       if (result.rows.length > 0) {
         res.status(200).send('User already exists');
       } else {
@@ -43,7 +40,6 @@ module.exports = {
         }
         pool.query(queryStr, properties, function(err, result) {
           if (err) return console.log(err);
-          console.log('success', result);
           res.send(result.rows);
         });
       }
@@ -58,9 +54,8 @@ module.exports = {
       WHERE authid=($1)`;
     pool.query(queryStr, [id], function(err, result) {
       if (err) return console.log(err);
-      console.log('success', result);
       res.json(result.rows[0]);
-    })
+    });
   },
 
   updateUser: function (req, res, next) {
@@ -77,8 +72,7 @@ module.exports = {
 
     pool.query(queryStr, properties, function(err, result) {
       if (err) return console.log(err);
-      console.log('success', result);
       res.status(201).send('updated user');
-    })
+    });
   }
-}
+};

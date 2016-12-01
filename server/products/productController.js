@@ -183,7 +183,6 @@ module.exports = {
 
     pool.query(queryStr, [body.categoryId, body.productName, body.pricePerDay, body.lat, body.lng, body.productDescription, body.city, body.state, body.zip, id], function(err, result) {
       if (err) return console.log(err);
-      console.log('success', result);
       res.status(201).send('updated product');
     });
   },

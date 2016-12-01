@@ -2,8 +2,6 @@ var pg = require('pg');
 
 //Import private database config information
 var dbConfig = require('../config/dbConfig.js');
-// Uncomment the line below if you want to test on your local DB instead of cloud.
-//dbConfig.url = 'postgres://localhost:5432/hells'
 
 //This section contains the settings to set up Postgres client pooling.
 var config = {

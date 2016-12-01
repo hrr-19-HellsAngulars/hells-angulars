@@ -86,8 +86,6 @@ export class Products implements OnInit {
           let activeTransactions: Array<any> = [];
           // an array of all active transactions
           this.activeTransactions = transactions.slice();
-          console.log("this.activeTransactions");
-          console.log(this.activeTransactions);
         });
   }
 
@@ -95,8 +93,6 @@ export class Products implements OnInit {
     let from = this.convertObjToDate(this.availableFrom);
     let to = this.convertObjToDate(this.availableTo);
     let userRange = this.makeRange(from, to);
-    console.log("userRange");
-    console.log(userRange);
     this.activeProducts = [];
     for (let i = 0; i < this.activeTransactions.length; i++) {
       let bookedfrom = this.activeTransactions[i].bookedfrom.substr(0, 10);
@@ -147,15 +143,9 @@ export class Products implements OnInit {
     this.getActiveProducts();
     let from = this.convertObjToDate(this.availableFrom);
     let to = this.convertObjToDate(this.availableTo);
-    console.log("vv availables vv");
-    console.log(from, to);
     this.products = this.allProducts;
     let context = this;
     let products = this.products.filter(function(product: any) {
-      console.log("product");
-      console.log(context.activeProducts.includes(product.id));
-      console.log("this.activeProducts");
-      console.log(context.activeProducts);
       return (
         product.priceperday >= parseInt(context.minPrice, 10)
         && product.priceperday <= parseInt(context.maxPrice, 10)

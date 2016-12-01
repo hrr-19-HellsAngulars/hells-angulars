@@ -44,7 +44,6 @@ export class Google {
       autocomplete.addListener("place_changed", () => {
         // get the place result
         let place: google.maps.places.PlaceResult = autocomplete.getPlace();
-        console.log(place);
         // set latitude and longitude
         this.latitude = place.geometry.location.lat();
         this.longitude = place.geometry.location.lng();

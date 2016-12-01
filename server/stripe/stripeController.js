@@ -39,7 +39,6 @@ module.exports = {
       stripeaccountid=($1) WHERE authId=($2)`;
         pool.query(queryString , [stripeUserId, userId], function(err, result) {
           if (err) return console.log(err);
-          console.log('success', result);
         });
         res.redirect('/#/profile');
       });
@@ -58,14 +57,12 @@ module.exports = {
         console.log(error);
         res.send(400, 'Payment rejected');
       } else {
-        console.log(req.body.transaction);
         // insert into transaction table
         var queryString = `INSERT INTO transactions
           (totalvalue, buyer_id, seller_id, status_id, product_id, bookedfrom, bookedto)
           VALUES ($1, (SELECT id from users where authid = $2), $3, $4, $5, $6, $7)`;
         pool.query(queryString, [transaction.amount, transaction.buyer_id, transaction.seller_id,  transaction.status_id, transaction.product_id, transaction.bookedfrom, transaction.bookedto], function (err, result) {
           if (err) return console.log(err);
-          console.log('add new transaction');
           res.send(200, 'Success');
         });
       }
