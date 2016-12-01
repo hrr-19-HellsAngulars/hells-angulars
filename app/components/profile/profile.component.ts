@@ -122,7 +122,7 @@ export class ProfileComponent implements OnInit {
   }
 
   public transfer() {
-    window.alert('We have received your request. Please allow 3-5 business days to process the payment');
+    window.alert("We have received your request. Please allow 3-5 business days to process the payment");
   }
 
   public convertDate(date: string) {
