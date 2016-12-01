@@ -97,7 +97,6 @@ export class EditProductForm {
     this.cityState = this.product.city + ", " + this.product.state;
     this.model.zip = this.product.zip;
     this.model.userId = this.product.owner_id;
-    console.log(this.model.categoryId, this.product.category_id;);
   }
 
 }
