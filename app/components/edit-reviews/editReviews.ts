@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter, OnInit }         from "@angular/core";
-import { NewReview }        from "../add-review/newReview";
+import { EditedReview }        from "./editedReview";
 import { EditReviewService } from "./editReviews.service";
 
 import { NgbRatingConfig } from "@ng-bootstrap/ng-bootstrap";
@@ -23,7 +23,7 @@ export class EditReviewForm {
   public hovered = 0;
   public readonly = false;
 
-  public model = new NewReview();
+  public model = new EditedReview();
 
   constructor(
     private editReviewService: EditReviewService,
@@ -37,15 +37,7 @@ export class EditReviewForm {
     this.model.text = this.review.text
   }
 
-  public onSubmit(model: NewReview) {
-    console.log(this.userId);
-    console.log(this.transaction);
-
-    model.authorId = this.userId;
-    model.transactionId = this.transaction.id;
-    model.productId = this.transaction.product_id;
-    model.buyerId = this.transaction.buyer_id;
-    model.sellerId = this.transaction.seller_id;
+  public onSubmit(model: EditedReview) {
     model.rating = this.selected;
     this.editReviewService.updateReview(model, this.review.id)
         .then(result => {

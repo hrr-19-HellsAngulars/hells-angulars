@@ -182,12 +182,12 @@ module.exports = {
   },
 
   updateReview: function (req, res, next) {
+    console.log('product control to major tom');
     var id = req.body.id;
-    var body = req.body.review;
-    var queryStr = `UPDATE reviews SET
-      transaction_id = $1, product_id = $2, buyer_id = $3, seller_id = $4, author_id = $5, text = $6, rating = $7, WHERE id=($8)`;
+    var body = req.body;
+    var queryStr = `UPDATE reviews SET text = $1, rating = $2 WHERE id=($3)`;
 
-    pool.query(queryStr, [body.transactionId, body.productId, body.buyerId, body.sellerId, body.authorId, body.text, body.rating, id], function(err, result) {
+    pool.query(queryStr, [body.text, body.rating, id], function(err, result) {
       if (err) return console.log(err);
       console.log('success', result);
       res.status(201).send('updated review');

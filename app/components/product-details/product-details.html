@@ -92,8 +92,7 @@
     <h4 class="modal-title">Edit Review Below</h4>
   </div>
   <div class="modal-body">
-    <editreview-form #editReview (close)="close()" [transaction]=
-  "selectedTransaction" [userId]="user.id" [review]="selectedReview"></editreview-form>
+    <editreview-form #editReview (close)="close()" [userId]="user.id" [review]="selectedReview"></editreview-form>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-primary" (click)="c('Close click')">Close</button>

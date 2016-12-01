@@ -1,6 +1,6 @@
 import { Headers, Http } from "@angular/http";
 import { Injectable }    from "@angular/core";
-import { NewReview }    from "../add-review/newReview";
+import { EditedReview }    from "./editedReview";
 
 import "rxjs/add/operator/toPromise";
 
@@ -15,9 +15,10 @@ export class EditReviewService {
   constructor(private http: Http) { }
 
   // edits  a review in the database
-  public updateReview(newReview: NewReview, id: number): Promise<any> {
-    let requestBody = {review: newReview, id: id};
-    return this.http.post("/api/reviews", requestBody, { headers: this.headers })
+  public updateReview(editedReview: EditedReview, id: number): Promise<any> {
+    console.log(editedReview, id);
+    let requestBody = {text: editedReview.text, rating: editedReview.rating, id: id};
+    return this.http.put("/api/reviews", requestBody, { headers: this.headers })
     .toPromise()
     .then(res => res)
     .catch(this.handleError);
@@ -34,6 +35,7 @@ export class EditReviewService {
   }
 
   private handleError(error: any): Promise<any> {
+    console.log('handleerror');
     return Promise.reject(error.message || error);
   }
 }
