@@ -15,5 +15,8 @@
       <label>Your review</label>
       <textarea class="form-control" placeholder="Tell people about your experience" cols="40" rows="5" [(ngModel)]="model.text" [ngModelOptions]="{standalone: true}"></textarea>
     </li>
+    <li>
+      <button class= "btn btn-danger" (click)="deleteReview()">Delete Review</button>
+    </li>
   </ul>
 </form>
