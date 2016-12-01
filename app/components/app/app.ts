@@ -28,8 +28,7 @@ export class App {
   public searchControl: FormControl;
   public lat: any = 37.7749295;    // set default lat for San Francisco
   public lng: any = -122.4194155;  // set default lng for San Francisco
-  public cityState: string = "San Jose, CA";
-  public userCityFound: boolean = false;
+  public cityState: string = "finding your city...";
 
   @ViewChild("search")
   public searchElementRef: ElementRef;
@@ -85,15 +84,11 @@ export class App {
 
   private setCurrentPosition() {
     if ("geolocation" in navigator) {
-      this.cityState = "finding your city...";
       navigator.geolocation.getCurrentPosition((position) => {
-        this.userCityFound = true;
         this.lat = position.coords.latitude;
         this.lng = position.coords.longitude;
 
         // The rest of the code in this block translates lat/lng to city, state
-        this.cityState = "";
-
         const url = `http://maps.googleapis.com/maps/api/geocode/json?latlng=${this.lat},${this.lng}&sensor=true`;
         this.appService.getCityState(url)
           .then(response => {
@@ -112,10 +107,12 @@ export class App {
               });
             });
           });
-      });
-      if (!this.userCityFound) {
+      }, (error) => {
         this.cityState = "San Francisco, CA";
-      }
+      });
+      // if (!this.userCityFound) {
+      //   this.cityState = "San Francisco, CA";
+      // }
     }
   }
 }
