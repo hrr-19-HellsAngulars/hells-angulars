@@ -1,6 +1,7 @@
 import { Injectable }    from "@angular/core";
 
-import { NgbModal, ModalDismissReasons, NgbModalRef } from "@ng-bootstrap/ng-bootstrap";
+import { NgbModal, ModalDismissReasons,
+ NgbModalRef }           from "@ng-bootstrap/ng-bootstrap";
 
 @Injectable()
 export class AddModalService {

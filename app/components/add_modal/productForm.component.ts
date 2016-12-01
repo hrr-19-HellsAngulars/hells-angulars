@@ -1,20 +1,19 @@
-import {
-  Component, OnInit, ViewChild, Output, EventEmitter, ElementRef,
-}                                        from "@angular/core";
+import { amazonS3Config }                from "../../auth/amazonS3.config";
+import { Component, OnInit, ViewChild, Output,
+  EventEmitter, ElementRef }             from "@angular/core";
 import { FormControl }                   from "@angular/forms";
 import { MapsAPILoader }                 from "angular2-google-maps/core";
 
-import { NewProduct }        from "./newProduct";
-import { NewProductService } from "./newProduct.service";
+import { NewProduct }                    from "./newProduct";
+import { NewProductService }             from "./newProduct.service";
 
-import { amazonS3Config } from "../../auth/amazonS3.config";
 declare const AWS: any;
 
 @Component({
   moduleId: module.id,
   selector: "newprod-form",
   templateUrl: "newProd-form.component.html",
-  styleUrls: ["newProd-form.css"],
+  styleUrls: [ "newProd-form.css" ],
 })
 
 export class NewProductForm {
@@ -96,9 +95,6 @@ export class NewProductForm {
     // create search FormControl
     this.searchControl = new FormControl();
 
-    // //set current position
-    // this.setCurrentPosition();
-
     // load Places Autocomplete
     this.mapsAPILoader.load().then(() => {
       let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {
@@ -115,14 +111,4 @@ export class NewProductForm {
       });
     });
   }
-
-  // private setCurrentPosition() {
-  //   if ("geolocation" in navigator) {
-  //     navigator.geolocation.getCurrentPosition((position) => {
-  //       this.latitude = position.coords.latitude;
-  //       this.longitude = position.coords.longitude;
-  //       this.zoom = 12;
-  //     });
-  //   }
-  // }
 }
