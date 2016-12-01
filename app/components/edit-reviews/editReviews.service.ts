@@ -16,7 +16,6 @@ export class EditReviewService {
 
   // edits  a review in the database
   public updateReview(editedReview: EditedReview, id: number): Promise<any> {
-    console.log(editedReview, id);
     let requestBody = {text: editedReview.text, rating: editedReview.rating, id: id};
     return this.http.put("/api/reviews", requestBody, { headers: this.headers })
     .toPromise()
@@ -25,7 +24,6 @@ export class EditReviewService {
   }
 
   public deleteReview(id: number): Promise<any> {
-    console.log("lets begin");
     let url = "/api/reviews/" + id;
     let requestBody = {id: id};
     return this.http.post(url, requestBody, { headers: this.headers })
@@ -35,7 +33,7 @@ export class EditReviewService {
   }
 
   private handleError(error: any): Promise<any> {
-    console.log("handleerror");
+    console.log("handle error");
     return Promise.reject(error.message || error);
   }
 }
