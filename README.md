@@ -18,7 +18,17 @@
 
 ## Usage
 
+Users of Gear Box are able to both post items for rent and rent items for others. An account with Stripe is required to receive payments from completed transactions. Gear Box accounts can be linked via social profiles or created originally via the sign up form. Default search location for products is picked up through location on the browser and can be changed anytime with the top navigation bar. Contribute to the Gear Box community by leaving feedback for other users and products so others know what to expect when renting a product!
+
 ## Requirements
+
+Angular2 2.1.1
+Auth0 Lock 10.6.1
+Express 4.14.0
+Node 6.8.0
+PostgreSQL 6.1.0
+UI Router-ng2 1.0.0-beta.3
+TypeScript 2.0.10
 
 ## Development
 
