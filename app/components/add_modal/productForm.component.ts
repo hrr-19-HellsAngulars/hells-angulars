@@ -53,7 +53,7 @@ export class NewProductForm {
       if (pic !== undefined) {
         let params = {Key: pic.name, Body: pic};
         bucket.upload(params, function (error: any, result: any) {
-          if (error) { console.log(error); };
+          if (error) { console.error(error); };
           let thisImageLink: any = "imageLink" + index;
           context.model[thisImageLink] = result.Location;
         });
@@ -87,7 +87,7 @@ export class NewProductForm {
           this.close.emit();
         })
         .catch(error => {
-          console.log(error);
+          console.error(error);
         });
   };
 

@@ -33,7 +33,7 @@ export class EditReviewService {
   }
 
   private handleError(error: any): Promise<any> {
-    console.log("handle error");
+    console.error(error);
     return Promise.reject(error.message || error);
   }
 }

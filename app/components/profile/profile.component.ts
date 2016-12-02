@@ -45,7 +45,7 @@ export class ProfileComponent implements OnInit {
         this.getUserRentals(this.user.id);
         this.getUserTransactions(this.user.id);
       })
-      .catch(err => console.log(err));
+      .catch(err => console.error(err));
   }
 
   public getUserProducts(userId: number) {
@@ -55,7 +55,7 @@ export class ProfileComponent implements OnInit {
         const products = JSON.parse(response._body);
         this.products = products;
       })
-      .catch(err => console.log(err));
+      .catch(err => console.error(err));
   }
 
   public getUserTransactions(userId: number) {
@@ -69,7 +69,7 @@ export class ProfileComponent implements OnInit {
         });
         this.getAvailableFunds();
       })
-      .catch(err => console.log(err));
+      .catch(err => console.error(err));
   }
 
   public getUserRentals(userId: number) {
@@ -79,7 +79,7 @@ export class ProfileComponent implements OnInit {
         const rentals = JSON.parse(response._body);
         this.rentals = rentals;
       })
-      .catch(err => console.log(err));
+      .catch(err => console.error(err));
   }
 
   public getAvailableFunds() {
@@ -103,7 +103,6 @@ export class ProfileComponent implements OnInit {
     let context = this;
     this.profileService.closeTransaction(id)
       .then(response => {
-        console.log(response);
         context.getUserTransactions(context.user.id);
       });
   }

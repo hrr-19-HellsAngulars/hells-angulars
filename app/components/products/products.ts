@@ -55,10 +55,6 @@ export class Products implements OnInit {
     config.readonly = true;
   }
 
-  public clickedMarker(label: string, index: number) {
-    console.log(`clicked the marker: ${label || index}`);
-  }
-
   public makeRange(start: any, end: any): String[] {
     function addDays(date: any, days: any) {
       let dat = new Date(date.valueOf());

@@ -5,6 +5,7 @@ var stripeAPI = require("../config/stripeConfig.js");
 var express = require('express');
 var app = express();
 
+
 var stripe = require("stripe")(stripeAPI.API_KEY);
 //deployment
 //var stripe = require("stripe")(process.env.stripeAPIKey);

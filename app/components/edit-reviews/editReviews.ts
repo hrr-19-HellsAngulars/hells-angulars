@@ -40,12 +40,10 @@ export class EditReviewForm {
     model.rating = this.selected;
     this.editReviewService.updateReview(model, this.review.id)
         .then(result => {
-          console.log("SO");
           this.close.emit();
-          console.log("FUN");
         })
         .catch(error => {
-          console.log(error);
+          console.error(error);
         });
   }
 
@@ -55,7 +53,7 @@ export class EditReviewForm {
           this.close.emit();
         })
         .catch(error => {
-          console.log(error);
+          console.error(error);
         });
   }
 
