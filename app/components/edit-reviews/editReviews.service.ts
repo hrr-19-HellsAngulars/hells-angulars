@@ -25,9 +25,9 @@ export class EditReviewService {
   }
 
   public deleteReview(id: number): Promise<any> {
-    console.log('lets begin');
+    console.log("lets begin");
     let url = "/api/reviews/" + id;
-    let requestBody = {id: id}
+    let requestBody = {id: id};
     return this.http.post(url, requestBody, { headers: this.headers })
     .toPromise()
     .then(res => res)
@@ -35,7 +35,7 @@ export class EditReviewService {
   }
 
   private handleError(error: any): Promise<any> {
-    console.log('handleerror');
+    console.log("handleerror");
     return Promise.reject(error.message || error);
   }
 }

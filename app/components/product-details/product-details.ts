@@ -143,6 +143,7 @@ export class ProductDetails implements OnInit {
           return prev + acc.rating;
         }, 0);
         this.averageRating =  +total / reviews.length;
+        console.log(this.reviews);
       })
       .catch(err => console.log(err));
   }
@@ -199,7 +200,7 @@ export class ProductDetails implements OnInit {
 
   public onSelectReview(review: any) {
     this.selectedReview = review;
-    console.log('reviews', this.reviews);
+    console.log("reviews", this.reviews);
     console.log("product-details selectedReview", this.selectedReview);
   }
 

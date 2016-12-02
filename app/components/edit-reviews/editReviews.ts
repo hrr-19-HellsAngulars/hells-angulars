@@ -33,24 +33,30 @@ export class EditReviewForm {
   }
 
   public ngOnInit(): void {
-    this.model.text = this.review.text
+    this.model.text = this.review.text;
   }
 
   public onSubmit(model: EditedReview) {
     model.rating = this.selected;
     this.editReviewService.updateReview(model, this.review.id)
         .then(result => {
-          console.log('SO');
+          console.log("SO");
           this.close.emit();
-          console.log('FUN');
+          console.log("FUN");
         })
         .catch(error => {
           console.log(error);
         });
   }
 
-  public deleteReview(){
-    this.editReviewService.deleteReview(this.review.id);
+  public deleteReview() {
+    this.editReviewService.deleteReview(this.review.id)
+        .then(result => {
+          this.close.emit();
+        })
+        .catch(error => {
+          console.log(error);
+        });
   }
 
 }

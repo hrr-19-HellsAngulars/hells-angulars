@@ -95,6 +95,7 @@
     <editreview-form #editReview (close)="close()" [userId]="user.id" [review]="selectedReview"></editreview-form>
   </div>
   <div class="modal-footer">
+    <button type="button" class="btn btn-danger pull-left" (click)="editReview.deleteReview()">Delete Review</button>
     <button type="button" class="btn btn-primary" (click)="c('Close click')">Close</button>
     <button type="button" class="btn btn-primary" (click)="editReview.onSubmit(editReview.model)">Submit</button>
   </div>
