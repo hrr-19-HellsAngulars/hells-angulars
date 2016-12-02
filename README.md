@@ -22,13 +22,13 @@ Users of Gear Box are able to both post items for rent and rent items for others
 
 ## Requirements
 
-Angular2 2.1.1
-Auth0 Lock 10.6.1
-Express 4.14.0
-Node 6.8.0
-PostgreSQL 6.1.0
-UI Router-ng2 1.0.0-beta.3
-TypeScript 2.0.10
+* Angular2 2.1.1
+* Auth0 Lock 10.6.1
+* Express 4.14.0
+* Node 6.8.0
+* PostgreSQL 6.1.0
+* UI Router-ng2 1.0.0-beta.3
+* TypeScript 2.0.10
 
 ## Development
 
