@@ -1,13 +1,13 @@
 <div class="page-wrap">
   <nav class="navbar nav-inline">
-    <img src="../../../assets/gearbox_v1.png" class="logo float-xs-left"/>
+    <img src="../../../assets/gearbox_v1.png" class="navbar-brand float-xs-left"/>
     <a class="navbar-brand gearbox" href="#">
-      GEAR BOX
+      <h3>GEAR BOX</h3>
     </a>
     <form class="form-inline float-xs-left" #form="ngForm">
       <input type="text" class="left-nav form-control" placeholder="Dig in the Gear Box..." ngModel name="keyword">
-      <input type="text" #search class="left-nav form-control" placeholder="San Francisco, CA">
-      <a class="left-nav" uiSref="products-search" ui-sref-opts="{reload: true}" (click)="onSearch(form); form.reset()"><i class="fa fa-search fa-lg"></i></a>
+      <input type="text" #search class="left-nav form-control" placeholder="{{cityState}}" onclick="this.select()">
+      <a class="left-nav" uiSref="products-search" [uiOptions]="{reload: true}" (click)="onSearch(form); form.reset()"><i class="fa fa-search fa-lg"></i></a>
     </form>
     <div class="float-xs-right">
       <ul class = "nav navbar-nav">
@@ -27,7 +27,7 @@
           <a class="nav-link" (click)="auth.login()" *ngIf="!auth.authenticated()"><i class="fa fa-sign-in" aria-hidden="true"></i> Log In</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link"  (click)="auth.logout()" *ngIf="auth.authenticated()"><i class="fa fa-sign-out" aria-hidden="true"></i> Log Out</a>
+          <a class="nav-link"  uiSref="home" (click)="auth.logout()" *ngIf="auth.authenticated()"><i class="fa fa-sign-out" aria-hidden="true"></i> Log Out</a>
         </li>
       </ul>
     </div>

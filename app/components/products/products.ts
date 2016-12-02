@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewChild, ElementRef, Input }   from "@angular/core";
+import { Component, OnInit, ViewChild,
+  ElementRef, Input }          from "@angular/core";
 import { FormControl }         from "@angular/forms";
 import { MapsAPILoader }       from "angular2-google-maps/core";
 import { NgbRatingConfig }     from "@ng-bootstrap/ng-bootstrap";
@@ -15,17 +16,17 @@ import * as moment             from "moment";
 })
 
 export class Products implements OnInit {
-  public products: Array<any> = [];
+  public allProducts: Array<any>;
   public markers: Array<any>;
+  public maxPrice: string = "500";
+  public minPrice: string = "0";
   public latitude: number = 39.8282;
   public longitude: number = -98.5795;
-  public zoom: number = 10;
-  public searchControl: FormControl;
-  public allProducts: Array<any>;
-  public minPrice: string = "0";
-  public maxPrice: string = "500";
+  public products: Array<any> = [];
   public searchCategoryId: string = "";
+  public searchControl: FormControl;
   public searchRadius: number = 50; // miles
+  public zoom: number = 10;
   @Input()
   public availableFrom: any = {
     year: new Date().getFullYear(),
@@ -46,15 +47,15 @@ export class Products implements OnInit {
 
   constructor(
     public activeTransactions: Array<any>,
+    private config: NgbRatingConfig,
     private mapsAPILoader: MapsAPILoader,
     private productsService: ProductsService,
-    private config: NgbRatingConfig
   ) {
     config.max = 5;
     config.readonly = true;
   }
 
-  clickedMarker(label: string, index: number) {
+  public clickedMarker(label: string, index: number) {
     console.log(`clicked the marker: ${label || index}`);
   }
 
@@ -86,8 +87,6 @@ export class Products implements OnInit {
           let activeTransactions: Array<any> = [];
           // an array of all active transactions
           this.activeTransactions = transactions.slice();
-          console.log("this.activeTransactions");
-          console.log(this.activeTransactions);
         });
   }
 
@@ -95,8 +94,6 @@ export class Products implements OnInit {
     let from = this.convertObjToDate(this.availableFrom);
     let to = this.convertObjToDate(this.availableTo);
     let userRange = this.makeRange(from, to);
-    console.log("userRange");
-    console.log(userRange);
     this.activeProducts = [];
     for (let i = 0; i < this.activeTransactions.length; i++) {
       let bookedfrom = this.activeTransactions[i].bookedfrom.substr(0, 10);
@@ -139,7 +136,6 @@ export class Products implements OnInit {
           }
           this.products = productsWithRows;
           this.markers = allProducts;
-          this.refineSearch();
         });
   }
 
@@ -147,15 +143,9 @@ export class Products implements OnInit {
     this.getActiveProducts();
     let from = this.convertObjToDate(this.availableFrom);
     let to = this.convertObjToDate(this.availableTo);
-    console.log("vv availables vv");
-    console.log(from, to);
     this.products = this.allProducts;
     let context = this;
     let products = this.products.filter(function(product: any) {
-      console.log("product");
-      console.log(context.activeProducts.includes(product.id));
-      console.log("this.activeProducts");
-      console.log(context.activeProducts);
       return (
         product.priceperday >= parseInt(context.minPrice, 10)
         && product.priceperday <= parseInt(context.maxPrice, 10)

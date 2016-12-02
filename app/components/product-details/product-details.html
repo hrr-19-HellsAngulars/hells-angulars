@@ -71,9 +71,34 @@
         <br>
         <p class="primary card-text">{{review.text}}</p>
       </div>
+      <!-- <div *ngIf="{{user.id}} === {{review.author_id}}"> -->
+      <div *ngIf="user">
+        <div *ngIf="user.id === review.author_id">
+          <button class= "btn btn-primary col-xs-12" (click)="open(editReview)" (click)="onSelectReview(review)">Edit Review</button>
+        </div>
+      </div>
     </div>
     <hr>
   </div>
 </div>
+
+<!-- Edit Reviews Modal -->
+
+<template #editReview ngbModalContainer let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <h4 class="modal-title">Edit Review Below</h4>
+  </div>
+  <div class="modal-body">
+    <editreview-form #editReview (close)="close()" [userId]="user.id" [review]="selectedReview"></editreview-form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-danger pull-left" (click)="editReview.deleteReview()">Delete Review</button>
+    <button type="button" class="btn btn-primary" (click)="c('Close click')">Close</button>
+    <button type="button" class="btn btn-primary" (click)="editReview.onSubmit(editReview.model)">Submit</button>
+  </div>
+</template>
 
 

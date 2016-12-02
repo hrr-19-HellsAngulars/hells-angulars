@@ -17,11 +17,11 @@ export class Auth {
   public lock = new Auth0Lock(myConfig.clientID, myConfig.domain, {
     additionalSignUpFields: [
       {
-        name: "firstname",                              // required
+        name: "firstname", // required
         placeholder: "enter your first name",
       },
       {
-        name: "lastname",                              // required
+        name: "lastname",  // required
         placeholder: "enter your last name",
       },
     ],
@@ -66,6 +66,7 @@ export class Auth {
   };
 
   public findOrCreateUser(profile) {
+    // creates a user if they are not found
    return this.http.post("api/users", profile, {headers: this.headers})
     .map(res => res)
     .subscribe(
@@ -83,6 +84,7 @@ export class Auth {
     localStorage.removeItem("id_token");
     localStorage.removeItem("profile");
     this.userProfile = undefined;
+
   };
 
 }

@@ -1,6 +1,7 @@
 /* tslint:disable:no-string-literal */
-import { Auth }                     from "../../auth/auth.service";
 import { ActivatedRoute }           from "@angular/router";
+import { AddModalService }          from "../add_modal/addModal.service";
+import { Auth }                     from "../../auth/auth.service";
 import { Component, Input, OnInit } from "@angular/core";
 import { NgbRatingConfig }          from "@ng-bootstrap/ng-bootstrap";
 import { stripeConfig }             from "../../stripe/stripe.config";
@@ -8,6 +9,7 @@ import { ProductDetailsService }    from "./product-details.service";
 import { UIROUTER_DIRECTIVES }      from "ui-router-ng2";
 import { UIRouter }                 from "ui-router-ng2";
 import { DaterangepickerConfig }    from "./daterangepicker/index";
+import { ProfileService }           from "../profile/profile.service";
 
 import * as moment from "moment";
 
@@ -25,16 +27,21 @@ export class ProductDetails implements OnInit {
 
   @Input() public selectedPic: String;
 
-  public fromDate: any;
-  public toDate: any;
-  public prodId: any;
-  public invalidDays: Array<any>;
-  public formattedDays: Array<any> = [];
-  public context: any = this;
+  public selectedReview: any;
+  public selectedTransaction: any;
+  public user: any;
+  public userId: any;
 
-  private reviews: Array<any>;
-  private numberOfReviews: Number;
+  public context: any = this;
+  public formattedDays: Array<any> = [];
+  public fromDate: any;
+  public invalidDays: Array<any>;
+  public prodId: any;
+  public toDate: any;
+
   private averageRating: Number;
+  private numberOfReviews: Number;
+  private reviews: Array<any>;
 
   // private oldFromDate: any = undefined;
   // private oldToDate: any = undefined;
@@ -49,6 +56,8 @@ export class ProductDetails implements OnInit {
     private productDetailsService: ProductDetailsService,
     private uiRouter: UIRouter,
     private drpOptions: DaterangepickerConfig,
+    private profileService: ProfileService,
+    private addModalService: AddModalService
   ) {
     // get invalid dates from transaction table
     this.prodId = this.uiRouter.globals.params["productId"];
@@ -95,6 +104,14 @@ export class ProductDetails implements OnInit {
     };
   }
 
+  public ngOnInit() {
+    this.product = this.product[0];
+    this.selectedPic = this.product.url[0];
+    this.getReviews(this.product.id);
+    this.getUserIdFromProfile();
+    // this.getUserInfo();
+  }
+
 // Product Details Methods
 
   public selectedDate(value: any) {
@@ -109,12 +126,6 @@ export class ProductDetails implements OnInit {
     let days = Math.round(differenceMs / oneDay);
     this.daysBetween = days;
     this.totalAmount = days * this.product.priceperday;
-  }
-
-  public ngOnInit() {
-    this.product = this.product[0];
-    this.selectedPic = this.product.url[0];
-    this.getReviews(this.product.id);
   }
 
   public onSelect(n: number) {
@@ -132,7 +143,6 @@ export class ProductDetails implements OnInit {
           return prev + acc.rating;
         }, 0);
         this.averageRating =  +total / reviews.length;
-
         console.log(this.reviews);
       })
       .catch(err => console.log(err));
@@ -167,5 +177,39 @@ export class ProductDetails implements OnInit {
   public convertObjToDate(obj: any) {
     let date = obj.year + "-" + obj.month + "-" + obj.day;
     return new Date(date);
+  }
+
+  public getUserIdFromProfile() {
+    if (localStorage.getItem("profile")) {
+      this.userId = JSON.parse(localStorage.getItem("profile")).user_id;
+      this.getUserInfo();
+    } else {
+      return;
+    }
+  }
+
+  public getUserInfo() {
+    console.log(this.userId);
+    this.profileService
+      .getUserInfo(this.userId)
+      .then(response => {
+        const user = JSON.parse(response._body);
+        this.user = user;
+        console.log(user);
+      })
+      .catch(err => console.log(err));
+  }
+
+  public open(content: any) {
+    this.addModalService.open(content);
+  }
+
+  public onSelectReview(review: any) {
+    this.selectedReview = review;
+  }
+
+  public close() {
+    this.addModalService.close();
+    this.getReviews(this.product.id);
   }
 }

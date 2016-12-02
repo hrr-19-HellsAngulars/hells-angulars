@@ -1,20 +1,19 @@
-import {
-  Component, OnInit, ViewChild, Output, EventEmitter, ElementRef,
-}                                        from "@angular/core";
+import { amazonS3Config }                from "../../auth/amazonS3.config";
+import { Component, OnInit, ViewChild, Output,
+  EventEmitter, ElementRef }             from "@angular/core";
 import { FormControl }                   from "@angular/forms";
 import { MapsAPILoader }                 from "angular2-google-maps/core";
 
-import { NewProduct }        from "./newProduct";
-import { NewProductService } from "./newProduct.service";
+import { NewProduct }                    from "./newProduct";
+import { NewProductService }             from "./newProduct.service";
 
-import { amazonS3Config } from "../../auth/amazonS3.config";
 declare const AWS: any;
 
 @Component({
   moduleId: module.id,
   selector: "newprod-form",
   templateUrl: "newProd-form.component.html",
-  styleUrls: ["newProd-form.css"],
+  styleUrls: [ "newProd-form.css" ],
 })
 
 export class NewProductForm {
@@ -50,7 +49,6 @@ export class NewProductForm {
     AWSService.config.accessKeyId = amazonS3Config.accessKeyId;
     AWSService.config.secretAccessKey = amazonS3Config.secretAccessKey;
     let bucket = new AWSService.S3({params: {Bucket: "gear-box"}});
-    console.log(pictures);
     pictures.forEach((pic: any, index: number) => {
       if (pic !== undefined) {
         let params = {Key: pic.name, Body: pic};
@@ -83,20 +81,6 @@ export class NewProductForm {
       });
     });
 
-    // for (const i = 0; i < this.place.address_components.length; i++) {
-    //   for (const j = 0; j < this.place.address_components[i].types.length; j++) {
-    //     if (this.place.address_components[i].types[j] === "locality") {
-    //       model.city = this.place.address_components[i].long_name;
-    //     }
-    //     if (this.place.address_components[i].types[j] === "administrative_area_level_1") {
-    //       model.state = this.place.address_components[i].short_name;
-    //     }
-    //     if (this.place.address_components[i].types[j] === "postal_code") {
-    //       model.zip = this.place.address_components[i].long_name;
-    //     }
-    //   }
-    // }
-
     model.userId = JSON.parse(localStorage.getItem("profile")).user_id;
     this.newProductService.postProduct(model)
         .then(result => {
@@ -111,9 +95,6 @@ export class NewProductForm {
     // create search FormControl
     this.searchControl = new FormControl();
 
-    // //set current position
-    // this.setCurrentPosition();
-
     // load Places Autocomplete
     this.mapsAPILoader.load().then(() => {
       let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {
@@ -123,7 +104,6 @@ export class NewProductForm {
         // get the place result
         let place: google.maps.places.PlaceResult = autocomplete.getPlace();
         this.place = place;
-        console.log(place);
 
         // set latitude and longitude
         this.latitude = place.geometry.location.lat();
@@ -131,14 +111,4 @@ export class NewProductForm {
       });
     });
   }
-
-  // private setCurrentPosition() {
-  //   if ("geolocation" in navigator) {
-  //     navigator.geolocation.getCurrentPosition((position) => {
-  //       this.latitude = position.coords.latitude;
-  //       this.longitude = position.coords.longitude;
-  //       this.zoom = 12;
-  //     });
-  //   }
-  // }
 }

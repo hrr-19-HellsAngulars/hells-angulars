@@ -37,11 +37,14 @@ module.exports = function(app, express) {
   // app.get('/api/products/images/:id', productController.getImages);
   app.post('/api/products', productController.createProduct);
   app.put('/api/products/:id', productController.updateProduct);
+  // app.delete('/api/products/:id', productController.deleteProduct);
 
   //Review routes
   // app.get('/api/reviews', productController.getReviews);
   app.get('/api/reviews/:id', productController.getReviewByProductId);
   app.post('/api/reviews', productController.createReview);
+  app.post('/api/reviews/:id', productController.deleteReview);
+  app.put('/api/reviews', productController.updateReview);
 
   //Transaction routes
   app.get('/api/transactions/seller/:id', transactionController.getTransactionsBySellerId);
