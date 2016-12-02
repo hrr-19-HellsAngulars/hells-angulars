@@ -1,14 +1,16 @@
+import { AddModalService }     from "../add_modal/addModal.service";
 import { AppService }          from "./app.service";
 import { Auth }                from "../../auth/auth.service";
-import { Component, OnInit, ViewChild, ElementRef }   from "@angular/core";
-import { FormGroup, FormControl }           from "@angular/forms";
 import { MapsAPILoader }       from "angular2-google-maps/core";
-
-import { AddModalService }     from "../add_modal/addModal.service";
 import { ProductsService }     from "../products/products.service";
 import { UIROUTER_DIRECTIVES } from "ui-router-ng2";
-
-import { NgbModal, ModalDismissReasons, NgbModalRef } from "@ng-bootstrap/ng-bootstrap";
+import { NgbModal,
+  ModalDismissReasons,
+  NgbModalRef }                from "@ng-bootstrap/ng-bootstrap";
+import { Component, OnInit,
+  ViewChild, ElementRef }      from "@angular/core";
+import { FormGroup,
+  FormControl }                from "@angular/forms";
 
 @Component({
   moduleId: module.id,

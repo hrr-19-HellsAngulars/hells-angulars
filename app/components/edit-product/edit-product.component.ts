@@ -1,10 +1,9 @@
-import { Component, ElementRef, EventEmitter,
-         Input, OnInit, Output, ViewChild } from "@angular/core";
-import { MapsAPILoader } from "angular2-google-maps/core";
-import { FormControl } from "@angular/forms";
-
-import { NewProduct } from "../add_modal/newProduct";
+import { Component, ElementRef, EventEmitter, Input,
+  OnInit, Output, ViewChild } from "@angular/core";
 import { EditProductService } from "./edit-product.service";
+import { FormControl }        from "@angular/forms";
+import { MapsAPILoader }      from "angular2-google-maps/core";
+import { NewProduct }         from "../add_modal/newProduct";
 
 @Component({
   moduleId: module.id,
@@ -20,16 +19,16 @@ export class EditProductForm {
 
   public addressChanged: boolean = false;
   public categories = [ "Backpacking", "Bike", "Surf", "Snowboard", "Ski", "SUP", "Kayak" ];
-  public searchControl: FormControl;
+  public city: string;
   public cityState: string = "";
   public lat: number;
   public lng: number;
-  public city: string;
+  public model = new NewProduct();
+  public place: any;
+  public searchControl: FormControl;
+  public selectedCat: any;
   public state: string;
   public zip: number;
-  public place: any;
-  public model = new NewProduct();
-  public selectedCat: any;
 
   @ViewChild("search")
   public searchElementRef: ElementRef;
@@ -86,19 +85,19 @@ export class EditProductForm {
       });
     });
 
-    this.model.id = this.product.id;
-    this.model.productName = this.product.productname;
-    this.model.productDescription = this.product.description;
-    this.model.pricePerDay = this.product.priceperday;
+    this.cityState = this.product.city + ", " + this.product.state;
     this.model.categoryId = this.product.category_id;
-    this.selectedCat = this.categories[this.model.categoryId - 1];
+    this.model.city = this.product.city;
+    this.model.id = this.product.id;
     this.model.lat = this.product.lat;
     this.model.lng = this.product.lng;
-    this.model.city = this.product.city;
+    this.model.pricePerDay = this.product.priceperday;
+    this.model.productName = this.product.productname;
+    this.model.productDescription = this.product.description;
     this.model.state = this.product.state;
-    this.cityState = this.product.city + ", " + this.product.state;
-    this.model.zip = this.product.zip;
     this.model.userId = this.product.owner_id;
+    this.model.zip = this.product.zip;
+    this.selectedCat = this.categories[this.model.categoryId - 1];
   }
   public selectChange(event: any) {
     this.model.categoryId = this.categories.indexOf(event.target.value) + 1;

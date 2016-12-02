@@ -1,5 +1,6 @@
-import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
-import { FormControl } from "@angular/forms";
+import { Component, OnInit, ViewChild,
+  ElementRef }           from "@angular/core";
+import { FormControl }   from "@angular/forms";
 import { MapsAPILoader } from "angular2-google-maps/core";
 
 @Component({
@@ -22,13 +23,13 @@ export class Google {
 
   constructor(
     private mapsAPILoader: MapsAPILoader
-  ) {}
+  ) { }
 
   ngOnInit() {
     // set google maps defaults
-    this.zoom = 4;
     this.latitude = 39.8282;
     this.longitude = -98.5795;
+    this.zoom = 4;
 
     // create search FormControl
     this.searchControl = new FormControl();
@@ -44,7 +45,6 @@ export class Google {
       autocomplete.addListener("place_changed", () => {
         // get the place result
         let place: google.maps.places.PlaceResult = autocomplete.getPlace();
-        console.log(place);
         // set latitude and longitude
         this.latitude = place.geometry.location.lat();
         this.longitude = place.geometry.location.lng();

@@ -1,9 +1,8 @@
-import { Injectable } from "@angular/core";
+import { Data }          from "../../data/dummydata";
 import { Http, Headers } from "@angular/http";
+import { Injectable }    from "@angular/core";
 
 import "rxjs/add/operator/toPromise";
-
-import { Data } from "../../data/dummydata";
 
 @Injectable()
 

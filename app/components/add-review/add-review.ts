@@ -25,7 +25,7 @@ export class AddReviewForm {
   public model = new NewReview();
 
   constructor(
-    private addReivewService: AddReviewService,
+    private addReviewService: AddReviewService,
     private config: NgbRatingConfig,
   ) {
     config.max = 5;
@@ -39,7 +39,7 @@ export class AddReviewForm {
     model.buyerId = this.transaction.buyer_id;
     model.sellerId = this.transaction.seller_id;
     model.rating = this.selected;
-    this.addReivewService.addReivew(model)
+    this.addReviewService.addReview(model)
         .then(result => {
           this.close.emit();
         })

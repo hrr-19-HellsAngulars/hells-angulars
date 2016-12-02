@@ -1,6 +1,6 @@
 import { Headers, Http } from "@angular/http";
 import { Injectable }    from "@angular/core";
-import { NewReview }    from "./newReview";
+import { NewReview }     from "./newReview";
 
 import "rxjs/add/operator/toPromise";
 
@@ -15,7 +15,7 @@ export class AddReviewService {
   constructor(private http: Http) { }
 
   // adds a review to the database
-  public addReivew(newReview: NewReview): Promise<any> {
+  public addReview(newReview: NewReview): Promise<any> {
     return this.http.post("/api/reviews", newReview, { headers: this.headers })
     .toPromise()
     .then(res => res)

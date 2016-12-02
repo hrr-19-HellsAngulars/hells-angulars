@@ -30,11 +30,11 @@ export class ProfileComponent implements OnInit {
     private addModalService: AddModalService
   ) { }
 
-  getUserIdFromProfile() {
+  public getUserIdFromProfile() {
     this.userId = JSON.parse(localStorage.getItem("profile")).user_id;
   }
 
-  getUserInfo() {
+  public getUserInfo() {
     this.profileService
       .getUserInfo(this.userId)
       .then(response => {
@@ -48,7 +48,7 @@ export class ProfileComponent implements OnInit {
       .catch(err => console.log(err));
   }
 
-  getUserProducts(userId: number) {
+  public getUserProducts(userId: number) {
     this.profileService
       .getUserProducts(userId)
       .then(response => {
@@ -58,7 +58,7 @@ export class ProfileComponent implements OnInit {
       .catch(err => console.log(err));
   }
 
-  getUserTransactions(userId: number) {
+  public getUserTransactions(userId: number) {
     this.profileService
       .getUserTransactions(userId)
       .then(response => {
@@ -72,7 +72,7 @@ export class ProfileComponent implements OnInit {
       .catch(err => console.log(err));
   }
 
-  getUserRentals(userId: number) {
+  public getUserRentals(userId: number) {
     this.profileService
       .getUserRentals(userId)
       .then(response => {
@@ -82,7 +82,7 @@ export class ProfileComponent implements OnInit {
       .catch(err => console.log(err));
   }
 
-  getAvailableFunds() {
+  public getAvailableFunds() {
     let funds = 0;
     this.completedTransactions.forEach(transaction => {
       funds += +transaction.totalvalue;
@@ -90,16 +90,16 @@ export class ProfileComponent implements OnInit {
     this.availableFunds = funds;
   }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.getUserIdFromProfile();
     this.getUserInfo();
   }
 
-  onSelect(rental: any) {
+  public onSelect(rental: any) {
     this.selectedTransaction = rental;
   }
 
-  closeTransaction(id: number) {
+  public closeTransaction(id: number) {
     let context = this;
     this.profileService.closeTransaction(id)
       .then(response => {
@@ -108,7 +108,7 @@ export class ProfileComponent implements OnInit {
       });
   }
 
-  onSelectProduct(product: any) {
+  public onSelectProduct(product: any) {
     this.selectedProduct = product;
   }
 

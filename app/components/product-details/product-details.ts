@@ -1,6 +1,7 @@
 /* tslint:disable:no-string-literal */
-import { Auth }                     from "../../auth/auth.service";
 import { ActivatedRoute }           from "@angular/router";
+import { AddModalService }          from "../add_modal/addModal.service";
+import { Auth }                     from "../../auth/auth.service";
 import { Component, Input, OnInit } from "@angular/core";
 import { NgbRatingConfig }          from "@ng-bootstrap/ng-bootstrap";
 import { stripeConfig }             from "../../stripe/stripe.config";
@@ -9,7 +10,6 @@ import { UIROUTER_DIRECTIVES }      from "ui-router-ng2";
 import { UIRouter }                 from "ui-router-ng2";
 import { DaterangepickerConfig }    from "./daterangepicker/index";
 import { ProfileService }           from "../profile/profile.service";
-import { AddModalService }          from "../add_modal/addModal.service";
 
 import * as moment from "moment";
 
@@ -27,21 +27,21 @@ export class ProductDetails implements OnInit {
 
   @Input() public selectedPic: String;
 
-  public user: any;
-  public userId: any;
   public selectedReview: any;
   public selectedTransaction: any;
+  public user: any;
+  public userId: any;
 
-  public fromDate: any;
-  public toDate: any;
-  public prodId: any;
-  public invalidDays: Array<any>;
-  public formattedDays: Array<any> = [];
   public context: any = this;
+  public formattedDays: Array<any> = [];
+  public fromDate: any;
+  public invalidDays: Array<any>;
+  public prodId: any;
+  public toDate: any;
 
-  private reviews: Array<any>;
-  private numberOfReviews: Number;
   private averageRating: Number;
+  private numberOfReviews: Number;
+  private reviews: Array<any>;
 
   // private oldFromDate: any = undefined;
   // private oldToDate: any = undefined;
@@ -180,7 +180,7 @@ export class ProductDetails implements OnInit {
   }
 
   public getUserIdFromProfile() {
-    if(localStorage.getItem("profile")){
+    if (localStorage.getItem("profile")) {
       this.userId = JSON.parse(localStorage.getItem("profile")).user_id;
       this.getUserInfo();
     } else {
@@ -206,8 +206,6 @@ export class ProductDetails implements OnInit {
 
   public onSelectReview(review: any) {
     this.selectedReview = review;
-    console.log("reviews", this.reviews);
-    console.log("product-details selectedReview", this.selectedReview);
   }
 
   public close() {
