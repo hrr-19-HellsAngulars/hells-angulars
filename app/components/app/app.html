@@ -27,7 +27,7 @@
           <a class="nav-link" (click)="auth.login()" *ngIf="!auth.authenticated()"><i class="fa fa-sign-in" aria-hidden="true"></i> Log In</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link"  (click)="auth.logout()" *ngIf="auth.authenticated()"><i class="fa fa-sign-out" aria-hidden="true"></i> Log Out</a>
+          <a class="nav-link"  uiSref="home" (click)="auth.logout()" *ngIf="auth.authenticated()"><i class="fa fa-sign-out" aria-hidden="true"></i> Log Out</a>
         </li>
       </ul>
     </div>

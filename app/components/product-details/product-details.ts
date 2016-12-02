@@ -104,6 +104,14 @@ export class ProductDetails implements OnInit {
     };
   }
 
+  public ngOnInit() {
+    this.product = this.product[0];
+    this.selectedPic = this.product.url[0];
+    this.getReviews(this.product.id);
+    this.getUserIdFromProfile();
+    // this.getUserInfo();
+  }
+
 // Product Details Methods
 
   public selectedDate(value: any) {
@@ -118,14 +126,6 @@ export class ProductDetails implements OnInit {
     let days = Math.round(differenceMs / oneDay);
     this.daysBetween = days;
     this.totalAmount = days * this.product.priceperday;
-  }
-
-  public ngOnInit() {
-    this.product = this.product[0];
-    this.selectedPic = this.product.url[0];
-    this.getReviews(this.product.id);
-    this.getUserIdFromProfile();
-    this.getUserInfo();
   }
 
   public onSelect(n: number) {
@@ -180,10 +180,16 @@ export class ProductDetails implements OnInit {
   }
 
   public getUserIdFromProfile() {
-    this.userId = JSON.parse(localStorage.getItem("profile")).user_id;
+    if(localStorage.getItem("profile")){
+      this.userId = JSON.parse(localStorage.getItem("profile")).user_id;
+      this.getUserInfo();
+    } else {
+      return;
+    }
   }
 
   public getUserInfo() {
+    console.log(this.userId);
     this.profileService
       .getUserInfo(this.userId)
       .then(response => {
