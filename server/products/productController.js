@@ -36,8 +36,8 @@ module.exports = {
     var minLat = parseFloat(req.query.lat) - 0.5 || 0;
     var maxLng = parseFloat(req.query.lng) + 0.5 || 360;
     var minLng = parseFloat(req.query.lng) - 0.5 || 0;
-
-    var queryStr = `SELECT products.id, products.category_id, products.owner_id, products.description, products.productname, products.priceperday, products.location, products.lat, products.lng, products.city, products.state, avg(reviews.rating) as AverageRating, images.url FROM products LEFT JOIN reviews ON products.id=reviews.product_id LEFT JOIN images ON products.id=images.product_id WHERE (productname LIKE '%${req.query.query}%' AND lat>${minLat} AND lat<${maxLat}) GROUP BY products.id, images.url`;
+    req.query.query = req.query.query.toUpperCase();
+    var queryStr = `SELECT products.id, products.category_id, products.owner_id, products.description, products.productname, products.priceperday, products.location, products.lat, products.lng, products.city, products.state, avg(reviews.rating) as AverageRating, images.url FROM products LEFT JOIN reviews ON products.id=reviews.product_id LEFT JOIN images ON products.id=images.product_id WHERE (UPPER(productname) LIKE '%${req.query.query}%' AND lat>${minLat} AND lat<${maxLat}) GROUP BY products.id, images.url`;
     pool.query(queryStr, function(err, result) {
       if (err) {
         console.log(err);
