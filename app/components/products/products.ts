@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewChild, ElementRef, Input }   from "@angular/core";
+import { Component, OnInit, ViewChild,
+  ElementRef, Input }          from "@angular/core";
 import { FormControl }         from "@angular/forms";
 import { MapsAPILoader }       from "angular2-google-maps/core";
 import { NgbRatingConfig }     from "@ng-bootstrap/ng-bootstrap";
@@ -15,17 +16,17 @@ import * as moment             from "moment";
 })
 
 export class Products implements OnInit {
-  public products: Array<any> = [];
+  public allProducts: Array<any>;
   public markers: Array<any>;
+  public maxPrice: string = "500";
+  public minPrice: string = "0";
   public latitude: number = 39.8282;
   public longitude: number = -98.5795;
-  public zoom: number = 10;
-  public searchControl: FormControl;
-  public allProducts: Array<any>;
-  public minPrice: string = "0";
-  public maxPrice: string = "500";
+  public products: Array<any> = [];
   public searchCategoryId: string = "";
+  public searchControl: FormControl;
   public searchRadius: number = 50; // miles
+  public zoom: number = 10;
   @Input()
   public availableFrom: any = {
     year: new Date().getFullYear(),
@@ -46,15 +47,15 @@ export class Products implements OnInit {
 
   constructor(
     public activeTransactions: Array<any>,
+    private config: NgbRatingConfig,
     private mapsAPILoader: MapsAPILoader,
     private productsService: ProductsService,
-    private config: NgbRatingConfig
   ) {
     config.max = 5;
     config.readonly = true;
   }
 
-  clickedMarker(label: string, index: number) {
+  public clickedMarker(label: string, index: number) {
     console.log(`clicked the marker: ${label || index}`);
   }
 
