@@ -16,7 +16,10 @@ dist/
 server/db/dbConfig.js
 
 ## CONFIG FILES ##
+app/auth/amazonS3.config.ts
+app/auth/auth.config.ts
 server/config
+app/auth/googleMaps.config.ts
 
 ## Typescript command files ##
 *.tmp.txt

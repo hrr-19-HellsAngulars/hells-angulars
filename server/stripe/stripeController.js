@@ -1,14 +1,14 @@
 var pool = require("../db/db.js");
 var request = require("request");
-//var stripeAPI = require("../config/stripeConfig.js");
+var stripeAPI = require("../config/stripeConfig.js");
 
 var express = require('express');
 var app = express();
 
 
-//var stripe = require("stripe")(stripeAPI.API_KEY);
+var stripe = require("stripe")(stripeAPI.API_KEY);
 //deployment
-var stripe = require("stripe")(process.env.stripeAPIKey);
+//var stripe = require("stripe")(process.env.stripeAPIKey);
 
 var TOKEN_URI = "https://connect.stripe.com/oauth/token";
 var AUTHORIZE_URI = "https://connect.stripe.com/oauth/authorize";
@@ -25,13 +25,13 @@ module.exports = {
         url: TOKEN_URI,
         form: {
           grant_type: 'authorization_code',
-          // client_id: stripeAPI.CLIENT_ID,
+          client_id: stripeAPI.CLIENT_ID,
           //deployement
-          client_id: process.env.stripeClientID,
+          //client_id: process.env.stripeClientID,
           code: code,
-          // client_secret: stripeAPI.API_KEY,
+          client_secret: stripeAPI.API_KEY,
           // deployment:
-          client_secret: process.env.stripeAPIKey,
+          //client_secret: process.env.stripeAPIKey,
         }
       };
       request.post(postBody, function(err, r, body) {
