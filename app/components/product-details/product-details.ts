@@ -180,7 +180,7 @@ export class ProductDetails implements OnInit {
   }
 
   public getUserIdFromProfile() {
-    if(localStorage.getItem("profile")){
+    if (localStorage.getItem("profile")) {
       this.userId = JSON.parse(localStorage.getItem("profile")).user_id;
       this.getUserInfo();
     } else {
