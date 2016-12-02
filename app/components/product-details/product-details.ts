@@ -143,9 +143,8 @@ export class ProductDetails implements OnInit {
           return prev + acc.rating;
         }, 0);
         this.averageRating =  +total / reviews.length;
-        console.log(this.reviews);
       })
-      .catch(err => console.log(err));
+      .catch(err => console.error(err));
   }
 
   public openCheckOut() {
@@ -189,15 +188,13 @@ export class ProductDetails implements OnInit {
   }
 
   public getUserInfo() {
-    console.log(this.userId);
     this.profileService
       .getUserInfo(this.userId)
       .then(response => {
         const user = JSON.parse(response._body);
         this.user = user;
-        console.log(user);
       })
-      .catch(err => console.log(err));
+      .catch(err => console.error(err));
   }
 
   public open(content: any) {

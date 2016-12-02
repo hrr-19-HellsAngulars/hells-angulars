@@ -44,7 +44,7 @@ export class AddReviewForm {
           this.close.emit();
         })
         .catch(error => {
-          console.log(error);
+          console.error(error);
         });
   }
 

@@ -9,9 +9,9 @@ var stripeController = require('../stripe/stripeController');
 var transactionController = require('../transactions/transactionController');
 
 var authCheck = jwt({
-//   secret: new Buffer(authConfig.secret, 'base64'),
-//   audience: authConfig.clientId
-// });
+  secret: new Buffer(authConfig.secret, 'base64'),
+  audience: authConfig.clientId
+});
 
 //deployment
 // var authCheck = jwt({
