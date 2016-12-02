@@ -93,7 +93,7 @@ export class ProductDetails implements OnInit {
 
     this.drpOptions.settings = {
       opens: "center",
-      //minDate: moment(new Date()),
+      minDate: moment(new Date()),
       isInvalidDate: function(date: any) {
         for (let i = 0; i < context.formattedDays.length; i++) {
           if (date.format("MM-DD-YYYY") === context.formattedDays[i]) {
